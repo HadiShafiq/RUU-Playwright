@@ -51,3 +51,10 @@ Every entry has a status. **Verified** = confirmed by a Playwright run (give the
 ## Known environment behaviour
 - SIT /home normally loads in about 4s. Under 3 concurrent workers one navigation took 37s (run 2026-10-28_153031). Keep `navigationTimeout` at 60s.
 - The UI is in Bahasa Melayu by default (language selector "Bahasa Melayu"). Locators use the Malay labels. Katalon's Object Repository (`CDC-Katalon-Automation/Object Repository`) is a reference only. Re-check each locator in Playwright before using it.
+
+## Preparing an application for Declare (verified SIT 2026-10-28 on KU-28102026-0028)
+- Saving a new application (top Save) creates the draft: "Please click HERE or navigate to Task List … KU-…". Continue it from Task List → My Task.
+- Register Category Code(s) overlap justification: `textarea[id*="overlapCatSuppDocDtId:0:overlapCaReasonId"]`. Upload icon `a[id*="overlapCatSuppDocDtId:0:"]` with `img[src*="upload.png"]` → dialog with `input[type=file]` → `td.start button` → title-bar X. Document description: "Surat Rayuan Pertindihan Bidang". The upload and justification persist. Save still showed the ERR-722661 banner once, but a fresh reload showed the data saved and the error gone.
+- Supporting Documents mandatory rows: `tbody[id*="mandatoryTableId_data"] > tr[data-ri=i]`, with the same upload dialog pattern. For this Organization (Others) account there are 3: BORANG PENGISYTIHARAN MOF; UNDANG-UNDANG TUBUH / PERLEMBAGAAN PERTUBUHAN; MINIT MESYUARAT AGUNG TAHUNAN PERTUBUHAN TERKINI. Save → "Update MOF Profile : KU-… has been successfully saved".
+- Declaration page: a list of notes (processing fee is required before processing; registration fee before the certificate is issued) and a **Declare** button. Declare submits the application; it was never clicked by automation.
+- Test upload file: `CDC-Katalon-Automation/TestData/UploadFiles/File_pdf_for_testing.pdf` (1-page PDF). In bash heredocs, write Windows paths with forward slashes, because backslashes get stripped.

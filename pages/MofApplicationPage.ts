@@ -74,7 +74,8 @@ export class MofApplicationPage {
   }
 
   async expectOnApplication() {
-    await expect(this.page).toHaveTitle(/MOF Application/);
+    // Existing draft: "MOF Application"; new, unsaved application: "Update MOF Profile Application".
+    await expect(this.page).toHaveTitle(/MOF Application|Update MOF Profile Application/);
     await expect(this.sectionTab('Company Basic Information')).toBeVisible();
   }
 
