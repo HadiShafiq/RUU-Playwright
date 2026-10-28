@@ -1,7 +1,12 @@
+import fs from 'node:fs';
 import os from 'node:os';
 import { defineConfig, devices } from '@playwright/test';
 import { getEnv, hasSavedSession } from './config/environments';
 import lowMemoryArgs from './config/low-memory-chromium-args.json';
+
+// Login credentials (E2E_USERNAME / E2E_PASSWORD) live in the git-ignored .env file.
+// Values already set in the shell win over the file.
+if (fs.existsSync('.env')) process.loadEnvFile('.env');
 
 const env = getEnv();
 

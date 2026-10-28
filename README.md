@@ -9,6 +9,8 @@ npm run auth:sit        # a browser opens: log in by hand, then press Resume in 
 ```
 The session is saved to `.auth/sit.json` (git-ignored). If it expires, tests fail with "Redirected to SSO". When that happens, run the auth step again.
 
+For automatic login, copy `.env.example` to `.env` (git-ignored) and fill in `E2E_USERNAME` and `E2E_PASSWORD`. Tests that use `LoginPage` (such as `npm run mof:sit`) then log in by themselves. Without `.env` they wait up to 3 minutes for you to log in by hand.
+
 ## Running
 | Command | What it does |
 |---|---|
