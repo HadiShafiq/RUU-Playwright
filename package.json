@@ -1,0 +1,28 @@
+{
+  "name": "eperolehan-playwright",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Playwright QA automation for ePerolehan (SIT/UAT). Standalone; reads the Katalon project (CDC-Katalon-Automation) only to build the coverage matrix.",
+  "scripts": {
+    "auth:sit": "cross-env TEST_ENV=SIT playwright test --project=auth --headed --workers=1",
+    "auth:uat": "cross-env TEST_ENV=UAT playwright test --project=auth --headed --workers=1",
+    "test:sit": "cross-env TEST_ENV=SIT playwright test --project=chromium",
+    "test:uat": "cross-env TEST_ENV=UAT playwright test --project=chromium",
+    "smoke:sit": "cross-env TEST_ENV=SIT playwright test --project=chromium --grep @smoke",
+    "smoke:uat": "cross-env TEST_ENV=UAT playwright test --project=chromium --grep @smoke",
+    "report": "playwright show-report reports/html",
+    "matrix": "node scripts/build-matrix.mjs",
+    "typecheck": "tsc --noEmit",
+    "browser:sit": "cross-env TEST_ENV=SIT node scripts/browser-server.mjs --detached",
+    "browser:uat": "cross-env TEST_ENV=UAT node scripts/browser-server.mjs --detached",
+    "mof:sit": "cross-env TEST_ENV=SIT CDP_URL=http://127.0.0.1:9333 playwright test tests/mof --project=chromium --workers=1",
+    "browsers:mem": "node scripts/browser-memory.mjs",
+    "browsers:kill": "node scripts/browser-memory.mjs --kill"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/node": "^24.0.0",
+    "cross-env": "^7.0.3",
+    "typescript": "^5.6.3"
+  }
+}

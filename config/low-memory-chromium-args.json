@@ -1,0 +1,14 @@
+[
+  "--disable-gpu",
+  "--disable-extensions",
+  "--disable-component-extensions-with-background-pages",
+  "--disable-background-networking",
+  "--disable-component-update",
+  "--disable-default-apps",
+  "--disable-sync",
+  "--no-first-run",
+  "--metrics-recording-only",
+  "--disable-features=Translate,OptimizationHints,MediaRouter,BackForwardCache,AutofillServerCommunication,PasswordLeakDetection,InterestFeedContentSuggestions,CalculateNativeWinOcclusion",
+  "--renderer-process-limit=2",
+  "--js-flags=--max-old-space-size=512"
+]
