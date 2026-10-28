@@ -31,6 +31,10 @@ const context = await chromium.launchPersistentContext(profile, {
   viewport: null,
   args: [`--remote-debugging-port=${port}`, '--start-maximized', ...lowMemoryArgs],
 });
-console.log(`[browser-server] ${env} browser open, CDP http://127.0.0.1:${port}, profile ${profile}`);
+// Start on the environment's home page instead of a blank tab.
+const home = { SIT: 'http://ngepsit.eperolehan.com.my/home', UAT: 'http://ngepuat.eperolehan.com.my/home' }[env];
+const page = context.pages()[0] ?? (await context.newPage());
+await page.goto(home).catch((e) => console.log(`[browser-server] could not open ${home}: ${e.message}`));
+console.log(`[browser-server] ${env} browser open on ${home}, CDP http://127.0.0.1:${port}, profile ${profile}`);
 await new Promise((resolve) => context.on('close', resolve));
 console.log('[browser-server] browser closed');
