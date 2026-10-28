@@ -31,8 +31,9 @@ const KEEP_BRANCH = 'SELANGOR';
 const JUSTIFICATION = 'Testing Justification';
 const UPLOAD_PDF = path.resolve(__dirname, '../../fixtures/files/File_pdf_for_testing.pdf');
 
+// Katalon counterpart: Test Cases/Update MOF Profile.tc (KAT-065 in coverage/scenario-matrix.csv).
 const meta = (id: string, expected: string) =>
-  scenario({ cr: CR, id, module: MODULE, role: ROLE, expected: `Proposed — Pending QA Review: ${expected}` });
+  scenario({ cr: CR, id, module: MODULE, role: ROLE, tags: ['@KAT-065'], expected: `Proposed — Pending QA Review: ${expected}` });
 
 /** Stay on the application if it is already open (normal serial run); otherwise log in and open it. */
 async function onApplication(page: Page, env: EnvConfig, evidence: Evidence) {

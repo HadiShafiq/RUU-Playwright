@@ -31,12 +31,36 @@ function walk2(d) {
     e.isDirectory() ? walk2(path.join(d, e.name)) : /\.spec\.ts$/.test(e.name) ? [path.join(d, e.name)] : []);
 }
 
+// Latest Playwright run (any environment) that executed the spec linked to a scenario, from reports/<ENV>/<RunId>/results.json.
+const runs = fs.existsSync(path.join(root, 'reports'))
+  ? fs.readdirSync(path.join(root, 'reports'), { withFileTypes: true })
+      .filter((e) => e.isDirectory() && /^(SIT|UAT)$/.test(e.name))
+      .flatMap((e) => fs.readdirSync(path.join(root, 'reports', e.name)).map((run) => ({ env: e.name, run })))
+      .filter(({ env, run }) => fs.existsSync(path.join(root, 'reports', env, run, 'results.json')))
+      .sort((a, b) => b.run.localeCompare(a.run))
+  : [];
+const specResults = (suite) => [...(suite.specs ?? []), ...(suite.suites ?? []).flatMap(specResults)];
+function latestExecution(specFile) {
+  const file = path.relative(path.join(root, 'tests'), path.join(root, specFile)).split(path.sep).join('/');
+  for (const { env, run } of runs) {
+    let json;
+    try { json = JSON.parse(fs.readFileSync(path.join(root, 'reports', env, run, 'results.json'), 'utf8')); } catch { continue; }
+    const tests = (json.suites ?? []).flatMap(specResults).filter((s) => s.file === file).flatMap((s) => s.tests);
+    if (!tests.length) continue;
+    const passed = tests.filter((t) => t.results.at(-1)?.status === 'passed').length;
+    const ran = tests.filter((t) => t.results.length && t.results.at(-1).status !== 'skipped').length;
+    return { status: passed === tests.length ? 'PASS' : ran ? 'FAIL' : 'NOT RUN', note: `${env} run ${run}: ${passed}/${tests.length} passed` };
+  }
+  return undefined;
+}
+
 const rows = walk(katalon).sort().map((f, i) => {
   const id = `KAT-${String(i + 1).padStart(3, '0')}`;
   const rel = path.relative(katalon, f).split(path.sep).join('/').replace(/\.tc$/, '');
   const parts = rel.split('/');
   const name = parts.at(-1);
   const spec = specs.find(([, src]) => src.includes(`'${id}'`) || src.includes(`@${id}`));
+  const execution = spec ? latestExecution(spec[0]) : undefined;
   return {
     'Scenario ID': id,
     'CR Number': '',
@@ -48,9 +72,9 @@ const rows = walk(katalon).sort().map((f, i) => {
     'Katalon Source': `Test Cases/${rel}.tc`,
     'Playwright Spec': spec?.[0] ?? '',
     'Automation Status': spec ? 'Automated (Playwright)' : 'Pending (Katalon only)',
-    'Execution Status': 'NOT RUN',
+    'Execution Status': execution?.status ?? 'NOT RUN',
     'Expected Result': '',
-    Notes: '',
+    Notes: execution?.note ?? '',
   };
 });
 
