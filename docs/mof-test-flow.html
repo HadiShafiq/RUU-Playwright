@@ -117,6 +117,7 @@ code, .mono { font-family: var(--font-mono); font-size: 0.82em; }
 .alert { border: 1px solid var(--danger); background: var(--danger-soft); border-radius: 8px; padding: 14px 18px; font-size: 0.9rem; }
 .alert b { color: var(--danger); }
 footer { font-size: 0.8rem; color: var(--muted); }
+.pill.data { background: var(--danger-soft); color: var(--danger); }
 @media (max-width: 520px) { .dur { margin-left: 0; width: 100%; } .bar { width: 70px; } }
 </style>
 </head>
@@ -126,12 +127,12 @@ footer { font-size: 0.8rem; color: var(--muted); }
   <header>
     <div class="eyebrow">Playwright · ePerolehan SIT · Supplier Management</div>
     <h1>Update MOF Profile: test flow</h1>
-    <p class="lede">What <code>tests/mof/update-mof-profile.spec.ts</code> does, step by step, with the results from the last full run. The steps run in order in one browser that stays open at the end.</p>
+    <p class="lede">What <code>tests/mof/update-mof-profile.spec.ts</code> does, step by step. It logs in, saves a draft, then works through the left menu in order on the same page, never going back to Task List, and stops on Declaration. Declare is never clicked. One browser stays open at the end.</p>
     <div class="summary">
       <div class="stat ok"><b>9 / 9</b><span>Passed</span></div>
-      <div class="stat"><b>37.0 s</b><span>Total time</span></div>
-      <div class="stat"><b>1</b><span>Worker (1.8 GB free)</span></div>
-      <div class="stat"><b class="mono" style="font-size:1rem">2026-10-28_170849</b><span>Run ID</span></div>
+      <div class="stat"><b>1.1 min</b><span>Total time</span></div>
+      <div class="stat"><b class="mono" style="font-size:1rem">KU-28102026-0030</b><span>Application</span></div>
+      <div class="stat"><b class="mono" style="font-size:1rem">2026-10-28_185719</b><span>Run ID</span></div>
     </div>
   </header>
 
@@ -141,104 +142,119 @@ footer { font-size: 0.8rem; color: var(--muted); }
       <li class="step">
         <div class="node"><div class="dot">1</div><div class="rail"></div></div>
         <div class="card">
-          <div class="card-head"><h3>Log in and open the application</h3><span class="id">MOF-001</span><span class="pill pass">PASS</span>
-            <span class="dur">8.0 s<span class="bar"><i style="width:80%"></i></span></span></div>
-          <p>Waits for you to log in by hand, or logs in itself if credentials are set at run time. Then: Quick Link → tick Terms and Conditions → Proceed.</p>
-          <div class="snippet">await new LoginPage(page, env).ensureLoggedIn(evidence.log);
-const { via, applicationNo } = await mof.open(evidence.log);</div>
-          <div class="sit">SIT answered <span class="mono">ERR-722542</span>: a pending application already exists. The test opened that draft, <b>KU-28102026-0020</b>, from Task List → My Task instead of creating a new one.</div>
+          <div class="card-head"><h3>Log in, open and save the application</h3><span class="id">MOF-001</span><span class="pill pass">PASS</span><span class="pill data">Saves</span>
+            <span class="dur">10.2 s<span class="bar"><i style="width:78%"></i></span></span></div>
+          <p>Logs in with the SIT row of <code>.auth/credentials.xlsx</code> (no waiting). Then: Quick Link → tick Terms and Conditions → Proceed → <b>Save</b>. SIT answers "Please click HERE … KU-…", and the test clicks <b>HERE</b> to continue the new draft directly, not through Task List.</p>
+          <div class="snippet">await new LoginPage(page, env).ensureLoggedIn(evidence.log);   // credentials.xlsx
+const { via, applicationNo } = await mof.open(evidence.log);    // … Save → "HERE"</div>
+          <div class="sit">If a draft is already pending, SIT answers <span class="mono">ERR-722542</span> and won't create another. The test then opens that draft once from Task List → My Task. In run 185719 that was KU-28102026-0030, created by Save → HERE in run 185216.</div>
         </div>
       </li>
 
       <li class="step">
-        <div class="node"><div class="dot">2–6</div><div class="rail"></div></div>
+        <div class="node"><div class="dot">2–3</div><div class="rail"></div></div>
         <div class="card">
-          <div class="card-head"><h3>Open each left-menu section</h3><span class="id">MOF-002 … MOF-006</span><span class="pill pass">5 × PASS</span>
-            <span class="dur">8.4 s<span class="bar"><i style="width:84%"></i></span></span></div>
-          <p>Clicks each section and checks that its tab becomes active (<code>aria-expanded="true"</code>). A screenshot is taken of every section.</p>
-          <div class="sections">
-            <span class="sec">Company Basic Information</span><span class="sec">Assoc Company / Projects</span>
-            <span class="sec">Capital / Equity Status</span><span class="sec">Bank Information</span><span class="sec">Register Category Code(s)</span>
+          <div class="card-head"><h3>Open the first sections</h3><span class="id">MOF-002, MOF-003</span><span class="pill pass">2 × PASS</span>
+            <span class="dur">7.4 s<span class="bar"><i style="width:57%"></i></span></span></div>
+          <p>Clicks each section in the left menu and checks that its tab becomes active (<code>aria-expanded="true"</code>). A screenshot is taken of every section.</p>
+          <div class="sections"><span class="sec">Company Basic Information</span><span class="sec">Assoc Company / Projects</span></div>
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="node"><div class="dot">4</div><div class="rail"></div></div>
+        <div class="card">
+          <div class="card-head"><h3>Personnel / Branch Info: keep only SELANGOR</h3><span class="id">MOF-004</span><span class="pill pass">PASS</span><span class="pill data">Deletes</span>
+            <span class="dur">21.7 s<span class="bar"><i style="width:100%"></i></span></span></div>
+          <p>Ticks every branch except SELANGOR on all pages and checks that selection, then clicks the Delete button below the grid and answers <b>Yes</b>. SIT deletes at once, with no Save. The test then checks that only SELANGOR is left.</p>
+          <div class="grid-demo" aria-label="Company Branches in run 185216">
+            <div class="br gone"><span class="box"></span>JOHOR</div><div class="br gone"><span class="box"></span>KELANTAN</div>
+            <div class="br gone"><span class="box"></span>PERLIS</div><div class="br gone"><span class="box"></span>LABUAN</div>
+            <div class="br gone"><span class="box"></span>PULAU PINANG</div><div class="br gone"><span class="box"></span>SABAH</div>
+            <div class="br gone"><span class="box"></span>PAHANG</div><div class="br gone"><span class="box"></span>KEDAH</div>
+            <div class="br gone"><span class="box"></span>PUTRAJAYA</div><div class="br gone"><span class="box"></span>PERAK</div>
+            <div class="br gone"><span class="box"></span>KUALA LUMPUR</div><div class="br gone"><span class="box"></span>MELAKA</div>
+            <div class="br gone"><span class="box"></span>TERENGGANU</div><div class="br gone"><span class="box"></span>SARAWAK</div>
+            <div class="br on"><span class="box"></span>SELANGOR</div><div class="br gone"><span class="box"></span>NEGERI SEMBILAN</div>
           </div>
-          <div class="snippet">const result = await mof.goToSection(name);
-await expect(mof.sectionTab(name)).toHaveAttribute('aria-expanded', 'true');</div>
+          <p class="note">16 branches across 4 pages on a new application; 15 deleted (time from run 185216). On a later run it finds only SELANGOR and deletes nothing.</p>
+          <div class="snippet">const deleted = await mof.branches.deleteAllExcept('SELANGOR', evidence.log);
+expect(await mof.branches.allStates()).toEqual(['SELANGOR']);</div>
+          <div class="sit"><span class="mono">ERR-722683</span> Personnel and capital can't be edited within 6 months of registration. Branch selection and Delete still work.</div>
+        </div>
+      </li>
+
+      <li class="step">
+        <div class="node"><div class="dot">5–6</div><div class="rail"></div></div>
+        <div class="card">
+          <div class="card-head"><h3>Open the middle sections</h3><span class="id">MOF-005, MOF-006</span><span class="pill pass">2 × PASS</span>
+            <span class="dur">5.1 s<span class="bar"><i style="width:39%"></i></span></span></div>
+          <p>Same as steps 2–3: click, check the tab is active, take a screenshot.</p>
+          <div class="sections"><span class="sec">Capital / Equity Status</span><span class="sec">Bank Information</span></div>
         </div>
       </li>
 
       <li class="step">
         <div class="node"><div class="dot">7</div><div class="rail"></div></div>
         <div class="card">
-          <div class="card-head"><h3>Supporting Documents</h3><span class="id">MOF-007</span><span class="pill recover">PASS after reload</span>
-            <span class="dur">9.9 s<span class="bar"><i style="width:99%"></i></span></span></div>
-          <p>Leaving Register Category Code(s) is blocked by a validation. The test reloads the draft from Task List and opens the section directly, which works.</p>
-          <div class="sit"><span class="mono">ERR-722661</span> Overlap category: please provide justification and upload the necessary supporting document.</div>
+          <div class="card-head"><h3>Register Category Code(s): justification and document</h3><span class="id">MOF-007</span><span class="pill pass">PASS</span><span class="pill data">Uploads, Saves</span>
+            <span class="dur">8.0 s<span class="bar"><i style="width:62%"></i></span></span></div>
+          <p>Types "Testing Justification" for the overlap category, uploads the test PDF as "Surat Rayuan Pertindihan Bidang", then clicks <b>Save</b>. Without this, SIT won't let you leave the section.</p>
+          <div class="sit"><span class="mono">ERR-722661</span> still shows once after Save, but the data is saved (a fresh reload on KU-28102026-0029 confirmed it) and the next section opens.</div>
         </div>
       </li>
 
       <li class="step">
         <div class="node"><div class="dot">8</div><div class="rail"></div></div>
         <div class="card">
-          <div class="card-head"><h3>Declaration</h3><span class="id">MOF-008</span><span class="pill recover">PASS after reload</span>
-            <span class="dur">5.0 s<span class="bar"><i style="width:50%"></i></span></span></div>
-          <p>Same pattern: leaving Supporting Documents is blocked, so the test reloads and opens Declaration directly.</p>
-          <div class="sit"><span class="mono">ERR-722537</span> Missing mandatory document: BORANG PENGISYTIHARAN MOF.</div>
+          <div class="card-head"><h3>Supporting Documents: mandatory uploads</h3><span class="id">MOF-008</span><span class="pill pass">PASS</span><span class="pill data">Uploads, Saves</span>
+            <span class="dur">13.0 s<span class="bar"><i style="width:100%"></i></span></span></div>
+          <p>Uploads the test PDF to each mandatory row that has no document yet, then clicks <b>Save</b> and expects "successfully saved".</p>
+          <div class="sections"><span class="sec r">BORANG PENGISYTIHARAN MOF</span><span class="sec r">UNDANG-UNDANG TUBUH / PERLEMBAGAAN PERTUBUHAN</span><span class="sec r">MINIT MESYUARAT AGUNG TAHUNAN PERTUBUHAN TERKINI</span></div>
         </div>
       </li>
 
       <li class="step final">
         <div class="node"><div class="dot">9</div><div class="rail"></div></div>
         <div class="card">
-          <div class="card-head"><h3>Personnel / Branch Info: only SELANGOR, then stop</h3><span class="id">MOF-009</span><span class="pill pass">PASS</span>
-            <span class="dur">5.0 s<span class="bar"><i style="width:50%"></i></span></span></div>
-          <p>Goes through every page of the Company Branches table, ticks SELANGOR, unticks everything else, then checks all pages again. It confirms "Modified By" hasn't changed, which shows nothing was saved, and stops with the browser left open.</p>
-          <div class="grid-demo" aria-label="Company Branches selection in this run">
-            <div class="br"><span class="box"></span>JOHOR</div><div class="br"><span class="box"></span>KELANTAN</div>
-            <div class="br"><span class="box"></span>PERLIS</div><div class="br"><span class="box"></span>LABUAN</div>
-            <div class="br"><span class="box"></span>PULAU PINANG</div><div class="br"><span class="box"></span>SABAH</div>
-            <div class="br"><span class="box"></span>PAHANG</div><div class="br"><span class="box"></span>KEDAH</div>
-            <div class="br"><span class="box"></span>PUTRAJAYA</div><div class="br"><span class="box"></span>PERAK</div>
-            <div class="br"><span class="box"></span>KUALA LUMPUR</div><div class="br"><span class="box"></span>MELAKA</div>
-            <div class="br"><span class="box"></span>TERENGGANU</div><div class="br"><span class="box"></span>SARAWAK</div>
-            <div class="br on"><span class="box"></span>SELANGOR</div><div class="br"><span class="box"></span>NEGERI SEMBILAN</div>
-          </div>
-          <p class="note">16 branches across 4 pages at the time of this run. SELANGOR was on page 3.</p>
-          <div class="snippet">const targetPage = await mof.branches.selectOnly('SELANGOR', evidence.log);
-expect(await mof.branches.selectedStates()).toEqual(['SELANGOR']);
-expect(modifiedAfter).toBe(modifiedBefore);   // nothing saved</div>
-          <div class="sit"><span class="mono">ERR-722683</span> Personnel and capital can't be edited within 6 months of registration. Ticking branch rows still works.</div>
+          <div class="card-head"><h3>Declaration: stop before Declare</h3><span class="id">MOF-009</span><span class="pill pass">PASS</span>
+            <span class="dur">3.2 s<span class="bar"><i style="width:25%"></i></span></span></div>
+          <p>Opens Declaration and checks that the Declare button is shown. <b>Declare is not clicked.</b> The browser is left on this page for the tester.</p>
+          <div class="snippet">await expect(page.getByRole('button', { name: 'Declare', exact: true })).toBeVisible();
+// STOP: Declare is never clicked</div>
         </div>
       </li>
     </ol>
   </section>
 
-  <div class="alert"><b>After this run, the branches were deleted separately.</b> On request, the 15 non-SELANGOR branches were deleted with one-off scripts, not with this test. SIT saved the delete as soon as its confirmation was accepted, without Save. The draft now has only SELANGOR, so the next run of step 9 will find a single row and no paging.</div>
+  <div class="alert"><b>This test changes SIT data.</b> It saves a new draft, deletes branches and uploads documents. Record each run in <code>knowledge/data-change-audit.md</code>. Drafts on this account (KU-28102026-0028 and 0029) have been "Deleted by Contractor" by someone outside the automation, so check Application Status if MOF-001 suddenly creates a new application.</div>
 
   <div class="two">
     <div class="panel">
       <h2>Safety rails in the test</h2>
       <ul>
-        <li><span class="x">✕</span><span>Never clicks Save, Submit, Declare or the Delete buttons</span></li>
-        <li><span class="x">✕</span><span>Never answers OK or Yes in a confirmation box</span></li>
+        <li><span class="x">✕</span><span>Never clicks Declare or Submit</span></li>
+        <li><span class="x">✕</span><span>Never clicks the top Delete, which deletes the whole application</span></li>
+        <li><span class="x">✕</span><span>Never goes back to Task List between sections</span></li>
         <li><span class="x">✕</span><span>Never creates a new application when one is pending</span></li>
-        <li><span class="ok">✓</span><span>Checks "Modified By" before and after to prove nothing was saved</span></li>
-        <li><span class="ok">✓</span><span>Credentials come from the run's environment only, never from files</span></li>
-        <li><span class="ok">✓</span><span>The page object has no methods for saving or deleting</span></li>
+        <li><span class="ok">✓</span><span>Deletes branches only after checking the selection is exactly "all except SELANGOR"</span></li>
+        <li><span class="ok">✓</span><span>Login from the git-ignored <code>.auth/credentials.xlsx</code>; the password is never logged or committed</span></li>
       </ul>
     </div>
     <div class="panel files">
       <h2>Where the code lives</h2>
       <ul>
-        <li><code>playwright/tests/mof/update-mof-profile.spec.ts</code><span>The 9 steps above</span></li>
-        <li><code>playwright/pages/MofApplicationPage.ts</code><span>Menu, draft and branch-table navigation</span></li>
-        <li><code>playwright/pages/LoginPage.ts</code><span>Manual or automatic login</span></li>
-        <li><code>playwright/fixtures/attached.ts</code><span>Uses the open browser and leaves it open</span></li>
-        <li><code>playwright/scripts/browser-server.mjs</code><span>Starts the browser that stays open</span></li>
+        <li><code>tests/mof/update-mof-profile.spec.ts</code><span>The 9 steps above</span></li>
+        <li><code>pages/MofApplicationPage.ts</code><span>Menu, Save, branch delete, upload dialog</span></li>
+        <li><code>pages/LoginPage.ts</code>, <code>support/credentials.ts</code><span>Automatic login from the Excel file</span></li>
+        <li><code>fixtures/files/File_pdf_for_testing.pdf</code><span>The PDF that is uploaded</span></li>
+        <li><code>fixtures/attached.ts</code><span>Uses the open browser and leaves it open</span></li>
+        <li><code>scripts/browser-server.mjs</code><span>Starts the browser that stays open</span></li>
       </ul>
-      <p class="note">Committed as <span class="mono">ad2719e</span> on branch <span class="mono">playwright-framework</span>.</p>
     </div>
   </div>
 
-  <footer>Run it: <code>npm run browser:sit</code>, then <code>npm run mof:sit</code>. Durations and messages come from the SIT run 2026-10-28_170849.</footer>
+  <footer>Run it: <code>npm run browser:sit</code>, then <code>npm run mof:sit</code>. Times and messages come from SIT run 2026-10-28_185719, except step 4 (run 185216, when the branches were deleted).</footer>
 </div>
 </body>
 </html>
