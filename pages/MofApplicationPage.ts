@@ -21,10 +21,12 @@ export interface SectionResult {
 }
 
 const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
+const fileName = (p: string) => p.split(/[\\/]/).pop() ?? p;
 
 /**
- * Update MOF Profile Application: navigation only. This page object deliberately has no
- * methods for Save, Delete, Submit, Declare or dialog OK buttons.
+ * Update MOF Profile Application. Saves (top Save), deletes branches and uploads documents, but
+ * deliberately has no methods for Declare, Submit or the top Delete (which deletes the whole
+ * application).
  */
 export class MofApplicationPage {
   readonly errorBanner: Locator;
@@ -35,9 +37,15 @@ export class MofApplicationPage {
     this.branches = new CompanyBranches(page);
   }
 
+  /** True when the application form with its left menu is on screen. */
+  async isOnApplication(): Promise<boolean> {
+    return this.sectionTab('Company Basic Information').isVisible();
+  }
+
   /**
-   * Dashboard Quick Link → accept Terms → Proceed. If SIT answers ERR-722542 (a pending
-   * application already exists) the existing draft is opened from My Task; nothing new is created.
+   * Dashboard Quick Link → accept Terms → Proceed → Save, then "click HERE" to continue the saved
+   * application on the spot. If SIT answers ERR-722542 (a pending application already exists) the
+   * existing draft is opened from My Task instead; nothing new is created.
    */
   async open(log: (m: string) => void): Promise<{ via: 'new' | 'existing-draft'; applicationNo: string }> {
     await this.page.goto('/web/epapp/dashboard');
@@ -57,7 +65,89 @@ export class MofApplicationPage {
       return { via: 'existing-draft', applicationNo: await this.openExistingDraft(log) };
     }
     await this.expectOnApplication();
-    return { via: 'new', applicationNo: await this.applicationNo() };
+    return { via: 'new', applicationNo: await this.saveNewAndContinue(log) };
+  }
+
+  /** Save a new application, then continue it through the acknowledgement's "HERE" link. */
+  private async saveNewAndContinue(log: (m: string) => void): Promise<string> {
+    log('Save (top of form) to create the draft');
+    await this.save();
+    const ack = this.page.getByText(/Please click HERE or navigate to Task List/);
+    await expect(ack).toBeVisible();
+    const applicationNo = (await ack.innerText()).match(/KU-\d+-\d+/)?.[0] ?? '';
+    log(`Saved as ${applicationNo}. Continuing via "HERE" (not Task List)`);
+    await ack.getByRole('link', { name: 'HERE', exact: true }).click();
+    await waitForAjaxIdle(this.page);
+    await this.expectOnApplication();
+    return applicationNo;
+  }
+
+  /** Top-of-form Save. (The Delete next to it deletes the whole application and is never used.) */
+  async save(): Promise<string> {
+    await this.page.getByRole('button', { name: 'Save', exact: true }).first().click();
+    await waitForAjaxIdle(this.page);
+    const messages = await this.page.locator('.ui-messages:visible, .ui-growl-item:visible').allInnerTexts();
+    return messages.map((m) => m.replace(/\s+/g, ' ').trim()).join(' | ');
+  }
+
+  /**
+   * Upload `file` through the upload dialog opened by `trigger` (an upload icon), then close the
+   * dialog. The row the icon sits in shows the file name afterwards.
+   */
+  async uploadVia(trigger: Locator, file: string) {
+    // The upload dialog is modal: while it is open, ignore its backdrop when waiting.
+    const inDialog = { dialogOpen: true };
+    await trigger.click();
+    await waitForAjaxIdle(this.page, undefined, inDialog);
+    // Pin the dialog by id: its file input disappears once the upload is done.
+    const dialogId = await this.page.locator('.ui-dialog:visible').filter({ has: this.page.locator('input[type="file"]') }).last().getAttribute('id');
+    const dialog = this.page.locator(`[id="${dialogId}"]`);
+    await dialog.locator('input[type="file"]').first().setInputFiles(file);
+    await waitForAjaxIdle(this.page, undefined, inDialog);
+    await dialog.locator('td.start button, button:has(.ui-icon-arrowreturnthick-1-n)').first().click();
+    await waitForAjaxIdle(this.page, undefined, inDialog);
+    if (await dialog.isVisible()) await dialog.locator('a.ui-dialog-titlebar-close').click();
+    await waitForAjaxIdle(this.page);
+  }
+
+  /** Register Category Code(s): overlap-category justification rows. */
+  get overlapRows(): Locator {
+    return this.page.locator('tbody[id*="overlapCatSuppDocDtId_data"] > tr');
+  }
+
+  /** Fill the justification of overlap row 0 and upload its supporting document. */
+  async fillOverlapJustification(reason: string, file: string) {
+    const area = this.page.locator('textarea[id*="overlapCatSuppDocDtId:0:overlapCaReasonId"]');
+    await area.fill(reason);
+    await area.blur();
+    await waitForAjaxIdle(this.page);
+    await this.uploadVia(this.page.locator('a[id*="overlapCatSuppDocDtId:0:"]').filter({ has: this.page.locator('img[src*="upload.png"]') }), file);
+    await expect(this.overlapRows.first()).toContainText(fileName(file));
+  }
+
+  /** Supporting Documents: mandatory document rows. */
+  get mandatoryRows(): Locator {
+    return this.page.locator('tbody[id*="mandatoryTableId_data"] > tr');
+  }
+
+  /** Upload `file` to every mandatory document row that has none yet. Returns the documents uploaded. */
+  async uploadMandatoryDocuments(file: string, log: (m: string) => void): Promise<string[]> {
+    const done: string[] = [];
+    const count = await this.mandatoryRows.count();
+    for (let i = 0; i < count; i++) {
+      const row = this.page.locator(`tbody[id*="mandatoryTableId_data"] > tr[data-ri="${i}"]`);
+      const name = (await row.locator('td').nth(1).innerText()).trim().split('(')[0].trim();
+      if ((await row.innerText()).includes(fileName(file).slice(0, 15))) {
+        log(`"${name}" already has a document, skipped`);
+        continue;
+      }
+      await this.uploadVia(row.locator('a').filter({ has: this.page.locator('img[src*="upload.png"]') }).first(), file);
+      // The grid shortens long names ("File_pdf_for_te..."), so match the start only.
+      await expect(row).toContainText(fileName(file).slice(0, 15));
+      log(`Uploaded "${name}"`);
+      done.push(name);
+    }
+    return done;
   }
 
   /** Task List → My Task → "Update MOF draft application". Also used to reload the draft fresh. */
@@ -144,15 +234,47 @@ export class CompanyBranches {
       .filter({ has: this.page.locator('td:nth-child(2) td').getByText(state, { exact: true }) });
   }
 
-  /** Walk every page: tick `state`, untick everything else. Returns the page `state` is on. */
-  async selectOnly(state: string, log: (m: string) => void): Promise<number> {
+  /** States of all rows, across all pages. */
+  async allStates(): Promise<string[]> {
+    const states: string[] = [];
     const pages = await this.pageCount();
-    let found = 0;
+    for (let p = 1; p <= pages; p++) {
+      await this.goToPage(p);
+      states.push(...(await this.rowsOnPage()).map((r) => r.state));
+    }
+    return states;
+  }
+
+  /**
+   * Delete every branch except `state`: select the others, then the Delete button below the grid →
+   * "Yes". SIT commits the deletion at once (no Save needed). Returns the deleted states.
+   */
+  async deleteAllExcept(state: string, log: (m: string) => void): Promise<string[]> {
+    const before = await this.allStates();
+    if (!before.includes(state)) throw new Error(`Branch "${state}" not found; nothing deleted`);
+    const others = before.filter((s) => s !== state);
+    if (!others.length) return [];
+    await this.selectAllExcept(state, log);
+    const selected = await this.selectedStates();
+    if (selected.includes(state) || selected.length !== others.length) {
+      throw new Error(`Selection is not exactly all branches except ${state}: ${selected.join(', ')}. Nothing deleted`);
+    }
+    await this.page.locator('[id$="tt:delBranchBtnId"]').click();
+    const confirm = this.page.locator('.ui-dialog:visible').filter({ hasText: 'Are you sure to proceed with branch deletion?' });
+    await expect(confirm).toBeVisible();
+    log('Branch Delete → "Yes"');
+    await confirm.locator('[id$="pendingQTPopUpId:yesWithResetId"]').click();
+    await waitForAjaxIdle(this.page);
+    return others;
+  }
+
+  /** Walk every page: tick everything except `state`, untick `state`. */
+  private async selectAllExcept(state: string, log: (m: string) => void) {
+    const pages = await this.pageCount();
     for (let p = 1; p <= pages; p++) {
       await this.goToPage(p);
       for (const r of await this.rowsOnPage()) {
-        const want = r.state === state;
-        if (want) found = p;
+        const want = r.state !== state;
         if (r.selected !== want) {
           await this.row(r.state).locator('.ui-chkbox-box').click();
           await waitForAjaxIdle(this.page);
@@ -160,8 +282,6 @@ export class CompanyBranches {
         }
       }
     }
-    if (!found) throw new Error(`Branch "${state}" not found on any of ${pages} pages`);
-    return found;
   }
 
   /** States currently selected, across all pages. */

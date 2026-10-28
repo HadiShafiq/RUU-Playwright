@@ -3,11 +3,15 @@ import { expect, type Locator, type Page } from '@playwright/test';
 /** Overlays PrimeFaces/JSF shows while an AJAX request or postback is in flight. */
 const BLOCKING_OVERLAYS = '.ui-blockui:visible, .blockUI:visible, .ui-widget-overlay:visible';
 
+/** Blocking overlays except a modal dialog's backdrop, for waits while a dialog is meant to stay open. */
+const BLOCKING_OVERLAYS_IN_DIALOG = '.ui-blockui:visible, .blockUI:visible';
+
 /**
  * Wait until PrimeFaces has no queued AJAX requests and no blocking overlay is visible.
  * Ported from the Katalon WebHelper.waitBlockUI(), plus a check of the PrimeFaces AJAX queue.
+ * `dialogOpen`: a modal dialog is open on purpose, so its backdrop (.ui-widget-overlay) is ignored.
  */
-export async function waitForAjaxIdle(page: Page, timeout = 30_000): Promise<void> {
+export async function waitForAjaxIdle(page: Page, timeout = 30_000, { dialogOpen = false } = {}): Promise<void> {
   await page.waitForFunction(
     () => {
       const pf = (window as any).PrimeFaces;
@@ -18,7 +22,7 @@ export async function waitForAjaxIdle(page: Page, timeout = 30_000): Promise<voi
     undefined,
     { timeout },
   );
-  await expect(page.locator(BLOCKING_OVERLAYS)).toHaveCount(0, { timeout });
+  await expect(page.locator(dialogOpen ? BLOCKING_OVERLAYS_IN_DIALOG : BLOCKING_OVERLAYS)).toHaveCount(0, { timeout });
 }
 
 /** Click and wait for the resulting AJAX update to settle. */
