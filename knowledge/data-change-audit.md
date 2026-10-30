@@ -122,3 +122,4 @@
 | 2026-10-30 18:03 | SIT | User ("continue") | KAT-024 Approve Request Notes, PASS | **RN260000000004510 approved** | Approve | Next: KAT-046 Prepare PR | n/a |
 | 2026-10-30 18:06 | SIT | User ("continue") | KAT-037 Add Simple Quotes - Product Plus Services | Catalogue item added (AINHALIM, 911017010000000000); stopped at Service List specification row 2. Not submitted | unsaved | n/a | n/a |
 | 2026-10-30 18:07 | SIT | User ("continue") | KAT-046 Prepare PR on RN260000000004510 | Submit PR task (assigned to the requisitioner) not found: document number typed into a Group Task field (positional locator). **No data touched** | read only | n/a | n/a |
+| 2026-10-30 18:12 | SIT | User ("continue") | KAT-046 Prepare Purchase Request, PASS | **Purchase Request PR260000000004657 submitted** (from RN260000000004510) | Submit PR | Next: KAT-047 approve PR | n/a |
