@@ -95,7 +95,9 @@ for (const f of walk(path.join(katalonRoot, 'Test Suites'), '.ts')) {
 const RUNTIME_EXPORTS = ['WebUI', 'findTestObject', 'TestObject', 'ConditionType', 'FailureHandling', 'Keys', 'WebUiCommonHelper',
   'WebElement', 'By', 'DriverFactory', 'KeywordUtil', 'println', 'gAssert', 'groovyMatcher', 'groovyFullMatch', 'Arrays', 'System',
   'Thread', 'SimpleDateFormat', 'LocalDate', 'DateTimeFormatter', 'File', 'Paths', 'Files', 'FileInputStream', 'FileOutputStream',
-  'XSSFWorkbook', 'katalonMissing', 'binding'];
+  'XSSFWorkbook', 'katalonMissing', 'binding', 'claimGroupTaskIfAny'];
+/** Runtime functions that REPAIRS call from Groovy; they are async, so calls get `await`. */
+const RUNTIME_ASYNC = ['claimGroupTaskIfAny'];
 const WEB_HELPER_SRC = path.join(katalonRoot, 'Keywords', 'common', 'WebHelper.groovy');
 const WEB_HELPER_NAMES = [...read(WEB_HELPER_SRC).matchAll(/^\s*static\s+\S+\s+(\w+)\s*\(/gm)].map((m) => m[1]);
 /**
@@ -126,6 +128,29 @@ if (WebUI.waitForElementVisible(gstNoticeOk, 3, FailureHandling.OPTIONAL)) c(gst
     replace: '$1uploadFilePath = $2',
     prepend: 'String uploadFilePath = System.getProperty("user.dir") + "/TestData/UploadFiles/File_pdf_for_testing.pdf"\n',
     note: '"uploadFilePath" was declared only in the Agreement = No branch but used by the LOA signer upload in every run; declared once at the top',
+  },
+  {
+    // Some LOAs need an approver in "Verification And Approval" (ERR-760315); no Katalon script fills it.
+    find: /^([ \t]*)((?:c|WebUI\.click)\(findTestObject\('Object Repository\/Direct LOA\/1\. Direct LOA Requistioner\/Submit and Save Button\/Submit LOA Application'\)[^\n]*)$/m,
+    replace: `$1WebUI.click(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Verification And Approval'), FailureHandling.OPTIONAL)
+$1waitBlockUI(10)
+$1if (WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Verification and Approval Tab/Dropdown Approver'), 3, FailureHandling.OPTIONAL)) {
+$1\tselectDropdownByIndex(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Verification and Approval Tab/Dropdown Approver'), 1)
+$1}
+$1$2`,
+    note: 'ENHANCEMENT: before Submit, open Verification And Approval and pick the first approver when the LOA asks for one ("Approver is required", ERR-760315); the Katalon script never fills it',
+  },
+  {
+    // FD / Agreement / Fulfillment tasks are often group tasks (several assignees); they must be claimed first.
+    when: (tc) => /^[34]\./.test(tc.rel) && !/Claim GroupTask/.test(tc.rel),
+    find: /^([ \t]*)(c\(findTestObject\('Object Repository\/Direct LOA\/2\. Direct LOA Supplier\/TaskList Supplier\/MyTask_Tasklist_Dropdown'\)\)[^\n]*)([\s\S]{0,400}?Input Document Number'\)\s*,\s*([A-Za-z_]\w*))/m,
+    replace: '$1claimGroupTaskIfAny($4)\n$1$2$3',
+    note: 'ENHANCEMENT: before searching My Task, claim the document from Group Task if it is a group task (e.g. Submit FD is assigned to 7 officers); same steps as WebHelper.claimDocument',
+  },
+  {
+    find: "//TestObject submitBtn = findTestObject('Object Repository/FD and Agreement/Submit Button')",
+    replace: "TestObject submitBtn = findTestObject('Object Repository/FD and Agreement/Submit Button')",
+    note: '"submitBtn" was used for the final Submit but its definition was commented out; un-commented (the object exists in the Object Repository)',
   },
   {
     // Typo: the script reads ZonalCoverage, the test case defines ZoneCoverage.
@@ -397,7 +422,7 @@ function convert(src, opts = {}) {
   }
 
   // await every Katalon/async call; parenthesise when the result is used (".trim()" etc.).
-  const asyncNames = new Set([...defined, ...imported, ...webHelper]);
+  const asyncNames = new Set([...defined, ...imported, ...webHelper, ...RUNTIME_ASYNC]);
   const callRe = new RegExp(String.raw`(?<![\w$.])(?:(?:WebUI|WebUiCommonHelper|Thread)\.\w+|${[...asyncNames].join('|') || '\u0001'})\s*\(|(?<![\w$])[\w$]+(?:\.[\w$]+|\[[^\]\n]*\]|\(\))*\.(?:${ASYNC_METHODS.join('|')})\s*\(`, 'g');
   const calls = [...code.matchAll(callRe)].map((m) => ({ start: m.index, open: m.index + m[0].length - 1 }));
   for (const { start, open } of calls.reverse()) {

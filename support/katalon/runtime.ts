@@ -461,6 +461,36 @@ export const WebUI = {
   },
 };
 
+/**
+ * On the Task List page: if `docNo` is in Group Task (a task assigned to several officers, e.g. Submit FD),
+ * claim it so it moves to My Task, where the Katalon scripts search. Same steps as Katalon's
+ * WebHelper.claimDocument (look through up to 10 pages, click Claim). Does nothing if it isn't there.
+ */
+export async function claimGroupTaskIfAny(docNo: any) {
+  const page = cur().page;
+  const doc = String(docNo ?? '').trim();
+  if (!doc) return false;
+  await settle();
+  const groupBody = page.locator('tbody[id*="taskListGroupId_data"]').first();
+  if (!(await groupBody.count())) return false;
+  for (let pageNo = 1; pageNo <= 10; pageNo++) {
+    const row = groupBody.locator('tr').filter({ has: page.locator(`td`, { hasText: new RegExp(`^\\s*${doc}\\s*$`) }) });
+    if (await row.count()) {
+      await row.first().locator('button', { hasText: 'Claim' }).first().click();
+      await settle();
+      await page.waitForTimeout(1000);
+      cur().log(`Claimed group task ${doc} (moved to My Task)`);
+      return true;
+    }
+    const next = page.locator(`xpath=(//span[contains(@class,'ui-paginator-pages')])[1]/span[normalize-space()='${pageNo + 1}']`);
+    if (!(await next.count())) break;
+    await next.click();
+    await settle();
+  }
+  cur().log(`${doc} is not in Group Task (nothing to claim)`);
+  return false;
+}
+
 export const KeywordUtil = {
   logInfo: (m: any) => cur().log(String(m)),
   markWarning: (m: any) => {
@@ -738,9 +768,12 @@ export async function katalonVariables(caseId: string, defaults: Record<string, 
   const vars: Record<string, any> = { ...defaults };
   const { _why, ...corrections } = (overrides as unknown as Record<string, Record<string, any>>)[caseId] ?? {};
   if (_why) cur().log(`Test data corrected (support/katalon/data-overrides.json): ${Object.keys(corrections).join(', ')}: ${_why}`);
-  // "{MMddHHmmss}" etc. in a correction: the run's time in that Java date pattern (for values SIT wants unique).
+  // "{MMddHHmmss}" etc. in a correction: the run's time in that Java date pattern (for values SIT wants unique);
+  // "{yyyy-MM-dd+180d}": that many days from today (for dates SIT wants in the future).
   const now = new Date();
-  for (const [k, v] of Object.entries(corrections)) vars[k] = typeof v === 'string' ? v.replace(/\{([yMdHms]+)\}/g, (_, p) => formatJavaDate(p, now)) : v;
+  const expand = (_: string, p: string, days?: string) => formatJavaDate(p, new Date(now.getTime() + Number(days ?? 0) * 86_400_000));
+  for (const [k, v] of Object.entries(corrections))
+    vars[k] = typeof v === 'string' ? v.replace(/\{([yMdHms][yMdHms\-/.: ]*?)(?:\+(\d+)d)?\}/g, expand) : v;
   const secretFile = path.join(ROOT, '.auth', 'katalon-variables.json');
   if (fs.existsSync(secretFile)) Object.assign(vars, JSON.parse(fs.readFileSync(secretFile, 'utf8'))[caseId] ?? {});
 

@@ -77,13 +77,26 @@
     "SupplierName": "MOF FL LLP (registration with SSM as LLP)6"
   },
   "KAT-019": {
-    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-007 account MOFFLROSNEW3",
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-007 account MOFFLROSNEW3; TEMPORARY PerformanceBond 2 (No): SIT rule setting Performance Bond Percentage expired (ERR-770222, knowledge/defects.md DEF-1) - remove when renewed",
     "FileReference1": "Test{MMddHHmmss}",
-    "SupplierName": "MOF FL Organization JPPM - New 3"
+    "SupplierName": "MOF FL Organization JPPM - New 3",
+    "PerformanceBond": "2"
   },
   "KAT-020": {
-    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-008 account MOFFLROS_6",
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-008 account MOFFLROS_6; TEMPORARY PerformanceBond 2 (No): same zonal schedule case as KAT-019, SIT rule setting Performance Bond Percentage expired (ERR-770222, DEF-1) - remove when renewed",
     "FileReference1": "Test{MMddHHmmss}",
-    "SupplierName": "MOF FL LLP (registration with SSM as LLP)6"
+    "SupplierName": "MOF FL LLP (registration with SSM as LLP)6",
+    "PerformanceBond": "2"
+  },
+  "KAT-021": {
+    "_why": "Start date 2026-10-19 is in the past (run date instead); default supplier Basic FL Organization (Others) 1 + item 851220040000000000 give 0 catalogue results. Use the company of KAT-022 supplier account BASICFLROS3 and its service item (Catalogue Search, 2026-10-30); RBProcurementType 1 like the sibling Product tests KAT-036/037: with 2 the script skips Criteria and Supplier List and SIT rejects (ERR-760109)",
+    "dateValue": "{yyyy-MM-dd}",
+    "SupplierName": "Basic FL ROC (registration with SSM as ROC) 3",
+    "ItemCode": "801218020000000000",
+    "RBProcurementType": "1"
+  },
+  "KAT-040": {
+    "_why": "Performance Bond dates 2026-06-15 are in the past (datepicker does not offer them); use 180 days from the run date",
+    "dateValue": "{yyyy-MM-dd+180d}"
   }
 }

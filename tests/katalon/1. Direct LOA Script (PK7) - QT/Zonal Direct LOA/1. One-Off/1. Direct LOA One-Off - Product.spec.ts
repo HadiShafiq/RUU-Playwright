@@ -10,6 +10,7 @@ import { toInt, waitBlockUI, wVisible, c, t, up, selectDropdownByIndex } from '.
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
  * Katalon step repaired: Supplier popup: the double-click on the supplier row already selects it and closes the popup, so "Select" is clicked only if the popup is still open 3 s later (it raced before).
+ * Katalon step repaired: ENHANCEMENT: before Submit, open Verification And Approval and pick the first approver when the LOA asks for one ("Approver is required", ERR-760315); the Katalon script never fills it.
  */
 test.describe('KAT-017 1. Direct LOA One-Off - Product', () => {
   test(
@@ -655,6 +656,11 @@ test.describe('KAT-017 1. Direct LOA One-Off - Product', () => {
      * - submit LOA application
      * ========================= */
     await c(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Payment Deduction'), 20)
+    await WebUI.click(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Verification And Approval'), FailureHandling.OPTIONAL)
+    await waitBlockUI(10)
+    if (await WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Verification and Approval Tab/Dropdown Approver'), 3, FailureHandling.OPTIONAL)) {
+    	await selectDropdownByIndex(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Verification and Approval Tab/Dropdown Approver'), 1)
+    }
     await WebUI.click(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Submit and Save Button/Submit LOA Application'))
 
     await waitBlockUI(30)

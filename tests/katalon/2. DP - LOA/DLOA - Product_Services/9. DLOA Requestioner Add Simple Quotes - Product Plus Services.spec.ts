@@ -9,6 +9,7 @@ import { waitBlockUI, wVisible, c, t, up, selectDropdownByIndex } from '../../..
  * Data:    suite "Akta_882/1b. Add SQ Product Service" → Data Files/Akta_882_RU/3- NEW RN (1_FL FOR RN.xlsx, sheet "4- Approve RN")
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
+ * Katalon step repaired: ENHANCEMENT: before Submit, open Verification And Approval and pick the first approver when the LOA asks for one ("Approver is required", ERR-760315); the Katalon script never fills it.
  */
 test.describe('KAT-037 9. DLOA Requestioner Add Simple Quotes - Product Plus Services', () => {
   test(
@@ -911,6 +912,11 @@ test.describe('KAT-037 9. DLOA Requestioner Add Simple Quotes - Product Plus Ser
      * Save LOA (unchanged)
      * ========================= */
     //WebUI.click(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Submit and Save Button/Save LOA Application'))
+    await WebUI.click(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Verification And Approval'), FailureHandling.OPTIONAL)
+    await waitBlockUI(10)
+    if (await WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Verification and Approval Tab/Dropdown Approver'), 3, FailureHandling.OPTIONAL)) {
+    	await selectDropdownByIndex(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Verification and Approval Tab/Dropdown Approver'), 1)
+    }
     await c(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Submit and Save Button/Submit LOA Application'))
     await c(findTestObject('Object Repository/DLOA/4. DLOA - Requestioner/2. Item List/Confirmation Pop up After Submit'))
 

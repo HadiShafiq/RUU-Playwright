@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { test as base } from './test';
 import { bindKatalon } from '../support/katalon/runtime';
 import { getEnv } from '../config/environments';
@@ -24,6 +26,8 @@ export const test = base.extend<{ katalon: void }>({
           .allInnerTexts()
           .catch(() => []);
         for (const m of messages.map((t) => t.replace(/\s+/g, ' ').trim()).filter(Boolean)) evidence.log(`Application message on failure: ${m}`);
+        // The evidence fixture saves failure_dom.html after this teardown, i.e. after sign-out; keep the real page.
+        fs.writeFileSync(path.join(evidence.dir, 'failure_dom_before_signout.html'), await page.content().catch(() => ''));
       }
       if (!page.isClosed()) {
         await page
