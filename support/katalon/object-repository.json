@@ -1,0 +1,1998 @@
+{
+ "DLOA/11. DO Verify LOA/DO verify": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Verify']]"
+ },
+ "DLOA/11. DO Verify LOA/Download All button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Download All And Print']]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Button Search Supplier": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Search']]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Click Action Item for Product": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Product List']]\n\n/following-sibling::*[1]\n\n//button[substring(@id, string-length(@id) - string-length(':questionTbl:addTopBtn') + 1) = ':questionTbl:addTopBtn']"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Click Action Item for Service": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service List']]\n\n/following-sibling::*[1]\n\n//button[substring(@id, string-length(@id) - string-length(':questionTbl:addTopBtn') + 1) = ':questionTbl:addTopBtn']"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Click Add to Compare": {
+  "method": "XPATH",
+  "selector": "(//a[contains(@id,':supplierItemID:0:')]/span)[3]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Click Add to Simple Quote": {
+  "method": "XPATH",
+  "selector": "//a[contains(@id,':supplierItemID:0:')]/span[2]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Click Button View Compare": {
+  "method": "XPATH",
+  "selector": "//button[.//span[contains(text(),'View Compare')]]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Click Catalogue Search": {
+  "method": "XPATH",
+  "selector": "//a[normalize-space(text())='Catalogue Search']"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Click Dropdown Item": {
+  "method": "XPATH",
+  "selector": "(//button[contains(@class,'ui-button') and .//span[contains(@class,'ui-icon-triangle-1-s')]])"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Click Item Inquiry": {
+  "method": "XPATH",
+  "selector": "//a[.//span[contains(text(),'Item Inquiry')]]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Delivery Period": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'questionTbl:0') and substring(@id, string-length(@id) - string-length(':deliveryTerm') + 1) = ':deliveryTerm']"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Delivery Term": {
+  "method": "XPATH",
+  "selector": "(//input[contains(@class,'ui-inputtext') and @type='text'])[8]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Dropdown Action - Simple Quote": {
+  "method": "XPATH",
+  "selector": "//button[starts-with(@id, '_Catalogue_WAR_NGePportlet_:form:') and contains(@id, 'supplierItemID')]/span"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Dropdown Procurement Type Category": {
+  "method": "XPATH",
+  "selector": "//div[@id='_Catalogue_WAR_NGePportlet_:form:procTypeCategory']/div[3]/span"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Dropdown Reason": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_Catalogue_WAR_NGePportlet_:form:justificationIdRPT\"]/div[3]/span"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/End Date Hour": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_Catalogue_WAR_NGePportlet_:form:endDatesb:calHour\"]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/End Date Minutes": {
+  "method": "XPATH",
+  "selector": "//select[@id='_Catalogue_WAR_NGePportlet_:form:endDatesb:calMin']"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/End Date Picker icon": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_Catalogue_WAR_NGePportlet_:form:endDatesb:calDate\"]/button"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Input EpNo": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space(.)='Item / Keyword']/following::input[5]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Input Item Code": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space(.)='Item / Keyword']/following::input[2]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Input Item Keyword": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space(.)='Item / Keyword']/following::input[1]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Input Supplier Name": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space(.)='Item / Keyword']/following::input[3]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Input Title": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_Catalogue_WAR_NGePportlet_:form:title\"]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Justification": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_Catalogue_WAR_NGePportlet_:form:justificationRmkRPT\"]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Order Quantity": {
+  "method": "XPATH",
+  "selector": "//input[contains(@class,'ui-inputtext') and contains(@name,'oderQtyId')]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Procurement Type Radio Button": {
+  "method": "XPATH",
+  "selector": "//table[@id='_Catalogue_WAR_NGePportlet_:form:procurementType']/tbody/tr/td[7]/div/div[2]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Side Menu item List": {
+  "method": "XPATH",
+  "selector": "//div[@id='_Catalogue_WAR_NGePportlet_:form:mainTabMenu']/ul/li[3]"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Start Date Hour": {
+  "method": "XPATH",
+  "selector": "//select[@id='_Catalogue_WAR_NGePportlet_:form:startDatesb:calHour']"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Start Date Minute": {
+  "method": "XPATH",
+  "selector": "//select[@id='_Catalogue_WAR_NGePportlet_:form:startDatesb:calMin']"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Start Date Picker icon": {
+  "method": "XPATH",
+  "selector": "//span[contains(@id,':startDatesb:calDate')]/button"
+ },
+ "DLOA/4. DLOA - Requestioner/1. General Information/Title": {
+  "method": "XPATH",
+  "selector": "//textarea[@id='_Catalogue_WAR_NGePportlet_:form:title']"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Action Item Click Specification": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service List']]\n\n/following-sibling::*[1]\n\n//button[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':addBtn') + 1) = ':addBtn']"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Click Date": {
+  "method": "XPATH",
+  "selector": "//div[@id='ui-datepicker-div']/table/tbody/tr/td[6]/a"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Click Specification Fahmi": {
+  "method": "XPATH",
+  "selector": "(//a[contains(@class,'ui-menuitem-link') and .//span[normalize-space(.)='Specification']])[2]"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Click Specification": {
+  "method": "XPATH",
+  "selector": "//a[contains(@class,'ui-menuitem-link') and .//span[normalize-space(.)='Specification']]"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Confirmation Pop up After Submit": {
+  "method": "XPATH",
+  "selector": "//*[substring(@id, string-length(@id) - string-length(':yesButton') + 1) = ':yesButton']"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Duration (Month)": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,':questionTbl:0:duration')]"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Freq. per UOM": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,':questionTbl:0:freqUOM')]"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Fulfilment Type Services": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,':questionTbl:0:fulfilType')]/div[3]"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Input Specification 2 TextBox": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service List']]\n\n/following-sibling::*[1]\n\n//textarea[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':specification') + 1) = ':specification']"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Input UOM": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service List']]\n\n/following-sibling::*[1]\n\n//input[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':uom_input') + 1) = ':uom_input']"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Quantity": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service List']]\n\n/following-sibling::*[1]\n\n//input[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':qty') + 1) = ':qty']"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Service Input Specification 1 TextBox": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service List']]\n\n/following-sibling::*[1]\n\n//textarea[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':itemName') + 1) = ':itemName']"
+ },
+ "DLOA/4. DLOA - Requestioner/2. Item List/Service Period": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space(.)='Service List']   \n\n/ancestor::*[self::div or self::fieldset or self::section][1]   \n\n//input[     contains(@id,':questionTbl:') and     substring(@id, string-length(@id) - string-length(':serviceTerm') + 1) = ':serviceTerm'   ]"
+ },
+ "DLOA/4. DLOA - Requestioner/3. Criteria and Supplier List/Click Button Add Location": {
+  "method": "XPATH",
+  "selector": "//li[@role='tab' and .//a[normalize-space()='Supplier Location']] /following::button[normalize-space()='Add'][1]"
+ },
+ "DLOA/4. DLOA - Requestioner/3. Criteria and Supplier List/Click Button Add Supplier": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'supplierlovBtn')]"
+ },
+ "DLOA/4. DLOA - Requestioner/3. Criteria and Supplier List/Click Button OK": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'okBtn')]"
+ },
+ "DLOA/4. DLOA - Requestioner/3. Criteria and Supplier List/Click Supplier List": {
+  "method": "XPATH",
+  "selector": "//a[normalize-space()='Supplier List']"
+ },
+ "DLOA/4. DLOA - Requestioner/3. Criteria and Supplier List/Locality Coverage": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'locLevels')]/div[3]"
+ },
+ "DLOA/4. DLOA - Requestioner/3. Criteria and Supplier List/Side Menu Criteria and Supplier List": {
+  "method": "XPATH",
+  "selector": "//a[span[normalize-space(.)='Criteria and Supplier List']]"
+ },
+ "DLOA/4. DLOA - Requestioner/4.Product/Click Action Item Product": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space()='Product List']]\n\r\n/following::button[contains(@id,':questionTbl:addTopBtn')][1]"
+ },
+ "DLOA/4. DLOA - Requestioner/4.Product/Input Product UOM": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space()='Product List']] /following-sibling::*[1] //input[contains(@id,':questionTbl:') and contains(@id,':uom_input')]"
+ },
+ "DLOA/4. DLOA - Requestioner/4.Product/Input Specification 2 TextBox": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space()='Product List']]\n\r\n/following-sibling::*[1]\n\r\n//textarea[contains(@id,':questionTbl:') and contains(@id,':specification')]"
+ },
+ "DLOA/4. DLOA - Requestioner/4.Product/Product Action Item Click Specification": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space()='Product List']]\n\r\n/following-sibling::*[1]\n\r\n//button[contains(@id,':questionTbl:') and contains(@id,':addBtn')]"
+ },
+ "DLOA/4. DLOA - Requestioner/4.Product/Product Click Specification": {
+  "method": "XPATH",
+  "selector": "//a[contains(@id,':questionTbl:') and .//span[normalize-space()='Specification']]"
+ },
+ "DLOA/4. DLOA - Requestioner/4.Product/Product Delivery Period": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space()='Product List']]\n\r\n/following-sibling::*[1]\n\r\n//input[contains(@id,':questionTbl:') and contains(@id,':deliveryTerm')]"
+ },
+ "DLOA/4. DLOA - Requestioner/4.Product/Product Price Type": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space()='Product List']]\n\r\n/following-sibling::*[1]\n\r\n//select[contains(@id,':questionTbl:') and contains(@id,':priceType')]"
+ },
+ "DLOA/4. DLOA - Requestioner/4.Product/Product Quantity": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space()='Product List']]\n\r\n/following-sibling::*[1]\n\r\n//input[contains(@id,':questionTbl:') and contains(@id,':qty')]"
+ },
+ "DLOA/4. DLOA - Requestioner/4.Product/Product Specification 1": {
+  "method": "XPATH",
+  "selector": "//span[normalize-space()='Product List']\n\r\n/ancestor::div[contains(@id,':spg_header')]\n\r\n/following-sibling::*[1]\n\r\n//textarea[contains(@id,':titleName')]"
+ },
+ "DLOA/4. DLOA - Requestioner/5. Product_Plus_Services/Click Specification ProductPlusServices": {
+  "method": "XPATH",
+  "selector": "(//div[.//span[normalize-space()='Service List']] /following::a[ contains(@id,':questionTbl:0:') and .//span[normalize-space()='Specification'] ])[2]"
+ },
+ "DLOA/4. DLOA - Requestioner/Compare/Button Proceed": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Proceed']]"
+ },
+ "DLOA/4. DLOA - Requestioner/Compare/Dropdown Approver Group": {
+  "method": "XPATH",
+  "selector": "(//div[contains(@class,'ui-selectonemenu-trigger')])[2]"
+ },
+ "DLOA/4. DLOA - Requestioner/Compare/Dropdown Approver Name": {
+  "method": "XPATH",
+  "selector": "(//div[contains(@class,'ui-selectonemenu-trigger')])[3]"
+ },
+ "DLOA/4. DLOA - Requestioner/Compare/Dropdown Price Type": {
+  "method": "XPATH",
+  "selector": "//span[contains(@class,'ui-icon-triangle-1-s')]"
+ },
+ "DLOA/4. DLOA - Requestioner/Compare/Dropdown Procurement Type Category": {
+  "method": "XPATH",
+  "selector": "//select[contains(@id,'procTypeCategory')]"
+ },
+ "DLOA/4. DLOA - Requestioner/Compare/New Price Offered per Unit": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,'itemPriceNormal')]"
+ },
+ "DLOA/4. DLOA - Requestioner/Compare/Sign Button": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id,'spkiSign') and .//span[normalize-space()='Sign']]"
+ },
+ "DLOA/4. DLOA - Requestioner/Compare/Submit Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Submit']]"
+ },
+ "DLOA/5. SUpplier Simple Quote Respond/Click Procument Tittle": {
+  "method": "XPATH",
+  "selector": "(//*[starts-with(@id,'_scSupplierInvitationSq_WAR_NGePportlet_:form:scSuppInviteTblId:0:')]/span)[1]"
+ },
+ "DLOA/5. SUpplier Simple Quote Respond/Click Simple Quote Respond": {
+  "method": "XPATH",
+  "selector": "//a[contains(@href,'/web/epapp/simple-quote-respond')]"
+ },
+ "DLOA/5. SUpplier Simple Quote Respond/Click Soft Cert Sign Button": {
+  "method": "XPATH",
+  "selector": "//*[@id='_ReviewSupplierView_WAR_NGePportlet_:form:spkiPopup:spkiSign']"
+ },
+ "DLOA/5. SUpplier Simple Quote Respond/Submit Respond Simple Quote": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Submit']]"
+ },
+ "DLOA/5. SUpplier Simple Quote Respond/Unit Price(RM) - 2": {
+  "method": "XPATH",
+  "selector": "(//input[starts-with(@id,'_ReviewSupplierView_WAR_NGePportlet_:form:') and contains(@id,':questionTbl:2:ratePerUom')])[1]"
+ },
+ "DLOA/5. SUpplier Simple Quote Respond/Unit Price(RM)": {
+  "method": "XPATH",
+  "selector": "(//input[starts-with(@id,'_ReviewSupplierView_WAR_NGePportlet_:form:') and contains(@id,':questionTbl:0:ratePerUom')])[1]"
+ },
+ "DLOA/6. Prepare Request Note/Approver Group Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[@id='_scDirectPurchaseTask_WAR_NGePportlet_:form:appGroupId']//div[contains(@class,'ui-selectonemenu-trigger')]"
+ },
+ "DLOA/6. Prepare Request Note/Approver Name Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDirectPurchaseTask_WAR_NGePportlet_:form:approverNameId\"]/div[3]"
+ },
+ "DLOA/6. Prepare Request Note/Click Prepared Name in Table": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDirectPurchaseTask_WAR_NGePportlet_:form:requestListDataTable:0:beforeSaveLov:dtUserOrg_data\"]/tr/td[1]"
+ },
+ "DLOA/6. Prepare Request Note/Click Search PR-LOA Prepared By": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDirectPurchaseTask_WAR_NGePportlet_:form:requestListDataTable:0:beforeSaveLov:searchName\"]"
+ },
+ "DLOA/6. Prepare Request Note/Click Search button": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDirectPurchaseTask_WAR_NGePportlet_:form:requestListDataTable:0:beforeSaveLov:searcbBtnId\"]/span"
+ },
+ "DLOA/6. Prepare Request Note/Click Select Button": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDirectPurchaseTask_WAR_NGePportlet_:form:requestListDataTable:0:beforeSaveLov:slbtn\"]/span"
+ },
+ "DLOA/6. Prepare Request Note/Dropdown Kumpulan PTJ": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDirectPurchaseTask_WAR_NGePportlet_:form:requestListDataTable:0:beforeSaveLov:somJabatan\"]/div[3]"
+ },
+ "DLOA/6. Prepare Request Note/Dropdown PTJ": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDirectPurchaseTask_WAR_NGePportlet_:form:requestListDataTable:0:beforeSaveLov:somPtj\"]/div[3]"
+ },
+ "DLOA/6. Prepare Request Note/Dropdown Username": {
+  "method": "XPATH",
+  "selector": "(//*[starts-with(@id,'_scDirectPurchaseTask_WAR_NGePportlet_:form:') and contains(@id,':j_idt')]/div[3])"
+ },
+ "DLOA/6. Prepare Request Note/Input Prepared Username": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDirectPurchaseTask_WAR_NGePportlet_:form:requestListDataTable:0:beforeSaveLov:searchName\"]"
+ },
+ "DLOA/6. Prepare Request Note/Submit Simple Quote": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Submit']]"
+ },
+ "DLOA/7. Approve RN/Click Button Approve": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Approve']]"
+ },
+ "DLOA/8. Prepare LOA/Click Prepare LOA Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Prepare Letter Of Acceptance']]"
+ },
+ "DLOA/8. Prepare LOA/Click pop up Yes": {
+  "method": "XPATH",
+  "selector": "//button[contains(@onclick,'qtChangeAgreementReqDlg.hide') and contains(@onclick,'agreementReqPG')]//span[normalize-space()='Yes']"
+ },
+ "DLOA/8. Prepare LOA/Date Picker COntract Details icon": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDpLoaList_WAR_NGePportlet_:form:effdate\"]/button/span[1]"
+ },
+ "DLOA/8. Prepare LOA/Date Picker Zone Item icon": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDpLoaList_WAR_NGePportlet_:form:govSignDate\"]/button/span[1]"
+ },
+ "DLOA/8. Prepare LOA/File Reference No_1": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDpLoaList_WAR_NGePportlet_:form:fileNo\"]"
+ },
+ "DLOA/8. Prepare LOA/File Reference No_2": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scDpLoaList_WAR_NGePportlet_:form:fileExtNo\"]"
+ },
+ "DLOA/8. Prepare LOA/LOA And Attachment/Choose File": {
+  "method": "XPATH",
+  "selector": "//input[@type='file' and starts-with(@id,'_scDpLoaList_WAR_NGePportlet_:form:') and contains(@id,'FU_input')]"
+ },
+ "DLOA/8. Prepare LOA/LOA And Attachment/Click upload Icon": {
+  "method": "XPATH",
+  "selector": "(//button[starts-with(@id,'_scDpLoaList_WAR_NGePportlet_:form:contentsTbl:') \n\n         and contains(@id,':scDocUploadBtn:scDocUploadBtnBtn')])[1]"
+ },
+ "DLOA/8. Prepare LOA/LOA And Attachment/Date Picker LOA and Attachment": {
+  "method": "XPATH",
+  "selector": "(//button[contains(@class,'ui-datepicker-trigger')])[1]"
+ },
+ "DLOA/8. Prepare LOA/LOA And Attachment/Dropdown Username": {
+  "method": "XPATH",
+  "selector": "(//div[contains(@class,'ui-selectonemenu-trigger')])[1]"
+ },
+ "DLOA/8. Prepare LOA/LOA And Attachment/Side Menu LOA And Attachment": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space(.)='Letter Of Acceptance And Attachment']]"
+ },
+ "DLOA/8. Prepare LOA/LOA And Attachment/Upload Icon LOA Signer Document": {
+  "method": "XPATH",
+  "selector": "(//button[contains(@class,'ui-button') and .//span[contains(@class,'ui-icon-arrowreturnthick-1-n')]])[1]"
+ },
+ "DLOA/9. DLOA Supplier/Accept and Reject Button/Accept Button Supplier": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Accept']]"
+ },
+ "DLOA/9. DLOA Supplier/Accept and Reject Button/Confirmation Yes": {
+  "method": "XPATH",
+  "selector": "//*[@id='_scLoaSupplierResponse_WAR_NGePportlet_:form:yesBtnConfmA']"
+ },
+ "DLOA/9. DLOA Supplier/Accept and Reject Button/Pop up Soft Cert Yes": {
+  "method": "XPATH",
+  "selector": "//*[@id='_scLoaSupplierResponse_WAR_NGePportlet_:form:spkiPopup:spkiSign']"
+ },
+ "DLOA/9. DLOA Supplier/Accept and Reject Button/Reject Button Supplier": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Reject']]"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Address": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scLoaSupplierResponse_WAR_NGePportlet_:form:address\"]"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Choose File Branch Information": {
+  "method": "XPATH",
+  "selector": "//input[@type='file' and starts-with(@id,'_scLoaSupplierResponse_WAR_NGePportlet_:form:') and contains(@id,'FU_input')]"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Click Branch Information": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scLoaSupplierResponse_WAR_NGePportlet_:form:loaSuppUploadBtn:loaSuppUploadBtnBtn\"]"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Click LOA Signing Date By Supplier": {
+  "method": "XPATH",
+  "selector": "//*[@id='_scLoaSupplierResponse_WAR_NGePportlet_:form:supplierSignDate']//button"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Click Upload File icon": {
+  "method": "XPATH",
+  "selector": "(//*[starts-with(@id,'_scLoaSupplierResponse_WAR_NGePportlet_:form:') and contains(@id,'FU')]\n\n  //table//tr/td[5]//button)[1]"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Designation": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scLoaSupplierResponse_WAR_NGePportlet_:form:designation\"]"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Fax No": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scLoaSupplierResponse_WAR_NGePportlet_:form:faxNo\"]"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Identification No": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scLoaSupplierResponse_WAR_NGePportlet_:form:identificationNo\"]"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Name": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scLoaSupplierResponse_WAR_NGePportlet_:form:witnessName\"]"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Pick LOA Signer Date": {
+  "method": "XPATH",
+  "selector": "//div[@id='ui-datepicker-div']/table/tbody/tr/td[6]/a"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Supplier Signer Details Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[@id='_scLoaSupplierResponse_WAR_NGePportlet_:form:accountNoId']//div[contains(@class,'ui-selectonemenu-trigger')]"
+ },
+ "DLOA/9. DLOA Supplier/General Information/Telephone No": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scLoaSupplierResponse_WAR_NGePportlet_:form:phoneNo\"]"
+ },
+ "DLOA/9. DLOA Supplier/Item Code Assignment/Click Hyperlink Product": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'unspscTableID')]//a[contains(@href,'javascript') or contains(@class,'ui-commandlink')]"
+ },
+ "DLOA/9. DLOA Supplier/Item Code Assignment/Click Search": {
+  "method": "XPATH",
+  "selector": "//button[.//span[contains(text(),'Search')]]"
+ },
+ "DLOA/9. DLOA Supplier/Item Code Assignment/Item Code": {
+  "method": "XPATH",
+  "selector": "//form//input[contains(@id,'_input')]"
+ },
+ "DLOA/9. DLOA Supplier/Item Code Assignment/Radio Button Assign Code Product": {
+  "method": "XPATH",
+  "selector": "//div[contains(@class,'ui-radiobutton-box')]"
+ },
+ "DLOA/9. DLOA Supplier/LOA and Attachment/Click Lampiran 7 - Surat Akuan Pembida Berjaya": {
+  "method": "XPATH",
+  "selector": "//button[starts-with(@id,'_scLoaSupplierResponse_WAR_NGePportlet_:form:contentsTbl:2:') \n\n        and contains(@id,':scDocUploadBtn:scDocUploadBtnBtn')]"
+ },
+ "DLOA/9. DLOA Supplier/LOA and Attachment/Click Lampiran C - Surat Akuan Sumpah Syarikat": {
+  "method": "XPATH",
+  "selector": "//button[starts-with(@id,'_scLoaSupplierResponse_WAR_NGePportlet_:form:contentsTbl:3:') \n\n        and contains(@id,':scDocUploadBtn:scDocUploadBtnBtn')]"
+ },
+ "DLOA/9. DLOA Supplier/LOA and Attachment/Click Perakuan Penerimaan Surat Setuju Terima": {
+  "method": "XPATH",
+  "selector": "//button[starts-with(@id,'_scLoaSupplierResponse_WAR_NGePportlet_:form:contentsTbl:1:') \n\n        and contains(@id,':scDocUploadBtn:scDocUploadBtnBtn')]"
+ },
+ "DLOA/9. DLOA Supplier/LOA and Attachment/Upload File": {
+  "method": "XPATH",
+  "selector": "(//input[@type='file' and starts-with(@id,'_scLoaSupplierResponse_WAR_NGePportlet_:form:') and contains(@id,'FU_input')])[1]"
+ },
+ "DLOA/9. DLOA Supplier/LOA and Attachment/a_Category Code": {
+  "method": "XPATH",
+  "selector": "//a[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:j_idt65']"
+ },
+ "DLOA/9. DLOA Supplier/LOA and Attachment/span_Choose Files_ui-icon ui-icon-closethick": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:j_idt417:dnSuppFileUploadDlgId']/div/a/span"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Account Code": {
+  "method": "XPATH",
+  "selector": "(//tr[.//label[normalize-space()='VOT']]//img[contains(@src,'search.png')])[6]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Acknowledge": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Acknowledge']]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Address Input": {
+  "method": "XPATH",
+  "selector": "//input[@type='text' and @autocomplete='off']"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Approver Group Dropdown": {
+  "method": "XPATH",
+  "selector": "//td[label[normalize-space()='Approver Group']]/following-sibling::td//label[contains(@class,'ui-selectonemenu-label')]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Approver Name Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_flPurchaseRequest_WAR_NGePportlet_:form:approverDropdown\"]/div[3]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Button PTJ Address": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='PTJ Address']]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Button Search Code": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[normalize-space()='Search']])[1]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Checkbox Address": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'lovTb2_data')]/tr/td[1]/div"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Checkbox": {
+  "method": "XPATH",
+  "selector": "//span[contains(.,'I declare')]/ancestor::tr[1]/td[1]//div[contains(@class,'ui-chkbox-box')]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Choose Result - Copy": {
+  "method": "XPATH",
+  "selector": "//tbody[contains(@id,'lovTb_data')]/tr//tbody[contains(@id,'lovTb_data')]/tr"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Choose Result 1": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_flPurchaseRequest_WAR_NGePportlet_:form:glAccountSR_data\"]/tr[1]/td[1]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Choose Result": {
+  "method": "XPATH",
+  "selector": "(//tr[@role='row' and @data-ri='0'])[2]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Click Button Update": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Update']]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Click Program_Activity": {
+  "method": "XPATH",
+  "selector": "(//tr[.//label[normalize-space()='VOT']]//img[contains(@src,'search.png')])[4]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Click VOT 1": {
+  "method": "XPATH",
+  "selector": "(//tr[.//label[normalize-space()='VOT']]//img[contains(@src,'search.png')])[2]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Description_Input": {
+  "method": "XPATH",
+  "selector": "(//input[@type='text' and contains(@class,'ui-inputfield')])[11]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Dropdown Searching": {
+  "method": "XPATH",
+  "selector": "//table[contains(@id,'lovCriteria')]//label[normalize-space()='- Select One -']/ancestor::div[contains(@class,'ui-selectonemenu')]//div[contains(@class,'ui-selectonemenu-trigger')]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Listing-VOT_Input": {
+  "method": "XPATH",
+  "selector": "(//input[@type='text' and contains(@class,'ui-inputtext')])[13]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Menu Approver List": {
+  "method": "XPATH",
+  "selector": "//span[normalize-space()='Approver List']"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Menu Charge Line Assignment": {
+  "method": "XPATH",
+  "selector": "//li[contains(@class,'ui-tabmenuitem') and .//span[normalize-space()='Charge Line Assignment']]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Menu Delivery": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Delivery Address & Item']]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Search Button": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'lov')]//button[.//span[normalize-space()='Search']]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Select Button Search 1": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[normalize-space()='Select']])[1]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Select Button Search": {
+  "method": "XPATH",
+  "selector": "(//button[contains(@id,'slbtn')])[2]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Select Button": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id,'slbtn')]"
+ },
+ "DLOA/9. DLOA Supplier/Purchase Request/Transaction Indicator": {
+  "method": "XPATH",
+  "selector": "(//tr[.//label[normalize-space()='Transaction Indicator']]//div[contains(@class,'ui-selectonemenu-trigger')])[1]"
+ },
+ "DLOA/9. DLOA Supplier/Side Menu Supplier/Side Menu Supplier LOA Attachment": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space(.)='Letter Of Acceptance And Attachment']]"
+ },
+ "DLOA/9. DLOA Supplier/Side Menu Supplier/Zone Item Service": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space(.)='Zone / Item Details']]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Product/Action Button for Result": {
+  "method": "XPATH",
+  "selector": "//img[contains(@id,':itemTable2ID:') and not(contains(@id,'_panel'))]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Product/Click Assign Button Product": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id,'ManualSourcingSupplierResponse') and contains(@id,'questionTbl') and contains(@id,':0:')]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Product/Click Item Code": {
+  "method": "XPATH",
+  "selector": "//a[contains(@id,'unspscTableID:0:') and contains(@id,'ManualSourcingSupplierResponse')]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Product/Dropdown Color": {
+  "method": "XPATH",
+  "selector": "//label[normalize-space()='Color']/following::div[contains(@class,'ui-selectonemenu')][1]/div[3]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Product/Dropdown Measurement": {
+  "method": "XPATH",
+  "selector": "//label[normalize-space()='Measurement']/following::div[contains(@class,'ui-selectonemenu')][1]/div[3]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Product/Dropdown Type": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space()='Type']/following::div[contains(@class,'ui-selectonemenu')][1]/div[3]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Product/Dropdown brand": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space()='Brand']/following::div[contains(@class,'ui-selectonemenu')][1]/div[3]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Product/Input Item Code": {
+  "method": "XPATH",
+  "selector": "//form[contains(@id,':form')]//input[contains(@id,'_input')]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Product/Search Extension Attribute": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Search']]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Product/Search Item Code": {
+  "method": "XPATH",
+  "selector": "//form[contains(@id,'_scManualSourcingSupplierResponse_WAR_NGePportlet_:form')]//button/span"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Service/Click Assign Button Service": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id, 'itemtbl') and not(contains(@class, 'ui-state-disabled')) and .//span[text()='Assign']]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Service/Click Hyperlink Item Code": {
+  "method": "XPATH",
+  "selector": "//a[contains(@id,'_scLoaSupplierResponse_WAR_NGePportlet_:form:unspscTableID:0:')]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Service/Click OK Popup": {
+  "method": "XPATH",
+  "selector": "//button[span[normalize-space()='OK']]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Service/Click Yes Popup": {
+  "method": "XPATH",
+  "selector": "//button[span[normalize-space()='Yes']]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Service/Input Item Code for Services": {
+  "method": "XPATH",
+  "selector": "//input[starts-with(@id,'_scLoaSupplierResponse_WAR_NGePportlet_:form:') and contains(@id,'j_idt') and contains(@id,'_input')]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Service/Input Item Name for Services": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space()='Item Name']/following::input[1]"
+ },
+ "DLOA/9. DLOA Supplier/Zone Item/Zone Item Supplier Service/Search Item Code": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Search']]"
+ },
+ "DLOA/Amendment/Contract Maintenance": {
+  "method": "XPATH",
+  "selector": "//a[contains(@class,'menuItemLink') and normalize-space()='Contract Maintenance']"
+ },
+ "DLOA/Assign Button/Assign Button 1": {
+  "method": "XPATH",
+  "selector": "//button[starts-with(@id,'_scRequestNoteCodeAssignment_WAR_NGePportlet_:form:requestListDataTable:1:') and contains(@id,':j_idt')]"
+ },
+ "DLOA/Assign Button/Assign Button 2": {
+  "method": "XPATH",
+  "selector": "//button[starts-with(@id,'_scRequestNoteCodeAssignment_WAR_NGePportlet_:form:requestListDataTable:0:') and contains(@id,':j_idt')]"
+ },
+ "DLOA/Assign Button/Click Product Link": {
+  "method": "XPATH",
+  "selector": "//a[starts-with(@id,'_scRequestNoteCodeAssignment_WAR_NGePportlet_:form:unspscTableID:0:') and contains(@id,':j_idt')]"
+ },
+ "DLOA/Assign Button/Search Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Search']]"
+ },
+ "DLOA/Assign Button/Submit Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Submit']]"
+ },
+ "DLOA/DP_Req/Input Specification 2 TextBox": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space()='Service List']]\n\r\n/ancestor::div[1]//textarea[contains(@id,':questionTbl:') and contains(@id,':specification')]"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/1. Click Add to Cart Button": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'supplierItemID:0:addToCartId')]"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/10. Approver Group Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_Catalogue_WAR_NGePportlet_:form:appGroupId_label\"]"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/11. Approver Name Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_Catalogue_WAR_NGePportlet_:form:approverNameId_label\"]"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/2. Order Quantity TextField": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'oderQtyId')]"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/3. Price Type Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'priceType')]/div[3]"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/4. Reason DropDown": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'justificationId')]/div[3]"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/5. Justification": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'justificationRmk')]"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/6. Click Proceed Button": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id,'proceedBtn')]//span[normalize-space()='Proceed']"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/7. Delivery or Service Period": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_Catalogue_WAR_NGePportlet_:form:requestListDataTable:0:deliveryTerm\"]"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/8. Procurement Type Category": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'procTypeCategory')]"
+ },
+ "DP - Add To Cart/1. Add to Cart Requestioner/9. Tilte": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_Catalogue_WAR_NGePportlet_:form:requestListDataTable:0:procTypeCatTitle\"]"
+ },
+ "DP - Add To Cart/Contract List/Acknowledge": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Acknowledge']]"
+ },
+ "DP - Add To Cart/Contract List/Approver Name Dropdown": {
+  "method": "XPATH",
+  "selector": "//label[@id='_flContractRequest_WAR_NGePportlet_:form:approverDropdown_label']"
+ },
+ "DP - Add To Cart/Contract List/Button Add Popup": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[normalize-space()='Add']])[2]"
+ },
+ "DP - Add To Cart/Contract List/Button Add": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[normalize-space()='Add']])[1]"
+ },
+ "DP - Add To Cart/Contract List/Choose Result 1": {
+  "method": "XPATH",
+  "selector": "(//tr[contains(@class,'ui-widget-content')])[2]"
+ },
+ "DP - Add To Cart/Contract List/Click Calender - End Date": {
+  "method": "XPATH",
+  "selector": "(//button[contains(@class,'ui-datepicker-trigger')])[2]"
+ },
+ "DP - Add To Cart/Contract List/Click Calender - Start Date": {
+  "method": "XPATH",
+  "selector": "(//button[contains(@class,'ui-datepicker-trigger')])"
+ },
+ "DP - Add To Cart/Contract List/Click Search": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[normalize-space()='Search']])[1]"
+ },
+ "DP - Add To Cart/Contract List/Dropdown Item Type": {
+  "method": "XPATH",
+  "selector": "(//div[contains(@class,'ui-selectonemenu-trigger')])[6]"
+ },
+ "DP - Add To Cart/Contract List/Dropdown Supplier Branch": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_flContractRequest_WAR_NGePportlet_:form:suppBranch\"]/div[3]"
+ },
+ "DP - Add To Cart/Contract List/Input Item Code": {
+  "method": "XPATH",
+  "selector": "(//input[@type='text' and contains(@class,'ui-inputtext')])[18]"
+ },
+ "DP - Add To Cart/Contract List/Input Ordered Quantity": {
+  "method": "XPATH",
+  "selector": "//tr[td]//input[contains(@id,'orderedQty')]"
+ },
+ "DP - Add To Cart/Contract List/Textarea Description": {
+  "method": "XPATH",
+  "selector": "//textarea[@name='_flContractRequest_WAR_NGePportlet_:form:title']"
+ },
+ "DP - Add To Cart/Contract List/Tickbox - I declare": {
+  "method": "XPATH",
+  "selector": "(//div[contains(@class,'ui-chkbox-box')])[4]"
+ },
+ "DP - Add To Cart/Contract List/Tickbox - Result": {
+  "method": "XPATH",
+  "selector": "(//div[contains(@class,'ui-chkbox-box')])[4]"
+ },
+ "DP - Add To Cart/Contract List/Tickbox - To remain": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_flContractRequest_WAR_NGePportlet_:form:crGeneralRadio\"]/div[2]"
+ },
+ "DP - Add To Cart/Create Invoice/Click Sign": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[text()='Sign']])[2]"
+ },
+ "DP - Add To Cart/Create Invoice/Dropdown Bank": {
+  "method": "XPATH",
+  "selector": "//div[contains(@class,'ui-selectonemenu-trigger')]"
+ },
+ "DP - Add To Cart/Create Invoice/Match Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Match']]"
+ },
+ "DP - Add To Cart/Create Invoice/Submit Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Submit']]"
+ },
+ "DP - Add To Cart/Create Invoice/Tick Box - I declare": {
+  "method": "XPATH",
+  "selector": "(//div[contains(@class,'ui-chkbox-box')])[2]"
+ },
+ "DP - Add To Cart/Fulfilment Received Note/Approve Button": {
+  "method": "XPATH",
+  "selector": "//button[normalize-space()='Approve']"
+ },
+ "DP - Add To Cart/Fulfilment Received Note/Click Dropdown Acknowledge": {
+  "method": "XPATH",
+  "selector": "//div[contains(@class,'ui-selectonemenu-trigger')]"
+ },
+ "DP - Add To Cart/Fulfilment Received Note/Click Dropdown Score": {
+  "method": "XPATH",
+  "selector": "//select[contains(@name, 'suppEvalutionDt') and contains(@name, 'score')]"
+ },
+ "DP - Add To Cart/Fulfilment Received Note/Click Menu Item": {
+  "method": "XPATH",
+  "selector": "//a[normalize-space(.)='Items']"
+ },
+ "DP - Add To Cart/Fulfilment Received Note/Click Menu Supplier Evaluation": {
+  "method": "XPATH",
+  "selector": "//a[normalize-space(.)='Supplier Evaluation']"
+ },
+ "DP - Add To Cart/Fulfilment Received Note/Click Sign WO GPKI": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Sign W/O GPKI']]"
+ },
+ "DP - Add To Cart/Fulfilment Received Note/Click Tasklist": {
+  "method": "XPATH",
+  "selector": "(//a[contains(@onclick, \"docType\")])[7]"
+ },
+ "DP - Add To Cart/Payment Match/Amendment With Supplement": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Amendment With Supplement']]"
+ },
+ "DP - Add To Cart/Payment Match/Click Button Search": {
+  "method": "XPATH",
+  "selector": "(//button[normalize-space()='Search'])[1]"
+ },
+ "DP - Add To Cart/Payment Match/Click Option": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Option']]"
+ },
+ "DP - Add To Cart/Payment Match/Click Sign WO GPKI": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Sign W/O GPKI']]"
+ },
+ "DP - Add To Cart/Payment Match/Menu Amendment Detail": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Amendment Detail']]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Blank": {
+  "method": "XPATH",
+  "selector": "//body"
+ },
+ "DP - Add To Cart/Pending Delivery List/Button Search": {
+  "method": "XPATH",
+  "selector": "//button[normalize-space()='Search']"
+ },
+ "DP - Add To Cart/Pending Delivery List/Button Stop Fulfilment": {
+  "method": "XPATH",
+  "selector": "//button[span[text()='Stop Fulfilment']]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click Action": {
+  "method": "XPATH",
+  "selector": "//img[contains(@src, 'ico-view.png') and @title='Contract Request']"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click Calender": {
+  "method": "XPATH",
+  "selector": "//span[contains(@class,'ui-icon-calendar')]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click Contract List": {
+  "method": "XPATH",
+  "selector": "//a[normalize-space()='Contract List']"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click Fulfilment Maintenance": {
+  "method": "XPATH",
+  "selector": "//a[normalize-space()='Fulfilment Maintenance']"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click Icon Triangle": {
+  "method": "XPATH",
+  "selector": "//div[contains(@class,'ui-row-toggler')]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click Option": {
+  "method": "XPATH",
+  "selector": "//button[span[normalize-space()='Option']]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click Pending List": {
+  "method": "XPATH",
+  "selector": "//a[normalize-space()='Pending Delivery List']"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click Sign": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[text()='Sign']])[2]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click Stop Delivery Instruction": {
+  "method": "XPATH",
+  "selector": "//a[span[normalize-space()='Stop Delivery Instruction']]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click Title": {
+  "method": "XPATH",
+  "selector": "(//a[contains(@onclick,\"Pending Fulfilment\")])[1]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Click for Schedule": {
+  "method": "XPATH",
+  "selector": "//div[contains(@class, 'ui-row-toggler')]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Delivery Amount (RM)": {
+  "method": "XPATH",
+  "selector": "//span[contains(@id,'doDelAddress:0:doItems:0:delAmountTxt') and contains(@class,'delAmountTxt')]/input"
+ },
+ "DP - Add To Cart/Pending Delivery List/Dropdown Document Type": {
+  "method": "XPATH",
+  "selector": "(//div[@class='ui-selectonemenu-trigger ui-state-default ui-corner-right'])[2]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Dropdown Justification": {
+  "method": "XPATH",
+  "selector": "//span[contains(@class, 'ui-icon-triangle-1-s')]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Dropdown Transaction Type": {
+  "method": "XPATH",
+  "selector": "(//div[@class='ui-selectonemenu-trigger ui-state-default ui-corner-right'])[1]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Input Contract List": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id, ':form:searchContractCriteria')]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Input Delivery Quantity": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,'delOrderedQty')]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Input Document No": {
+  "method": "XPATH",
+  "selector": "(//input[@type='text' and contains(@class,'ui-inputfield')])[2]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Input Explanation": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id, ':form:otherId')]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Input Purchase Number": {
+  "method": "XPATH",
+  "selector": "(//input[contains(@name,'flPendingDeliveryList') and @type='text'])[1]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Menu Delivery Item": {
+  "method": "XPATH",
+  "selector": "//span[normalize-space()='Delivery Items']"
+ },
+ "DP - Add To Cart/Pending Delivery List/Search TaskList": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[normalize-space(.)='Search']])[1]"
+ },
+ "DP - Add To Cart/Pending Delivery List/Tick Box Delivery": {
+  "method": "XPATH",
+  "selector": "//input[@type='checkbox' and contains(@id,'doDelAddress:0')]/ancestor::div[contains(@class,'ui-chkbox')]//div[contains(@class,'ui-chkbox-box')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Category Code/Click CheckBox Category Code": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:supplierPnlId:0:categorySelect']/div[2]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Category Code/Click OK Category Code": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:okButton']/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Category Code/Click Yes Pop Up Category Code": {
+  "method": "XPATH",
+  "selector": "(//div[contains(@class,'ppRightBtn') and not(contains(@style,'display: none'))]\n\n //button[.//span[normalize-space(.)='Yes']])[3]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Common Page/Click Task List": {
+  "method": "XPATH",
+  "selector": "//a[@role='menuitem' and normalize-space(.)='Task List']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Common Page/Dropdown Language": {
+  "method": "XPATH",
+  "selector": "//select[@id='_82_languageId']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Dashboard/Create LOA": {
+  "method": "XPATH",
+  "selector": "//a[normalize-space()='Create LOA']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/Button Add Fullfilment Schedule": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Add']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/End Month - 2": {
+  "method": "XPATH",
+  "selector": "(//*[contains(@id,':form:frequencySchedule:1:')]//*[contains(@class,'ui-selectonemenu-trigger')])[3]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/End Month": {
+  "method": "XPATH",
+  "selector": "(//*[contains(@id,':form:frequencySchedule:0:')]//*[contains(@class,'ui-selectonemenu-trigger')])[3]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/End year - 2": {
+  "method": "XPATH",
+  "selector": "(//*[contains(@id,':form:frequencySchedule:1:')]//*[contains(@class,'ui-selectonemenu-trigger')])[4]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/End year": {
+  "method": "XPATH",
+  "selector": "(//*[contains(@id,':form:frequencySchedule:0:')]//*[contains(@class,'ui-selectonemenu-trigger')])[4]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/No - 2": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scCreateManualSourcing_WAR_NGePportlet_:form:frequencySchedule:1:scheduleNum\"]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/No": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scCreateManualSourcing_WAR_NGePportlet_:form:frequencySchedule:0:scheduleNum\"]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/Start Month - 2": {
+  "method": "XPATH",
+  "selector": "(//*[contains(@id,':form:frequencySchedule:1:')]//*[contains(@class,'ui-selectonemenu-trigger')])[1]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/Start Month": {
+  "method": "XPATH",
+  "selector": "(//*[contains(@id,':form:frequencySchedule:0:')]//*[contains(@class,'ui-selectonemenu-trigger')])[1]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/Start Year - 2": {
+  "method": "XPATH",
+  "selector": "(//*[contains(@id,':form:frequencySchedule:1:')]//*[contains(@class,'ui-selectonemenu-trigger')])[2]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Fullfilment Schedule/Start Year": {
+  "method": "XPATH",
+  "selector": "(//*[contains(@id,':form:frequencySchedule:0:')]//*[contains(@class,'ui-selectonemenu-trigger')])[2]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Click Date": {
+  "method": "XPATH",
+  "selector": "//*[@id='ui-datepicker-div']//td[contains(@class,'ui-datepicker-today')]/a"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Date Picker icon": {
+  "method": "XPATH",
+  "selector": "//span[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:effdate']/button/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/DropDown Procurement Type Category": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:procTypeBoCategory']/div[3]/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Dropdown Contract Type": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:contractType']/div[3]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Dropdown Fullfilment Type": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:fulfilId']/div[3]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Dropdown Performance Bond - Periodic Schedule Product_Services": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'bondReqPk7')]/div[3]/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Dropdown Performance Bond - Periodic Schedule Services": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'bondReqPk7')]/div[3]/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Dropdown Performance Bond": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:performanceBondValId']/div[3]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Dropdown Procurement Category": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:procBoCategory']/div[3]/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Dropdown Procurement Method": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:procMode']/div[3]/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Dropdown Quotation_Tender Type": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:qtType']/div[3]/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Dropdown Reason PK 7": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:justificationId']/div[3]/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Dropdown Required Agreement": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:agreementReqPk7Per']/div[3]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Duration": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:loaContractDuration']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/File Reference No_1": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:fileNoId']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/File Reference No_2": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:fileExtNo']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/LOA Offered Price (RM)": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:loaAmtId']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Service Tax": {
+  "method": "XPATH",
+  "selector": "//label[contains(normalize-space(),'Sales Tax / Service Tax')]/following::input[@type='text'][1]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/General infomation Tab/Title Letter of Acceptance": {
+  "method": "XPATH",
+  "selector": "//textarea[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:title']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LOA And Attachment Tab/Button LOA Signer": {
+  "method": "XPATH",
+  "selector": "//a[contains(@id,'lovUserlovLink')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LOA And Attachment Tab/Choose File": {
+  "method": "XPATH",
+  "selector": "//input[@type='file' and contains(@id,'_scCreateManualSourcing_WAR_NGePportlet_:form:') and substring(@id, string-length(@id) - 5) = '_input']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LOA And Attachment Tab/Click in user Table": {
+  "method": "XPATH",
+  "selector": "//tbody[contains(@id,'lovTb_data')]/tr[1]/td[1]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LOA And Attachment Tab/Click upload Icon": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:contentsTbl:0:scDocUploadBtn:scDocUploadBtnBtn']/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LOA And Attachment Tab/Date Picker LOA and Attachment": {
+  "method": "XPATH",
+  "selector": "//span[@id='_scCreateManualSourcing_WAR_NGePportlet_:form:govSignDate']/button/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LOA And Attachment Tab/Dropdown Username": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'_label') and contains(@id,'_scCreateManualSourcing_WAR_NGePportlet_:form')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LOA And Attachment Tab/Input User Name": {
+  "method": "XPATH",
+  "selector": "//input[@type='text' and contains(@id,':form:') and contains(@class,'ui-inputtext')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LOA And Attachment Tab/Search User Name": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id,'lovSearchBtn')]/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LOA And Attachment Tab/Upload Icon LOA Signer Document": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'_scCreateManualSourcing_WAR_NGePportlet_:form:') and substring(@id, string-length(@id) - 1) = 'FU']//table//tbody/tr/td[5]//button//span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LogOut/Click Menu For Sign Out": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_145_userAvatar\"]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/LogOut/Click Sign Out": {
+  "method": "XPATH",
+  "selector": "//li[contains(@class,'sign-out')]//span[normalize-space(.)='Sign Out']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Login/Password": {
+  "method": "XPATH",
+  "selector": "//input[@id='password']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Login/Right Top Menu Login": {
+  "method": "XPATH",
+  "selector": "//a[@id='']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Login/Right Top Menu": {
+  "method": "XPATH",
+  "selector": "//li[@id='sfiw_']/a/span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Login/Submit Username and Password": {
+  "method": "XPATH",
+  "selector": "//input[@id='button']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Login/Username": {
+  "method": "XPATH",
+  "selector": "//input[@id='username']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Quotation and Tender Type - Open/Upload Approval Letter of Pegawai Pengawal": {
+  "method": "XPATH",
+  "selector": "(//*[contains(@id,'_scCreateManualSourcing_WAR_NGePportlet_:form:j_idt')]/div[2]//td[5]//button)[2]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/Button Search Supplier - Direct LOA": {
+  "method": "XPATH",
+  "selector": "//img[starts-with(@id,'_scCreateManualSourcing_WAR_NGePportlet_:form:supplierId:')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/Button Search Supplier": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id,'lovSearchBtn')]//span[normalize-space()='Search']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/Click the Supplier": {
+  "method": "XPATH",
+  "selector": "//tbody[contains(@id,'lovTb_data')]/tr[1]/td[2]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/DP - Click the Supplier": {
+  "method": "XPATH",
+  "selector": "//tbody[contains(@id,'lovTb')]/tr[1]/td[1]/div"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/DP - Supplier Dropdown": {
+  "method": "XPATH",
+  "selector": "//span[normalize-space()='Search']/ancestor::div[contains(@class,'ui-panel')]//div[contains(@class,'ui-selectonemenu-trigger')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/Key In Business Name": {
+  "method": "XPATH",
+  "selector": "//input[@type='text' and contains(@id,':form:') and contains(@class,'ui-inputtext')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/LOA - Supplier Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[contains(@id,'_label') and contains(@id,'_scCreateManualSourcing_WAR_NGePportlet_:form')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/Select Supplier": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id,'slbtn')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Category Code": {
+  "method": "XPATH",
+  "selector": "//a[span[normalize-space(.)='Category Code']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Letter Of Acceptance And Attachment": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'_scCreateManualSourcing_WAR_NGePportlet_')]//*[self::a or self::button][.//span[normalize-space(.)='Letter Of Acceptance And Attachment']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Payment Deduction": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space(.)='Payment Deduction']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Verification And Approval": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Verification And Approval']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Zone Item": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Zone / Item Details']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Side Menu/Side menu Fullfilment Schedule": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Fulfilment Schedule']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Submit and Save Button/Save LOA Application": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Accept']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Submit and Save Button/Submit LOA Application": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Submit']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Verification and Approval Tab/Dropdown Approver": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scCreateManualSourcing_WAR_NGePportlet_:form:loaApprover\"]/div[3]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Verification and Approval Tab/Pop Up Click Yes": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id,'_scCreateManualSourcing_WAR_NGePportlet_:form:') and contains(@onclick,'qtChangeAgreementReqDlg.hide') and .//span[normalize-space()='Yes']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Action Item Click Specification": {
+  "method": "XPATH",
+  "selector": "//button[substring(@id, string-length(@id) - string-length(':addBtn') + 1) = ':addBtn']//span"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Click Action Item for Product": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Product']]\n\n/following-sibling::*[1]\n\n//button[substring(@id, string-length(@id) - string-length(':questionTbl:addTopBtn') + 1) = ':questionTbl:addTopBtn']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Click Specification": {
+  "method": "XPATH",
+  "selector": "//a[contains(@class,'ui-menuitem-link') and .//span[normalize-space(.)='Specification']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Delete Button services": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id, ':spg_header') and .//span[normalize-space(.)='Service List']]//following-sibling::*[1]//button[contains(@id, 'questionTbl') and contains(@id, 'delBtn')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Delete Popup Click Yes": {
+  "method": "XPATH",
+  "selector": "(//button[contains(@class, 'ui-button')]//span[normalize-space(text())='Yes'])[3]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Dropdown Price Type": {
+  "method": "XPATH",
+  "selector": "//select[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':priceType') + 1) = ':priceType']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Input Specification 1 TextBox": {
+  "method": "XPATH",
+  "selector": "//textarea[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':itemName') + 1) = ':itemName']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Input Specification 2 TextBox": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space()='Product']]\n\n/ancestor::div[1]//textarea[contains(@id,':questionTbl:') and contains(@id,':specification')]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Input UOM": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':uom_input') + 1) = ':uom_input']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Quantity": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':qty') + 1) = ':qty']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Unit Price(RM)": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':ratePerUom') + 1) = ':ratePerUom']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Action Item Click Specification": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service']]\n\n/following-sibling::*[1]\n\n//button[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':addBtn') + 1) = ':addBtn']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Add Product and Service Click Specification": {
+  "method": "XPATH",
+  "selector": "(//a[contains(@id,':questionTbl:0:') and .//span[normalize-space(.)='Specification']])[2]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Click Action Item for Service": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service']]\n\n/following-sibling::*[1]\n\n//button[substring(@id, string-length(@id) - string-length(':questionTbl:addTopBtn') + 1) = ':questionTbl:addTopBtn']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Click Specification Services": {
+  "method": "XPATH",
+  "selector": "//a[contains(@class,'ui-menuitem-link') and .//span[normalize-space(.)='Specification']]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Click Specification": {
+  "method": "XPATH",
+  "selector": "(//div[(contains(@class,'ui-menu') or contains(@class,'ui-tieredmenu') or contains(@class,'ui-contextmenu'))\n\n      and not(contains(@style,'display: none'))]\n\n //a[.//span[@class='ui-menuitem-text' and normalize-space(.)='Specification']])[last()]"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Freq per UOM": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':freqUOM') + 1) = ':freqUOM']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Input Specification 1 TextBox": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service']]\n\n/following-sibling::*[1]\n\n//textarea[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':itemName') + 1) = ':itemName']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Input Specification 2 TextBox": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service']]\n\n/following-sibling::*[1]\n\n//textarea[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':specification') + 1) = ':specification']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Input UOM": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service']]\n\n/following-sibling::*[1]\n\n//input[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':uom_input') + 1) = ':uom_input']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Quantity": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service']]\n\n/following-sibling::*[1]\n\n//input[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':qty') + 1) = ':qty']"
+ },
+ "Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Service/Unit Price(RM)": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service']]\n\n/following-sibling::*[1]\n\n//input[contains(@id,':questionTbl:') and substring(@id, string-length(@id) - string-length(':ratePerUom') + 1) = ':ratePerUom']"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Accept and Reject Button/Accept Button Supplier": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Accept']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Accept and Reject Button/Confirmation Yes": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:yesBtnConfmA\"]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Accept and Reject Button/Pop up Soft Cert Yes": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:spkiPopup:spkiSign\"]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Accept and Reject Button/Reject Button Supplier": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Reject']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Address": {
+  "method": "XPATH",
+  "selector": "//textarea[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:address']"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Choose File Branch Information": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,'_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:') and contains(@id,'FU_input')]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Click Branch Information": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:dnBranchInfoUploadBtn:dnBranchInfoUploadBtnBtn']/span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Click LOA Signing Date By Supplier": {
+  "method": "XPATH",
+  "selector": "//span[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:supplierSignDate']/button/span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Click Upload File icon": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:') and substring(@id,string-length(@id)-string-length('FU')+1)='FU']//table//tr//td[5]//button//span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Designation": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:designation']"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Fax No": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:faxNo']"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Identification No": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,':identificationNo')]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Name": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:witnessName']"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Pick LOA Signer Date": {
+  "method": "XPATH",
+  "selector": "//div[@id='ui-datepicker-div']/table/tbody/tr/td[6]/a"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Supplier Signer Details Dropdown": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:accountNoId']/div[3]/span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/General Information/Telephone No": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:phoneNo']"
+ },
+ "Direct LOA/2. Direct LOA Supplier/LOA and Attachment/Click Lampiran 7 - Surat Akuan Pembida Berjaya": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:contentsTbl:2:dnSuppFileUploadDlgBtn:dnSuppFileUploadDlgBtnBtn']/span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/LOA and Attachment/Click Lampiran C - Surat Akuan Sumpah Syarikat": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:contentsTbl:3:dnSuppFileUploadDlgBtn:dnSuppFileUploadDlgBtnBtn']/span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/LOA and Attachment/Click Perakuan Penerimaan Surat Setuju Terima": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:contentsTbl:1:dnSuppFileUploadDlgBtn:dnSuppFileUploadDlgBtnBtn']/span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/LOA and Attachment/Upload File": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,'_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:') and contains(@id,'FU_input')]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/LOA and Attachment/a_Category Code": {
+  "method": "XPATH",
+  "selector": "//a[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:j_idt65']"
+ },
+ "Direct LOA/2. Direct LOA Supplier/LOA and Attachment/span_Choose Files_ui-icon ui-icon-closethick": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:j_idt417:dnSuppFileUploadDlgId']/div/a/span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Side Menu Supplier/Side Menu Supplier LOA Attachment": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'_scManualSourcingSupplierResponse_WAR_NGePportlet_')]//*[self::a or self::button][.//span[normalize-space(.)='Letter Of Acceptance And Attachment']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description": {
+  "method": "XPATH",
+  "selector": "//a[contains(@id,'_BpmTaskList_WAR_NGePportlet_:form:taskListMyTaskId:0:')]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Input Document Number": {
+  "method": "XPATH",
+  "selector": "(//input[starts-with(@id,'_BpmTaskList_WAR_NGePportlet_:form:') and contains(@id,':j_idt')])[6]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/TaskList Supplier/MyTask_Tasklist_Dropdown": {
+  "method": "XPATH",
+  "selector": "//a[@id='_BpmTaskList_WAR_NGePportlet_:form:normalViewPanelId_toggler']/span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[normalize-space(.)='Search']])[3]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/1. Product/Input Quantity": {
+  "method": "XPATH",
+  "selector": "//div[contains(@class,'ui-dialog')]//input[contains(@id,'specZoneQtyTbl:') and contains(@id,':zoneQty')]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/1. Product/Input Unit Price": {
+  "method": "XPATH",
+  "selector": "//div[@role='dialog']//input[contains(@id,'specAnswerTbl:') and contains(@id,':ratePerUomAns')]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/1. Product/Product Quantity Pencil Icon": {
+  "method": "XPATH",
+  "selector": "//*[contains(normalize-space(),'Product')]/following::button[contains(@id,':zoneQtyBtn') and .//span[contains(@class,'ui-icon-pencil')]][1]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/1. Product/Product Unit Price Pencil Icon": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id,'questionTbl:') and contains(@id,':ratePerUomBtn') and .//span[contains(@class,'ui-icon-pencil')]]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/1. Product/Quantity OK Button": {
+  "method": "XPATH",
+  "selector": "//div[@role='dialog' and .//span[normalize-space()='Zone Quantity']]//button[.//span[normalize-space()='OK']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/1. Product/Unit Price OK Button": {
+  "method": "XPATH",
+  "selector": "//div[@role='dialog' and .//span[normalize-space()='Offered Price (RM)']]//button[.//span[normalize-space()='OK']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/2. Services/Service Quantity Pencil Icon": {
+  "method": "XPATH",
+  "selector": "//*[contains(normalize-space(),'Service')]/following::button[contains(@id,':zoneQtyBtn') and .//span[contains(@class,'ui-icon-pencil')]][1]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/2. Services/Service Unit Price Pencil Icon": {
+  "method": "XPATH",
+  "selector": "//button[contains(@id,'questionTbl:') and contains(@id,':ratePerUomBtn') and .//span[contains(@class,'ui-icon-pencil')]]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/Add Button Zone": {
+  "method": "XPATH",
+  "selector": "//button[contains(@onclick,'zonePopupGeneral') and .//span[normalize-space()='Add']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/Add Locality": {
+  "method": "XPATH",
+  "selector": "//div[contains(@class,'ui-dialog') and .//span[normalize-space()='Add Locality']]//button[.//span[normalize-space()='OK']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/Zonal Coverage DropDown": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scCreateManualSourcing_WAR_NGePportlet_:form:locationLevels\"]/div[3]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/Zone Name": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scCreateManualSourcing_WAR_NGePportlet_:form:zoneNameId\"]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Action Button for Result": {
+  "method": "XPATH",
+  "selector": "//img[contains(@id,':itemTable2ID:') and not(contains(@id,'_panel'))]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Click Assign Button Product 1": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Assign Code']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Click Assign Button Product": {
+  "method": "XPATH",
+  "selector": "//tr[@data-ri='${index}']//button[.//span[normalize-space(.)='Assign']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Click Button Yes": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Yes']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Click Item Code": {
+  "method": "XPATH",
+  "selector": "//a[contains(@id,'unspscTableID:0:') and contains(@id,'ManualSourcingSupplierResponse')]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Dropdown Color": {
+  "method": "XPATH",
+  "selector": "//label[normalize-space()='Color']/following::div[contains(@class,'ui-selectonemenu')][1]/div[3]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Dropdown Measurement": {
+  "method": "XPATH",
+  "selector": "//label[normalize-space()='Measurement']/following::div[contains(@class,'ui-selectonemenu')][1]/div[3]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Dropdown Type": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space()='Type']/following::div[contains(@class,'ui-selectonemenu')][1]/div[3]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Dropdown brand": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space()='Brand']/following::div[contains(@class,'ui-selectonemenu')][1]/div[3]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Input Item Code": {
+  "method": "XPATH",
+  "selector": "//form[contains(@id,':form')]//input[contains(@id,'_input')]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Item Details Pop Up Item Details - OK": {
+  "method": "XPATH",
+  "selector": "//div[@role='dialog' and .//span[normalize-space()='Item Details']]//button[.//span[normalize-space()='OK']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Item Details Pop Up Item Details": {
+  "method": "XPATH",
+  "selector": "//div[@role='dialog' and .//span[normalize-space()='Item Details']]//button[.//span[normalize-space()='Yes']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Radio Button Assign Code": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_scManualSourcingSupplierResponse_WAR_NGePportlet_:form:itemTableID_data\"]/tr/td[1]/div/div[2]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Search Extension Attribute": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Search']]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Search Item Code": {
+  "method": "XPATH",
+  "selector": "//form[contains(@id,'_scManualSourcingSupplierResponse_WAR_NGePportlet_:form')]//button/span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Service/Click Assign Button Service": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,':spg_header') and .//span[normalize-space(.)='Service']]\n\n/following-sibling::*[1]\n\n//button[contains(@id,':questionTbl:0:')]/span"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Service/Click Hyperlink Item Code": {
+  "method": "XPATH",
+  "selector": "//a[contains(@id,'unspscTableID:0:') and contains(@id,'ManualSourcingSupplierResponse')]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Service/Input Item Code for Services": {
+  "method": "XPATH",
+  "selector": "//form[contains(@id,':form')]//input[contains(@id,'_input') and contains(@class,'ui-inputfield')]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Service/Input Item Name for Services": {
+  "method": "XPATH",
+  "selector": "//*[normalize-space()='Item Name']/following::input[1]"
+ },
+ "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Service/Search Item Code": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Search']]"
+ },
+ "Direct LOA/3. DO Verify LOA/DO verify": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Verify']]"
+ },
+ "Direct LOA/3. DO Verify LOA/Download All button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space(.)='Download All And Print']]"
+ },
+ "FD and Agreement/Add Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Add']]"
+ },
+ "FD and Agreement/Agreement Application/Agreement Contract Document/Button Signing Page": {
+  "method": "XPATH",
+  "selector": "//label[normalize-space()='Signing Page']/following::button[contains(@class,'ui-button-icon-only')][1]"
+ },
+ "FD and Agreement/Agreement Application/Agreement Contract Document/Button Stamping Page": {
+  "method": "XPATH",
+  "selector": "//label[normalize-space()='Stamping Page']/following::button[contains(@class,'ui-button-icon-only')][1]"
+ },
+ "FD and Agreement/Agreement Application/Agreement Contract Document/Choose Button Upload 1": {
+  "method": "XPATH",
+  "selector": "//div[@id='_ctAgreement_WAR_NGePportlet_:form:upAgrSignedPageDlg']//input[@type='file']"
+ },
+ "FD and Agreement/Agreement Application/Agreement Contract Document/Choose Button Upload 2": {
+  "method": "XPATH",
+  "selector": "//div[@id='_ctAgreement_WAR_NGePportlet_:form:upStampedPageDlg']//input[@type='file']"
+ },
+ "FD and Agreement/Agreement Application/Agreement Contract Document/Choose Button Upload": {
+  "method": "XPATH",
+  "selector": "//input[contains(@name,'uploadContractDocumentId_input')]"
+ },
+ "FD and Agreement/Agreement Application/Agreement Contract Document/Click Close Icon": {
+  "method": "XPATH",
+  "selector": "//div[@id='_ctAgreement_WAR_NGePportlet_:form:upContractDocumentDlg']//a[contains(@class,'ui-dialog-titlebar-close')]"
+ },
+ "FD and Agreement/Agreement Application/Agreement Contract Document/Upload Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Upload']]"
+ },
+ "FD and Agreement/Agreement Application/Agreement Contract Document/Upload File Button 1": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'upAgrSignedPageDlg')]//td[contains(@class,'start')]//button"
+ },
+ "FD and Agreement/Agreement Application/Agreement Contract Document/Upload File Button 2": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'upStampedPageDlg')]//tr[contains(@class,'template-upload')]//td[contains(@class,'start')]//button"
+ },
+ "FD and Agreement/Agreement Application/Agreement Contract Document/Upload File Button": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'upContractDocumentDlg')]//tr[contains(@class,'template-upload')][1]//td[contains(@class,'start')]//button"
+ },
+ "FD and Agreement/Agreement Application/Agreement Signer Information/Designation": {
+  "method": "XPATH",
+  "selector": "//tbody[contains(@id,'AgWitnessTable_data')]//tr[1]/td[4]//input"
+ },
+ "FD and Agreement/Agreement Application/Agreement Signer Information/Input Identification": {
+  "method": "XPATH",
+  "selector": "//tbody[contains(@id,'AgWitnessTable_data')]//tr[1]/td[3]//input"
+ },
+ "FD and Agreement/Agreement Application/Agreement Signer Information/Input Name": {
+  "method": "XPATH",
+  "selector": "//tbody[contains(@id,'AgWitnessTable_data')]//tr[1]/td[2]//input"
+ },
+ "FD and Agreement/Agreement Application/Agreement Signer Information/Witness Add Button": {
+  "method": "XPATH",
+  "selector": "(//label[normalize-space()='Witness']/following::span[normalize-space()='Add'][1]/ancestor::button)[1]"
+ },
+ "FD and Agreement/Agreement Application/Agreement/Agreement Tick Box": {
+  "method": "XPATH",
+  "selector": "//*[@id='_ctAgreement_WAR_NGePportlet_:form:disclaimerCheckBox']//div[contains(@class,'ui-chkbox-box')]"
+ },
+ "FD and Agreement/Agreement Application/Agreement/Claim Button": {
+  "method": "XPATH",
+  "selector": "//span[normalize-space()='Claim']/ancestor::button"
+ },
+ "FD and Agreement/Agreement Application/Agreement/Document Type TaskList": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_BpmTaskList_WAR_NGePportlet_:form:docTypeAnvanceId\"]/div[3]"
+ },
+ "FD and Agreement/Agreement Application/Common TaskList Funtion/GroupTask Document No": {
+  "method": "XPATH",
+  "selector": "(//label[normalize-space()='Document No :']/following::input[1])[1]"
+ },
+ "FD and Agreement/Agreement Application/Common TaskList Funtion/GroupTask Serach Button": {
+  "method": "XPATH",
+  "selector": "//span[normalize-space()='Group Task']/ancestor::div[contains(@class,'ui-panel')]//span[normalize-space()='Search']/ancestor::button"
+ },
+ "FD and Agreement/Agreement Application/Common TaskList Funtion/GroupTask TaskList Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_BpmTaskList_WAR_NGePportlet_:form:advanceViewPanelId_toggler\"]/span"
+ },
+ "FD and Agreement/Agreement Application/Common TaskList Funtion/MyTask DocumentType Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_BpmTaskList_WAR_NGePportlet_:form:docTypeNormalId_label\"]"
+ },
+ "FD and Agreement/Agreement Application/Create Agreement/Physical Contract No": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctAgreement_WAR_NGePportlet_:form:contractPhysicalNo\"]"
+ },
+ "FD and Agreement/CM - Amendment/Choose File Button": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,'approvalLetterId_input')]"
+ },
+ "FD and Agreement/CM - Amendment/Click Contract Maintenance": {
+  "method": "XPATH",
+  "selector": "//a[normalize-space()='Contract Maintenance']"
+ },
+ "FD and Agreement/CM - Amendment/Contract No": {
+  "method": "XPATH",
+  "selector": "(//label[contains(normalize-space(),'Contract No')]/following::input[1])[1]"
+ },
+ "FD and Agreement/CM - Amendment/Upload Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[contains(@class,'ui-icon-upload')]]"
+ },
+ "FD and Agreement/CM - Amendment/Upload File Button": {
+  "method": "XPATH",
+  "selector": "//div[contains(@id,'uploadApprovalLetterDlg')]//td[@class='start']//button"
+ },
+ "FD and Agreement/FD Application/Agency/Add Button Agency": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:addBtn\"]"
+ },
+ "FD and Agreement/FD Application/Agency/File Ref Agency": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:uploadRefNoDoc\"]"
+ },
+ "FD and Agreement/FD Application/Agency/Jabatan Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:jabatan\"]/div[3]"
+ },
+ "FD and Agreement/FD Application/Agency/Ministry Dropdown": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:ministry\"]/div[3]"
+ },
+ "FD and Agreement/FD Application/Agency/PTJ Code": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:ptjCodeVaue\"]"
+ },
+ "FD and Agreement/FD Application/Agency/Search Agency": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:agencySearchId\"]"
+ },
+ "FD and Agreement/FD Application/Agency/Select Button": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:agySlectBtnId\"]"
+ },
+ "FD and Agreement/FD Application/Agency/Upload Icon/Click Close button": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:ctSharingAttachDlg\"]/div[1]/a/span"
+ },
+ "FD and Agreement/FD Application/Agency/Upload Icon/Click Icon Choose File": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:agencyUploadId_input\"]"
+ },
+ "FD and Agreement/FD Application/Agency/Upload Icon/Click Upload Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Upload']]"
+ },
+ "FD and Agreement/FD Application/Agency/Upload Icon/Click Upload File Icon": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:agencyUploadId\"]/div[2]/table/tbody/tr/td[5]"
+ },
+ "FD and Agreement/FD Application/Approver Setting/Approver Right button": {
+  "method": "XPATH",
+  "selector": "//button[contains(@class,'ui-picklist-button-add') and @title='Add']"
+ },
+ "FD and Agreement/FD Application/Approver Setting/Submit Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Submit']]"
+ },
+ "FD and Agreement/FD Application/FD Approver/Approve Button": {
+  "method": "XPATH",
+  "selector": "//button[normalize-space()='Approve']"
+ },
+ "FD and Agreement/FD Application/FD Approver/Click Sign WO GPKI": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Sign W/O GPKI']]"
+ },
+ "FD and Agreement/FD Application/FD Approver/Click Sign": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[normalize-space()='Sign']])[2]"
+ },
+ "FD and Agreement/FD Application/Fulfilment Details/Button Upload - Performance Bond": {
+  "method": "XPATH",
+  "selector": "(//button[.//span[contains(@class,'ui-icon-arrowreturnthick-1-n')]])[1]"
+ },
+ "FD and Agreement/FD Application/Fulfilment Details/Checkbox Performance Bond": {
+  "method": "XPATH",
+  "selector": "(//div[contains(@class,'ui-chkbox-box')])[3]"
+ },
+ "FD and Agreement/FD Application/Fulfilment Details/Click Approval Letter": {
+  "method": "XPATH",
+  "selector": "//button[contains(@class,'ui-button') and .//span[contains(@class,'ui-icon-upload')]]"
+ },
+ "FD and Agreement/FD Application/Fulfilment Details/Click Choose": {
+  "method": "XPATH",
+  "selector": "//input[@type='file' and contains(@id,'uploadWaiver')]"
+ },
+ "FD and Agreement/FD Application/Fulfilment Details/File Reference No": {
+  "method": "XPATH",
+  "selector": "//input[@type='text' and contains(@id,'referenceNo')]"
+ },
+ "FD and Agreement/FD Application/Fulfilment Details/Physical Contract No": {
+  "method": "XPATH",
+  "selector": "//label[normalize-space()='Physical Contract No.']/ancestor::td/following-sibling::td//textarea"
+ },
+ "FD and Agreement/FD Application/Fulfilment Details/Service Period": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:dperiod\"]"
+ },
+ "FD and Agreement/FD Application/Schedule/Schedule Add Button": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:addScheduleBtn\"]"
+ },
+ "FD and Agreement/Performance Bond/Click Close button": {
+  "method": "XPATH",
+  "selector": "//*[@id=\"_ctFulfilmentDetail_WAR_NGePportlet_:form:uploadBondDlg\"]/div[1]/a/span"
+ },
+ "FD and Agreement/Performance Bond/Click Icon Choose File": {
+  "method": "XPATH",
+  "selector": "//input[@type='file' and contains(@id,'performanceFileuploadId')]"
+ },
+ "FD and Agreement/Performance Bond/Click Icon Date 1": {
+  "method": "XPATH",
+  "selector": "(//span[contains(@class,'ui-icon-calendar')]/ancestor::button)[1]"
+ },
+ "FD and Agreement/Performance Bond/Click Icon Date 2": {
+  "method": "XPATH",
+  "selector": "(//span[contains(@class,'ui-icon-calendar')]/ancestor::button)[2]"
+ },
+ "FD and Agreement/Performance Bond/Click Icon Date 3": {
+  "method": "XPATH",
+  "selector": "(//span[contains(@class,'ui-icon-calendar')]/ancestor::button)[3]"
+ },
+ "FD and Agreement/Performance Bond/Click Upload Button": {
+  "method": "XPATH",
+  "selector": "//button[contains(@onclick,'uploadBondDlg') and .//span[contains(@class,'ui-icon-upload')]]"
+ },
+ "FD and Agreement/Performance Bond/Click Upload File Icon": {
+  "method": "XPATH",
+  "selector": "//div[@id='_ctFulfilmentDetail_WAR_NGePportlet_:form:uploadBondDlg']//td[@class='start']//button"
+ },
+ "FD and Agreement/Performance Bond/Dropdown Financial Institution": {
+  "method": "XPATH",
+  "selector": "//div[@class='ui-selectonemenu-trigger ui-state-default ui-corner-right']"
+ },
+ "FD and Agreement/Performance Bond/Input Amount": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,'tableBond:0:') and contains(@class,'ppRightBtn')]"
+ },
+ "FD and Agreement/Performance Bond/Input Reference No": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,'tableBond:0:bondRefNoId')]"
+ },
+ "FD and Agreement/Side Menu/Agreement/Side Menu Agreement Contract Document": {
+  "method": "XPATH",
+  "selector": "//a[contains(.,'Agreement Contract Document')]"
+ },
+ "FD and Agreement/Side Menu/Agreement/Side Menu Agreement Signer Information": {
+  "method": "XPATH",
+  "selector": "//span[normalize-space()='Agreement Signer Information']/ancestor::a"
+ },
+ "FD and Agreement/Side Menu/FD Application/Agency Side Menu": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Agency']]"
+ },
+ "FD and Agreement/Side Menu/FD Application/Approver Settings": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Approver Settings']]"
+ },
+ "FD and Agreement/Side Menu/FD Application/Payment Tracking Side Menu": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Payment Tracking']]"
+ },
+ "FD and Agreement/Side Menu/FD Application/Performance Bond Side Menu": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Performance Bond']]"
+ },
+ "FD and Agreement/Side Menu/FD Application/Schedule Side Menu": {
+  "method": "XPATH",
+  "selector": "//a[.//span[normalize-space()='Schedule']]"
+ },
+ "FD and Agreement/Submit Button": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Submit']]"
+ },
+ "Supplier/Quick Link/Add File - Button": {
+  "method": "XPATH",
+  "selector": "//input[@type='file' and contains(@id,'_smUpdateMofDetails_WAR_NGePportlet_') and contains(@id,'_input')]"
+ },
+ "Supplier/Quick Link/Button Proceed": {
+  "method": "XPATH",
+  "selector": "//button[.//span[normalize-space()='Proceed']]"
+ },
+ "Supplier/Quick Link/Button Upload Doc": {
+  "method": "XPATH",
+  "selector": "//td[contains(@class,'start')]/button[.//span[contains(@class,'ui-icon-arrowreturnthick-1-n')]]"
+ },
+ "Supplier/Quick Link/Choose File": {
+  "method": "XPATH",
+  "selector": "//label[contains(@class,'fileinput-button') and .//span[normalize-space()='Choose']]//input[@type='file']"
+ },
+ "Supplier/Quick Link/Click Update MOF": {
+  "method": "XPATH",
+  "selector": "//a[normalize-space()='Update MOF Profile Application']"
+ },
+ "Supplier/Quick Link/Icon Upload Doc": {
+  "method": "XPATH",
+  "selector": "//a[contains(@id,'overlapCatSuppDocDtId:0:')]//img[contains(@src,'upload.png')]"
+ },
+ "Supplier/Quick Link/Popup - OK": {
+  "method": "XPATH",
+  "selector": "//button[contains(@onclick,'saveDraftConfirmDialog.hide()') and .//span[normalize-space()='OK']]"
+ },
+ "Supplier/Quick Link/Side Menu Assoc Company": {
+  "method": "XPATH",
+  "selector": "//a[contains(@class,'ui-commandlink') and .//span[normalize-space()='Assoc Company / Projects']]"
+ },
+ "Supplier/Quick Link/Side Menu Register Code": {
+  "method": "XPATH",
+  "selector": "//a[contains(@class,'ui-commandlink') and .//span[normalize-space()='Register Category Code(s)']]"
+ },
+ "Supplier/Quick Link/Side Menu Supporting Document": {
+  "method": "XPATH",
+  "selector": "//a[contains(@class,'ui-commandlink') and .//span[normalize-space()='Supporting Documents']]"
+ },
+ "Supplier/Quick Link/Text Area Justification": {
+  "method": "XPATH",
+  "selector": "//textarea[contains(@id,'overlapCatSuppDocDtId:0:overlapCaReasonId')]"
+ },
+ "Supplier/Quick Link/TickBox": {
+  "method": "XPATH",
+  "selector": "//div[contains(@class,'ui-chkbox') and .//input[@type='checkbox']]/div[contains(@class,'ui-chkbox-box')]"
+ },
+ "Zone item_Zonal/Zonal/Add Zonal": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:j_idt833']/span"
+ },
+ "Zone item_Zonal/Zonal/Checkbox Wilayah": {
+  "method": "XPATH",
+  "selector": "//li[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:treeZoneGeneralPopup:36']/span/div/div"
+ },
+ "Zone item_Zonal/Zonal/Choose State": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:locationLevels_panel']/div/ul/li[2]"
+ },
+ "Zone item_Zonal/Zonal/Click OK Add Locality": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:j_idt864']/span"
+ },
+ "Zone item_Zonal/Zonal/Click OK Product Quantity": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:j_idt867:j_idt1187']/span"
+ },
+ "Zone item_Zonal/Zonal/Click OK Unit Price(RM)": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:j_idt867:j_idt1114']/span"
+ },
+ "Zone item_Zonal/Zonal/Click Pencil Icon unit Price": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:j_idt867:questionTbl:0:ratePerUomBtn']/span"
+ },
+ "Zone item_Zonal/Zonal/Dropdown Zone Coverage": {
+  "method": "XPATH",
+  "selector": "//div[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:locationLevels']/div[3]/span"
+ },
+ "Zone item_Zonal/Zonal/Input Product Quantity": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:j_idt867:specZoneQtyTbl:0:zoneQty']"
+ },
+ "Zone item_Zonal/Zonal/Input Unit Price(RM)": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:j_idt867:specAnswerTbl:0:ratePerUomAns']"
+ },
+ "Zone item_Zonal/Zonal/Input Zone Name": {
+  "method": "XPATH",
+  "selector": "//input[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:zoneNameId']"
+ },
+ "Zone item_Zonal/Zonal/Radio Button Zonal": {
+  "method": "XPATH",
+  "selector": "//table[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:zoneLocFlg']/tbody/tr/td/div/div[2]"
+ },
+ "Zone item_Zonal/Zonal/div_UT Audit Sarawak 01_ui-chkbox ui-widget": {
+  "method": "XPATH",
+  "selector": "//li[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:treeZoneGeneralPopup:36']/span/div"
+ },
+ "Zone item_Zonal/Zonal/div_WILAYAH PERSEKUTUAN KUALA LUMPUR_ui-chk_6d9dd0": {
+  "method": "XPATH",
+  "selector": "//li[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:treeZoneGeneralPopup:37']/span/div/div"
+ },
+ "Zone item_Zonal/Zonal/span_Grand Total (RM)_ui-button-icon-left u_2834a0": {
+  "method": "XPATH",
+  "selector": "//button[@id='_scReviewManualSourcing_WAR_NGePportlet_:form:j_idt867:questionTbl:0:zoneQtyBtn']/span"
+ },
+ "Zone item_Zonal/Zonal/span_Offered Total Amount(RM)_ui-button-ico_f4f065": {
+  "method": "XPATH",
+  "selector": "10"
+ }
+}

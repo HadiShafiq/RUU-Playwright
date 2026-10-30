@@ -35,6 +35,19 @@ For automatic login, fill in the yellow Username and Password cells of `.auth/cr
 - `reports/html/`: Playwright HTML report with traces for failed tests
 - `knowledge/`: application map, repair log, defect register, data-change audit
 
+## Katalon test cases (tests/katalon)
+All 64 Katalon test cases are converted into `tests/katalon/<Katalon test case path>.spec.ts`, tagged `@KAT-0xx` (as in the coverage matrix) and `@katalon`. The 65th, Update MOF Profile, is the hand-written `tests/mof/update-mof-profile.spec.ts`. Each spec is its Katalon script translated line by line: same steps, same Object Repository XPaths, same delays and data columns. They run on `support/katalon/runtime.ts`, a layer that does what Katalon's `WebUI`, `findTestObject` and `TestObject` do, but with Playwright. **None of them has been run yet.** Nearly all of them change data on SIT/UAT.
+
+| Command | What it does |
+|---|---|
+| `npm run katalon:convert` | Regenerate the specs, `support/katalon/*` and the matrix from the Katalon project (read-only) |
+| `npm run katalon:sit -- --grep @KAT-010` | Run one converted test case on SIT (one worker) |
+
+- **Fix the converter, not the specs.** The specs are generated, so fixes go in `scripts/katalon/convert.mjs` or the runtime.
+- **Variables:** the defaults come from the `.tc` files. Username, Password and IC values go to `.auth/katalon-variables.json` (git-ignored, written by `katalon:convert`). If a Katalon suite binds a data file, the spec reads row `DATA_ROW` (default 1) of that Excel file. It looks for the file by name under `KATALON_DATA_DIR` (default `Desktop\Data Prep Excel AP 201`). `KAT_<Variable>=value` overrides any variable, for example `KAT_Document_Number=LA26…`.
+- **Files:** Katalon's `user.dir` is `fixtures/katalon` (holds `TestData/UploadFiles`). Its `user.home` is `reports/katalon-home`, so result workbooks (`Desktop/PrepDataFileNumber/*.xlsx`) are written there. Set `KATALON_HOME` to write them somewhere else.
+- **Katalon bugs:** `knowledge/katalon-script-defects.md` lists the places where a Katalon script uses a name it never defines. Katalon stops at those lines, and so do these specs.
+
 ## Writing a test
 ```ts
 import { test, expect, scenario } from '../../fixtures/test';
