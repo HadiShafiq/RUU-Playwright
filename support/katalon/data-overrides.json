@@ -96,7 +96,30 @@
     "RBProcurementType": "1"
   },
   "KAT-040": {
-    "_why": "Performance Bond dates 2026-06-15 are in the past (datepicker does not offer them); use 180 days from the run date",
-    "dateValue": "{yyyy-MM-dd+180d}"
+    "_why": "Performance Bond dates 2026-06-15 are in the past (datepicker does not offer them); use 180 days from the run date; tickPerformanceBond 2: with 1 the script ticks Performance Bond Deferment but adds no deferment history, so Approve FD fails (ERR-750071)",
+    "dateValue": "{yyyy-MM-dd+180d}",
+    "tickPerformanceBond": "2"
+  },
+  "KAT-042": {
+    "_why": "Agreement date 2026-10-14 is not selectable (before the LOA date); use the run date",
+    "dateValue": "{yyyy-MM-dd}"
+  },
+  "KAT-057": {
+    "_why": "Use our contract from LA260000000004032 (FD CT260000000002209 approved, agreement approved; services contract, supplier item 72121004 from KAT-008); dates in the past are not selectable, so today and +7 days; item type 2 = Service; end date = start + 60 days, the date SIT pre-fills (Delivery/Service Period 60 days); the script picker only moves forward from that month",
+    "ContractList": "LA260000000004032",
+    "StartDate": "{yyyy-MM-dd}",
+    "EndDate": "{yyyy-MM-dd+60d}",
+    "ddItemType": "2",
+    "ItemCode": "72121004"
+  },
+  "KAT-036": {
+    "_why": "Simple Quote start date 2026-10-12 is in the past; use the run date",
+    "dateValue": "{yyyy-MM-dd}"
+  },
+  "KAT-037": {
+    "_why": "Simple Quote start date 2026-10-12 is in the past; use the run date; default supplier Basic FL ROS - Organization (Registered with JPPM) 1 + item 911015030000000000 give 0 catalogue results; AINHALIM ENTERPRISE sells service 911017010000000000 (Catalogue Search 2026-10-30)",
+    "dateValue": "{yyyy-MM-dd}",
+    "SupplierName": "AINHALIM ENTERPRISE",
+    "ItemCode": "911017010000000000"
   }
 }

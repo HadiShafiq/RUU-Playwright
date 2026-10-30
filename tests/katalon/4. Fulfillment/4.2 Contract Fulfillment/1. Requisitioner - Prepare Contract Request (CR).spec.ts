@@ -9,6 +9,7 @@ import { waitBlockUI, wVisible, c, t, selectDropdownByIndex } from '../../../../
  * Data:    suite "Akta_882_DLOA/4- Prepare CR" → Data Files/Akta_882_RU/2- DLOA (2. DLOA.xlsx, sheet "3- VerifyLOA (2)")
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
+ * Katalon step repaired: Contract Request: the add-item steps run only when an "Add" button is visible; contracts that copy their items in automatically have none (the first "Add" in the page is the closed popup's button).
  */
 test.describe('KAT-057 1. Requisitioner - Prepare Contract Request (CR)', () => {
   test(
@@ -219,9 +220,9 @@ test.describe('KAT-057 1. Requisitioner - Prepare Contract Request (CR)', () => 
     	await WebUI.waitForElementVisible(dp, 20)
 
     	let parts: any = yyyyMmDd.split('-')
-    	let targetYear: any = parts[0]
-    	let targetMonthIndex: any = (parts[1]) - 1
-    	let targetDay: any = String(parts[2])
+    	let targetYear: any = Math.trunc(Number(parts[0]))
+    	let targetMonthIndex: any = (Math.trunc(Number(parts[1]))) - 1
+    	let targetDay: any = String(Math.trunc(Number(parts[2])))
 
     	let nextBtn: any = new TestObject('dpNext')
     	nextBtn.addProperty("xpath", ConditionType.EQUALS,
@@ -452,12 +453,16 @@ test.describe('KAT-057 1. Requisitioner - Prepare Contract Request (CR)', () => 
     await WebUI.delay(0.5)
 
     //Add
-    await c(findTestObject('Object Repository/DP - Add To Cart/Contract List/Button Add'))
-    await selectDropdownByIndex(findTestObject('Object Repository/DP - Add To Cart/Contract List/Dropdown Item Type'), ddItemType)
-    await t(findTestObject('Object Repository/DP - Add To Cart/Contract List/Input Item Code'),ItemCode)
-    await c(findTestObject('Object Repository/DP - Add To Cart/Contract List/Click Search'))
-    await c(findTestObject('Object Repository/DP - Add To Cart/Contract List/Tickbox - Result'))
-    await c(findTestObject('Object Repository/DP - Add To Cart/Contract List/Button Add Popup'))
+    if (await WebUI.waitForElementVisible(findTestObject('Object Repository/DP - Add To Cart/Contract List/Button Add'), 3, FailureHandling.OPTIONAL)) {
+    	await c(findTestObject('Object Repository/DP - Add To Cart/Contract List/Button Add'))
+    	await selectDropdownByIndex(findTestObject('Object Repository/DP - Add To Cart/Contract List/Dropdown Item Type'), ddItemType)
+    	await t(findTestObject('Object Repository/DP - Add To Cart/Contract List/Input Item Code'),ItemCode)
+    	await c(findTestObject('Object Repository/DP - Add To Cart/Contract List/Click Search'))
+    	await c(findTestObject('Object Repository/DP - Add To Cart/Contract List/Tickbox - Result'))
+    	await c(findTestObject('Object Repository/DP - Add To Cart/Contract List/Button Add Popup'))
+    } else {
+    	await WebUI.comment('Contract items are already listed; no item to add')
+    }
 
     //Table Add
     //t(findTestObject('Object Repository/DP - Add To Cart/Contract List/Input Ordered Quantity'), OrderedQuantity)

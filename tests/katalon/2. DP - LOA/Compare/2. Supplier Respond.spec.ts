@@ -183,9 +183,9 @@ test.describe('KAT-030 2. Supplier Respond', () => {
     	await WebUI.waitForElementVisible(dp, 20)
 
     	let parts: any = yyyyMmDd.split('-')
-    	let targetYear: any = parts[0]
-    	let targetMonth: any = parts[1]   // 1..12
-    	let targetDay: any = String(parts[2]) // "01" -> "1"
+    	let targetYear: any = Math.trunc(Number(parts[0]))
+    	let targetMonth: any = Math.trunc(Number(parts[1]))   // 1..12
+    	let targetDay: any = String(Math.trunc(Number(parts[2]))) // "01" -> "1"
 
     	// English month names used by jQuery UI datepicker
     	let monthMap: any = {
@@ -210,7 +210,7 @@ test.describe('KAT-030 2. Supplier Respond', () => {
     	while (guard < 48) {
     		let curMonthName: any = (await WebUI.getText(monthObj)).trim()
     		let curMonth: any = monthMap.get(curMonthName)
-    		let curYear: any = (await WebUI.getText(yearObj)).trim()
+    		let curYear: any = Math.trunc(Number((await WebUI.getText(yearObj)).trim()))
 
     		if (curYear == targetYear && curMonth == targetMonth) break
 

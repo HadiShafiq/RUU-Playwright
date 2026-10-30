@@ -1457,7 +1457,7 @@
  },
  "Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Input Document Number": {
   "method": "XPATH",
-  "selector": "(//input[starts-with(@id,'_BpmTaskList_WAR_NGePportlet_:form:') and contains(@id,':j_idt')])[6]"
+  "selector": "(//*[starts-with(normalize-space(text()),'Document No') and contains(text(),':')]/following::input[@type='text'][1])[last()]"
  },
  "Direct LOA/2. Direct LOA Supplier/TaskList Supplier/MyTask_Tasklist_Dropdown": {
   "method": "XPATH",
@@ -1465,7 +1465,7 @@
  },
  "Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList": {
   "method": "XPATH",
-  "selector": "(//button[.//span[normalize-space(.)='Search']])[3]"
+  "selector": "//*[translate(normalize-space(text()),'mytask','MYTASK')='MY TASK']/following::button[.//span[normalize-space(.)='Search']][1]"
  },
  "Direct LOA/2. Direct LOA Supplier/Zone Item/Zonal/1. Product/Input Quantity": {
   "method": "XPATH",

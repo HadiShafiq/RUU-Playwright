@@ -204,9 +204,9 @@ test.describe('KAT-037 9. DLOA Requestioner Add Simple Quotes - Product Plus Ser
     	await WebUI.waitForElementVisible(dp, 20)
 
     	let parts: any = yyyyMmDd.split('-')
-    	let targetYear: any = parts[0]
-    	let targetMonthIndex: any = (parts[1]) - 1
-    	let targetDay: any = String(parts[2])
+    	let targetYear: any = Math.trunc(Number(parts[0]))
+    	let targetMonthIndex: any = (Math.trunc(Number(parts[1]))) - 1
+    	let targetDay: any = String(Math.trunc(Number(parts[2])))
 
     	let nextBtn: any = new TestObject('dpNext')
     	nextBtn.addProperty("xpath", ConditionType.EQUALS,
@@ -512,7 +512,7 @@ test.describe('KAT-037 9. DLOA Requestioner Add Simple Quotes - Product Plus Ser
     	// =========================
     	await WebUI.selectOptionByIndex(
     	findTestObject('Object Repository/DLOA/4. DLOA - Requestioner/4.Product/Product Price Type'),
-    	Pricetype
+    	Math.trunc(Number(Pricetype))
     	)
     	
     	await waitBlockUI(20)

@@ -473,22 +473,30 @@ export async function claimGroupTaskIfAny(docNo: any) {
   await settle();
   const groupBody = page.locator('tbody[id*="taskListGroupId_data"]').first();
   if (!(await groupBody.count())) return false;
-  for (let pageNo = 1; pageNo <= 10; pageNo++) {
+  // Newest tasks are listed first, so a few pages are enough. Paging the Group Task table and leaving it on a
+  // later page breaks the My Task search that follows (it then returns nothing), so always go back to page 1.
+  const pageLink = (n: number) => page.locator(`xpath=(//span[contains(@class,'ui-paginator-pages')])[1]/span[normalize-space()='${n}']`);
+  let claimed = false;
+  let pageNo = 1;
+  for (; pageNo <= 3; pageNo++) {
     const row = groupBody.locator('tr').filter({ has: page.locator(`td`, { hasText: new RegExp(`^\\s*${doc}\\s*$`) }) });
     if (await row.count()) {
       await row.first().locator('button', { hasText: 'Claim' }).first().click();
       await settle();
       await page.waitForTimeout(1000);
-      cur().log(`Claimed group task ${doc} (moved to My Task)`);
-      return true;
+      claimed = true;
+      break;
     }
-    const next = page.locator(`xpath=(//span[contains(@class,'ui-paginator-pages')])[1]/span[normalize-space()='${pageNo + 1}']`);
-    if (!(await next.count())) break;
-    await next.click();
+    if (pageNo === 3 || !(await pageLink(pageNo + 1).count())) break;
+    await pageLink(pageNo + 1).click();
     await settle();
   }
-  cur().log(`${doc} is not in Group Task (nothing to claim)`);
-  return false;
+  if (pageNo > 1 && !claimed && (await pageLink(1).count())) {
+    await pageLink(1).click();
+    await settle();
+  }
+  cur().log(claimed ? `Claimed group task ${doc} (moved to My Task)` : `${doc} is not in Group Task (nothing to claim)`);
+  return claimed;
 }
 
 export const KeywordUtil = {

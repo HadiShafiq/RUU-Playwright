@@ -39,6 +39,18 @@ for (const file of walk(orRoot, '.rs').sort()) {
 /** Object Repository locators that no longer match SIT, found by running the specs. Listed in katalon-script-defects.md. */
 const OBJECT_REPAIRS = [
   {
+    key: 'Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Input Document Number',
+    find: "(//input[starts-with(@id,'_BpmTaskList_WAR_NGePportlet_:form:') and contains(@id,':j_idt')])[6]",
+    replace: "(//*[starts-with(normalize-space(text()),'Document No') and contains(text(),':')]/following::input[@type='text'][1])[last()]",
+    note: 'Task List "Document No" was "the 6th j_idt text box", which can be a Group Task field; now the box after the last "Document No :" label (the My Task one)',
+  },
+  {
+    key: 'Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList',
+    find: "(//button[.//span[normalize-space(.)='Search']])[3]",
+    replace: "//*[translate(normalize-space(text()),'mytask','MYTASK')='MY TASK']/following::button[.//span[normalize-space(.)='Search']][1]",
+    note: 'Task List "Search" was "the 3rd Search button on the page", which changes with the Group Task panel; now the first Search button after the MY TASK heading',
+  },
+  {
     key: 'Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Item Details Pop Up Item Details - OK',
     find: "normalize-space()='OK']",
     replace: "normalize-space()='OK' or normalize-space()='Yes']",
@@ -151,6 +163,18 @@ $1$2`,
     find: "//TestObject submitBtn = findTestObject('Object Repository/FD and Agreement/Submit Button')",
     replace: "TestObject submitBtn = findTestObject('Object Repository/FD and Agreement/Submit Button')",
     note: '"submitBtn" was used for the final Submit but its definition was commented out; un-commented (the object exists in the Object Repository)',
+  },
+  {
+    // Contract Request: some contracts copy their items in automatically; then there is no visible "Add" to open the
+    // item popup (the first "Add" in the DOM is the closed popup's own button) and the add-item steps must be skipped.
+    find: /^(c\(findTestObject\('Object Repository\/DP - Add To Cart\/Contract List\/Button Add'\)\)\n[\s\S]*?Contract List\/Button Add Popup'\)\)[^\n]*)$/m,
+    replace: (m) => `if (WebUI.waitForElementVisible(findTestObject('Object Repository/DP - Add To Cart/Contract List/Button Add'), 3, FailureHandling.OPTIONAL)) {\n${m.replace(/^/gm, '\t')}\n} else {\n\tWebUI.comment('Contract items are already listed; no item to add')\n}`,
+    note: 'Contract Request: the add-item steps run only when an "Add" button is visible; contracts that copy their items in automatically have none (the first "Add" in the page is the closed popup\'s button)',
+  },
+  {
+    find: 'checkDocumentStillAvailableToClaim(docNo)',
+    replace: 'claimDocument(docNo)',
+    note: '"checkDocumentStillAvailableToClaim" is called but never defined; the second check now looks for the document again with the script\'s own claimDocument (still there = failed claim, gone = skipped)',
   },
   {
     // Typo: the script reads ZonalCoverage, the test case defines ZoneCoverage.
@@ -377,7 +401,11 @@ function convert(src, opts = {}) {
   // Groovy / Java expressions.
   code = code
     .replace(/\(\s*(?:int|Integer|long|double|String|TestObject|WebElement|List(?:<[^>]*>)?)\s*\)\s*(?=[\w(\u0000])/g, '')
-    .replace(/\s+as\s+(?:String|int|Integer|List|TestObject|WebElement|long|double|BigDecimal)\b/g, '')
+    // Groovy casts: "06" as int → 6 (the date pickers rely on it), x as String → text; type-only casts are dropped.
+    .replace(/((?<![\w$.])[\w$]+(?:\.[\w$]+|\[[^\]\n]*\]|\([^()\n]*\))*)\s+as\s+(?:int|Integer|long|Long|short)\b/g, 'Math.trunc(Number($1))')
+    .replace(/((?<![\w$.])[\w$]+(?:\.[\w$]+|\[[^\]\n]*\]|\([^()\n]*\))*)\s+as\s+(?:double|Double|BigDecimal|float)\b/g, 'Number($1)')
+    .replace(/((?<![\w$.])[\w$]+(?:\.[\w$]+|\[[^\]\n]*\]|\([^()\n]*\))*)\s+as\s+String\b/g, 'String($1)')
+    .replace(/\s+as\s+(?:List|TestObject|WebElement)\b/g, '')
     .replace(/new\s+(?:ArrayList|LinkedList)(?:<[^>]*>)?\s*\(\s*\)/g, '[]')
     .replace(/new\s+(?:HashMap|LinkedHashMap)(?:<[^>]*>)?\s*\(\s*\)|\[\s*:\s*\]/g, '{}')
     .replace(/new\s+BigDecimal\s*\(/g, 'Number(')
@@ -487,7 +515,7 @@ for (const tc of testCases) {
     report.push(`${tc.id} ${tc.rel}: no script, skipped`);
     continue;
   }
-  let groovy = read(script);
+  let groovy = read(script).replace(/\r\n/g, '\n');
   const repaired = [];
   for (const r of REPAIRS) {
     if (r.when && !r.when(tc)) continue;

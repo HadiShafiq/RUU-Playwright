@@ -196,9 +196,9 @@ test.describe('KAT-045 1. Amendment With Supplement', () => {
         // c. PARSE DATE
         // =========================
         let parts: any = yyyyMmDd.split('-')
-        let targetYear: any = parts[0]
-        let targetMonthIndex: any = (parts[1]) - 1
-        let targetDay: any = String(parts[2])
+        let targetYear: any = Math.trunc(Number(parts[0]))
+        let targetMonthIndex: any = (Math.trunc(Number(parts[1]))) - 1
+        let targetDay: any = String(Math.trunc(Number(parts[2])))
 
         // =========================
         // d. NAV BUTTONS
