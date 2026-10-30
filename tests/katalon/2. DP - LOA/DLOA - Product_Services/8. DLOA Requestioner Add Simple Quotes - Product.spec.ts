@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t, up, selectDropdownByIndex } from '../../..
  * Script:  Scripts/2. DP - LOA/DLOA - Product_Services/8. DLOA Requestioner Add Simple Quotes - Product/Script1780471317257.groovy
  * Data:    suite "Akta_882/1a. Add Simple Quotes - Product" → Data Files/Akta_882_RU/3- NEW RN (1_FL FOR RN.xlsx, sheet "4- Approve RN")
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-036 8. DLOA Requestioner Add Simple Quotes - Product', () => {
   test(
@@ -168,7 +168,7 @@ test.describe('KAT-036 8. DLOA Requestioner Add Simple Quotes - Product', () => 
      * 2 = second radio
      * etc.
      */
-    async function clickProcurementType(option: any) {
+    async function clickProcurementType(option: any) { if (option != null) option = Number(option);
     	let xpath: any = `//*[@id='_Catalogue_WAR_NGePportlet_:form:procurementType:${option - 1}']`
 
     	let obj: any = new TestObject("procurementType_" + option)
@@ -237,7 +237,7 @@ test.describe('KAT-036 8. DLOA Requestioner Add Simple Quotes - Product', () => 
     	/*===================================
     	 function tick ikut index
     	 ===================================*/
-    	async function tickZoneTreeByIndex(index: any) {
+    	async function tickZoneTreeByIndex(index: any) { if (index != null) index = Number(index);
     	  let xpath: any = "(//*[contains(@id,'treeZoneLocationPopup')]/span/div/div)[" + index + "]"
     	  let obj: any = new TestObject("zoneTreeTick_" + index)
     	  obj.addProperty("xpath", ConditionType.EQUALS, xpath)

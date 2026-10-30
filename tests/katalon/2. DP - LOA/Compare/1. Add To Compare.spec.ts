@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t, selectDropdownByIndex } from '../../../../
  * Script:  Scripts/2. DP - LOA/Compare/1. Add To Compare/Script1780471317226.groovy
  * Data:    test case defaults (no suite binds a data file)
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  * Katalon defect kept as is: "SupplierName1" is used where the Katalon script does not define it (fails there, as in Katalon).
  * Katalon defect kept as is: "SupplierName2" is used where the Katalon script does not define it (fails there, as in Katalon).
  * Katalon defect kept as is: "SupplierName3" is used where the Katalon script does not define it (fails there, as in Katalon).
@@ -169,7 +169,7 @@ test.describe('KAT-029 1. Add To Compare', () => {
     * 2 = second radio
     * etc.
     */
-    async function clickProcurementType1(option: any) {
+    async function clickProcurementType1(option: any) { if (option != null) option = Number(option);
     	let xpath: any = `//*[@id='_Catalogue_WAR_NGePportlet_:form:procType:${option - 1}']`
      
     	let obj: any = new TestObject("procurementType_" + option)
@@ -238,7 +238,7 @@ test.describe('KAT-029 1. Add To Compare', () => {
     	/*===================================
     	 function tick ikut index
     	 ===================================*/
-    	async function tickZoneTreeByIndex(index: any) {
+    	async function tickZoneTreeByIndex(index: any) { if (index != null) index = Number(index);
     	  let xpath: any = "(//*[contains(@id,'treeZoneLocationPopup')]/span/div/div)[" + index + "]"
     	  let obj: any = new TestObject("zoneTreeTick_" + index)
     	  obj.addProperty("xpath", ConditionType.EQUALS, xpath)

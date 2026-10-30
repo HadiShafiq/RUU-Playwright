@@ -1557,7 +1557,7 @@
  },
  "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Item Details Pop Up Item Details - OK": {
   "method": "XPATH",
-  "selector": "//div[@role='dialog' and .//span[normalize-space()='Item Details']]//button[.//span[normalize-space()='OK']]"
+  "selector": "//div[@role='dialog' and .//span[normalize-space()='Item Details']]//button[.//span[normalize-space()='OK' or normalize-space()='Yes']]"
  },
  "Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Item Details Pop Up Item Details": {
   "method": "XPATH",

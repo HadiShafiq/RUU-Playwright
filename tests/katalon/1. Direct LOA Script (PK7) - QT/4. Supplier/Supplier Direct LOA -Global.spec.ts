@@ -8,7 +8,8 @@ import { waitBlockUI, wVisible, c, t, up, selectDropdownByIndex } from '../../..
  * Script:  Scripts/1. Direct LOA Script (PK7) - QT/4. Supplier/Supplier Direct LOA -Global/Script1778547080516.groovy
  * Data:    test case defaults (no suite binds a data file)
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
+ * Katalon step repaired: Zone / Item: an LOA over RM500,000 a year shows a GST registration notice (OK) that blocks the Assign buttons; click OK if it appears.
  */
 test.describe('KAT-009 Supplier Direct LOA -Global', () => {
   test(
@@ -244,6 +245,9 @@ test.describe('KAT-009 Supplier Direct LOA -Global', () => {
      * ========================= */
     // Open Zone Item menu
     await c(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Zone Item'))
+    let gstNoticeOk: any = new TestObject('gstNoticeOk')
+    gstNoticeOk.addProperty('xpath', ConditionType.EQUALS, "//div[contains(@class,'ui-dialog') and @aria-hidden='false' and contains(.,'register GST')]//button[.//span[normalize-space()='OK']]")
+    if (await WebUI.waitForElementVisible(gstNoticeOk, 3, FailureHandling.OPTIONAL)) await c(gstNoticeOk, 20)
 
     // ===== SET HOW MANY LOOPS YOU WANT =====
     let loopCount: any = 2

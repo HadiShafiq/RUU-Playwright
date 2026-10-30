@@ -10,7 +10,7 @@ import { waitBlockUI, wVisible, c, t } from '../../../support/katalon/helpers';
  *          also suite "Direct_Purchased (Services)/2. Supplier Simple Quote Respond" → Data Files/Direct_Purchased/DP_Izzah
  *          also suite "DP Supplier Respond Simple Quote/Supplier Respond Simple quote" → Data Files/DP - Supplier Respons Simple Quote/Supplier Respond Simple Quotes
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-022 2. Supplier Simple Quote Respond', () => {
   test(
@@ -155,7 +155,7 @@ test.describe('KAT-022 2. Supplier Simple Quote Respond', () => {
      * 2 = second radio
      * etc.
      */
-    async function clickProcurementType(option: any) {
+    async function clickProcurementType(option: any) { if (option != null) option = Number(option);
     	let xpath: any = `//*[@id='_Catalogue_WAR_NGePportlet_:form:procurementType:${option - 1}']`
 
     	let obj: any = new TestObject("procurementType_" + option)

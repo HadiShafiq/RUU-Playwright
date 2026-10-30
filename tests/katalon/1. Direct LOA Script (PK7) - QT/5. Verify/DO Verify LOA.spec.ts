@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t } from '../../../../support/katalon/helpers
  * Script:  Scripts/1. Direct LOA Script (PK7) - QT/5. Verify/DO Verify LOA/Script1778547080519.groovy
  * Data:    suite "Akta_882_DLOA/3-Verify LOA" → Data Files/Akta_882_RU/2- DLOA (2. DLOA.xlsx, sheet "3- VerifyLOA (2)")
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-010 DO Verify LOA', () => {
   test(

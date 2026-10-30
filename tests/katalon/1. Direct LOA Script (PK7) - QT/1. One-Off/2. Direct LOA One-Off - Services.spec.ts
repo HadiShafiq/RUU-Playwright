@@ -8,7 +8,8 @@ import { waitBlockUI, wVisible, c, t, up, selectDropdownByIndex } from '../../..
  * Script:  Scripts/1. Direct LOA Script (PK7) - QT/1. One-Off/2. Direct LOA One-Off - Services/Script1778547080480.groovy
  * Data:    test case defaults (no suite binds a data file)
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
+ * Katalon step repaired: Supplier popup: the double-click on the supplier row already selects it and closes the popup, so "Select" is clicked only if the popup is still open 3 s later (it raced before).
  */
 test.describe('KAT-002 2. Direct LOA One-Off - Services', () => {
   test(
@@ -208,7 +209,7 @@ test.describe('KAT-002 2. Direct LOA One-Off - Services', () => {
     await WebUI.delay(0.5)
     await WebUI.doubleClick(supplierRow, FailureHandling.OPTIONAL)
 
-    await c(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/Select Supplier'), 20)
+    if (!await WebUI.waitForElementNotVisible(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/Select Supplier'), 3, FailureHandling.OPTIONAL)) await c(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/Select Supplier'), 20)
     await waitBlockUI(1)
     await WebUI.delay(2)
 
@@ -798,7 +799,7 @@ test.describe('KAT-002 2. Direct LOA One-Off - Services', () => {
      * ========================= */
     await c(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Side Menu/Side Menu Zone Item'), 20)
 
-    async function clickZoneLocRadio(option: any) {
+    async function clickZoneLocRadio(option: any) { if (option != null) option = Number(option);
     	let xpath: any
     	switch(option) {
     		case 1:

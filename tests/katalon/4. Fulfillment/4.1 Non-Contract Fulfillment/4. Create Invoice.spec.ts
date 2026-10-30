@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t, selectDropdownByIndex } from '../../../../
  * Script:  Scripts/4. Fulfillment/4.1 Non-Contract Fulfillment/4. Create Invoice/Script1781745946497.groovy
  * Data:    suite "Akta_882/10. Create Invoice" → Data Files/Akta_882_RU/1- Request Note (RN) (1. Request Notes.xlsx, sheet "5-ItemCode - Service")
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-054 4. Create Invoice', () => {
   test(
@@ -174,7 +174,7 @@ test.describe('KAT-054 4. Create Invoice', () => {
      * 2 = second radio
      * etc.
      */
-    async function clickProcurementType(option: any) {
+    async function clickProcurementType(option: any) { if (option != null) option = Number(option);
     	let xpath: any = `//*[@id='_Catalogue_WAR_NGePportlet_:form:procurementType:${option - 1}']`
 
     	let obj: any = new TestObject("procurementType_" + option)

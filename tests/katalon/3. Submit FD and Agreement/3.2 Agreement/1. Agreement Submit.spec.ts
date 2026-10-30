@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t, up, selectDropdownByIndex } from '../../..
  * Script:  Scripts/3. Submit FD and Agreement/3.2 Agreement/1. Agreement Submit/Script1780455771543.groovy
  * Data:    suite "Agreement/Submit_Agreement" → Data Files/Akta_882_RU/2- DLOA (2. DLOA.xlsx, sheet "3- VerifyLOA (2)")
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-042 1. Agreement Submit', () => {
   test(

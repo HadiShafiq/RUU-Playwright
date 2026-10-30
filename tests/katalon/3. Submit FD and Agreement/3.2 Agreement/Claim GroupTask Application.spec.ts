@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t, selectDropdownByIndex } from '../../../../
  * Script:  Scripts/3. Submit FD and Agreement/3.2 Agreement/Claim GroupTask Application/Script1780455771550.groovy
  * Data:    test case defaults (no suite binds a data file)
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  * Katalon defect kept as is: "checkDocumentStillAvailableToClaim" is used where the Katalon script does not define it (fails there, as in Katalon).
  */
 test.describe('KAT-044 Claim GroupTask Application', () => {

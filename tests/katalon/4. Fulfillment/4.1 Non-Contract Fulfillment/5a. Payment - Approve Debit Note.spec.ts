@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t } from '../../../../support/katalon/helpers
  * Script:  Scripts/4. Fulfillment/4.1 Non-Contract Fulfillment/5a. Payment - Approve Debit Note/Script1781745946523.groovy
  * Data:    test case defaults (no suite binds a data file)
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-056 5a. Payment - Approve Debit Note', () => {
   test(
@@ -173,7 +173,7 @@ test.describe('KAT-056 5a. Payment - Approve Debit Note', () => {
      * 2 = second radio
      * etc.
      */
-    async function clickProcurementType(option: any) {
+    async function clickProcurementType(option: any) { if (option != null) option = Number(option);
     	let xpath: any = `//*[@id='_Catalogue_WAR_NGePportlet_:form:procurementType:${option - 1}']`
 
     	let obj: any = new TestObject("procurementType_" + option)

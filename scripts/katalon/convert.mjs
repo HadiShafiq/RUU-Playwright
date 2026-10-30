@@ -36,6 +36,21 @@ for (const file of walk(orRoot, '.rs').sort()) {
   const key = path.relative(orRoot, file).split(path.sep).join('/').replace(/\.rs$/, '');
   repository[key] = { method, selector };
 }
+/** Object Repository locators that no longer match SIT, found by running the specs. Listed in katalon-script-defects.md. */
+const OBJECT_REPAIRS = [
+  {
+    key: 'Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Item Details Pop Up Item Details - OK',
+    find: "normalize-space()='OK']",
+    replace: "normalize-space()='OK' or normalize-space()='Yes']",
+    note: 'Item Details confirmation now has Yes/No instead of OK ("Are you sure with this code assignment?"); accept either',
+  },
+];
+const objectRepairs = [];
+for (const r of OBJECT_REPAIRS) {
+  if (!repository[r.key]?.selector.includes(r.find)) throw new Error(`Object repair no longer applies: ${r.key}`);
+  repository[r.key].selector = repository[r.key].selector.split(r.find).join(r.replace);
+  objectRepairs.push(r);
+}
 fs.writeFileSync(path.join(root, 'support', 'katalon', 'object-repository.json'), JSON.stringify(repository, null, 1) + '\n');
 
 /* ---------- Test cases, variables, suite data bindings ---------- */
@@ -83,6 +98,44 @@ const RUNTIME_EXPORTS = ['WebUI', 'findTestObject', 'TestObject', 'ConditionType
   'XSSFWorkbook', 'katalonMissing', 'binding'];
 const WEB_HELPER_SRC = path.join(katalonRoot, 'Keywords', 'common', 'WebHelper.groovy');
 const WEB_HELPER_NAMES = [...read(WEB_HELPER_SRC).matchAll(/^\s*static\s+\S+\s+(\w+)\s*\(/gm)].map((m) => m[1]);
+/**
+ * Repairs to Katalon script steps that only worked by timing, found by running the specs on SIT.
+ * Applied to the Groovy source before conversion; listed in knowledge/katalon-script-defects.md.
+ */
+const SELECT_SUPPLIER = "c(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/Select Supplier'), 20)";
+const REPAIRS = [
+  {
+    find: SELECT_SUPPLIER,
+    replace: `if (!WebUI.waitForElementNotVisible(findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Search Supplier From Requistioner/Select Supplier'), 3, FailureHandling.OPTIONAL)) ${SELECT_SUPPLIER}`,
+    note: 'Supplier popup: the double-click on the supplier row already selects it and closes the popup, so "Select" is clicked only if the popup is still open 3 s later (it raced before)',
+  },
+  {
+    // LOAs over RM500,000 a year open a GST notice on the supplier's Zone / Item page that blocks the Assign buttons.
+    when: (tc) => /Supplier/.test(tc.rel),
+    find: /^((?:c|WebUI\.click)\(findTestObject\('Object Repository\/Direct LOA\/1\. Direct LOA Requistioner\/Side Menu\/Side Menu Zone Item'\)\)[^\n]*)$/m,
+    replace: `$1
+TestObject gstNoticeOk = new TestObject('gstNoticeOk')
+gstNoticeOk.addProperty('xpath', ConditionType.EQUALS, "//div[contains(@class,'ui-dialog') and @aria-hidden='false' and contains(.,'register GST')]//button[.//span[normalize-space()='OK']]")
+if (WebUI.waitForElementVisible(gstNoticeOk, 3, FailureHandling.OPTIONAL)) c(gstNoticeOk, 20)`,
+    note: 'Zone / Item: an LOA over RM500,000 a year shows a GST registration notice (OK) that blocks the Assign buttons; click OK if it appears',
+  },
+  {
+    // uploadFilePath is declared inside `if (agreementValue == 2) {` but the LOA signer upload uses it always.
+    when: (tc) => tc.rel.includes('/6. Open/'),
+    find: /^(\s+)String uploadFilePath = (System\.getProperty\("user\.dir"\) \+ "\/TestData\/UploadFiles\/File_pdf_for_testing\.pdf")/m,
+    replace: '$1uploadFilePath = $2',
+    prepend: 'String uploadFilePath = System.getProperty("user.dir") + "/TestData/UploadFiles/File_pdf_for_testing.pdf"\n',
+    note: '"uploadFilePath" was declared only in the Agreement = No branch but used by the LOA signer upload in every run; declared once at the top',
+  },
+  {
+    // Typo: the script reads ZonalCoverage, the test case defines ZoneCoverage.
+    when: (tc) => tc.variables.some((v) => v.name === 'ZoneCoverage') && !tc.variables.some((v) => v.name === 'ZonalCoverage'),
+    find: 'ZonalCoverage',
+    replace: 'ZoneCoverage',
+    note: 'Script reads variable "ZonalCoverage" but the test case defines "ZoneCoverage" (typo); reads ZoneCoverage',
+  },
+];
+
 /** Found by typechecking the converted specs: the Katalon scripts use these where they are not defined. */
 const UNDEFINED_IN_KATALON = ['uploadFilePath', 'ZonalCoverage', 'SupplierName1', 'SupplierName2', 'SupplierName3', 'DaytoResponse',
   'submitBtn', 'checkDocumentStillAvailableToClaim'];
@@ -285,8 +338,11 @@ function convert(src, opts = {}) {
     return `${ind}const ${n} = async (${params(p)}) => {`;
   });
   // Method definitions → async functions.
+  // Groovy coerces arguments to numeric parameter types (clickZoneLocRadio(int option) called with "2" from Excel);
+  // JS doesn't, and switch/=== then miss. Convert those parameters to numbers on entry.
+  const numericParams = (p) => p.split(',').map((s) => s.trim().split(/\s*=\s*/)[0].split(/\s+/)).filter((w) => w.length === 2 && /^(int|Integer|long|Long|double|Double|BigDecimal)$/.test(w[0])).map((w) => w[1]);
   code = code.replace(/^(\s*)(?:(?:private|public|static)\s+)*(?:def|void|String|boolean|Boolean|int|Integer|long|double|Object|TestObject|WebElement|List(?:<[^>\n]*>)?|Map(?:<[^>\n]*>)?)\s+(\w+)\s*\(([^)\n]*)\)\s*\{/gm,
-    (_, ind, n, p) => `${ind}async function ${n}(${params(p)}) {`);
+    (_, ind, n, p) => `${ind}async function ${n}(${params(p)}) {${numericParams(p).map((x) => ` if (${x} != null) ${x} = Number(${x});`).join('')}`);
   // Local variable declarations.
   code = code.replace(new RegExp(String.raw`^(\s*)(?:final\s+)?${TYPE}\s+(\w+)\s*=(?!=)`, 'gm'), (m, ind, n) => (/^(return|else|new|throw)$/.test(n) ? m : `${ind}let ${n}: any =`));
   code = code.replace(new RegExp(String.raw`^(\s*)(?:final\s+)?${TYPE}\s+(\w+)\s*$`, 'gm'), (m, ind, n) => (/^(return|else)$/.test(n) ? m : `${ind}let ${n}: any`));
@@ -406,7 +462,21 @@ for (const tc of testCases) {
     report.push(`${tc.id} ${tc.rel}: no script, skipped`);
     continue;
   }
-  const { ts, usedRuntime, helpers, webHelperUsed, notes } = convert(read(script), { variables: tc.variables.map((v) => v.name) });
+  let groovy = read(script);
+  const repaired = [];
+  for (const r of REPAIRS) {
+    if (r.when && !r.when(tc)) continue;
+    if (r.find instanceof RegExp) {
+      if (!r.find.test(groovy)) continue;
+      groovy = (r.prepend ?? '') + groovy.replace(r.find, r.replace);
+    } else {
+      if (!groovy.includes(r.find)) continue;
+      groovy = groovy.split(r.find).join(r.replace);
+    }
+    repaired.push(r.note);
+  }
+  const { ts, usedRuntime, helpers, webHelperUsed, notes } = convert(groovy, { variables: tc.variables.map((v) => v.name) });
+  notes.push(...repaired.map((n) => `REPAIRED: ${n}`));
   const parts = tc.rel.split('/');
   const name = parts.at(-1);
   const specFile = path.join(outDir, ...parts.slice(0, -1), `${name}.spec.ts`);
@@ -430,7 +500,7 @@ ${helpers.length ? `import { ${HELPERS.filter((h) => helpers.includes(h)).join('
  * Script:  ${path.relative(katalonRoot, script).split(path.sep).join('/')}
  * Data:    ${binding ? `suite "${binding.suite}" → ${binding.dataFile} (${path.win32.basename(binding.source)}, sheet "${binding.sheet}")` : 'test case defaults (no suite binds a data file)'}${otherBindings.map((b) => `\n *          also suite "${b.suite}" → ${b.dataFile}`).join('')}
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.${notes.map((n) => `\n * Katalon defect kept as is: ${n} (fails there, as in Katalon).`).join('')}
+ * DATA-CHANGING on SIT/UAT unless the script only reads.${notes.map((n) => (n.startsWith('REPAIRED: ') ? `\n * Katalon step repaired: ${n.slice(10)}.` : `\n * Katalon defect kept as is: ${n} (fails there, as in Katalon).`)).join('')}
  */
 test.describe('${tc.id} ${name.replace(/'/g, "\\'")}', () => {
   test(
@@ -502,9 +572,18 @@ define (or defines in another block), so Katalon itself stops there with Missing
 MissingMethodException. The Playwright spec keeps that behaviour: \`katalonMissing()\` throws the same way, unless the
 value is supplied with \`KAT_<name>\` (for test data such as SupplierName1).
 
+Lines marked REPAIRED are Katalon steps that only worked by timing; the converter changes them (REPAIRS in
+scripts/katalon/convert.mjs) so the Playwright run is reliable.
+
 | Scenario | Katalon test case | Defect |
 |---|---|---|
 ${defects.map((d) => `| ${d.id} | ${d.rel} | ${d.note} |`).join('\n')}
+
+## Object Repository locators repaired (OBJECT_REPAIRS)
+
+| Object | Change |
+|---|---|
+${objectRepairs.map((r) => `| ${r.key} | ${r.note} |`).join('\n')}
 `);
 
 console.log(report.join('\n'));

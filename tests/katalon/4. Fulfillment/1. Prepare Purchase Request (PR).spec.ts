@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t, selectDropdownByIndex } from '../../../sup
  * Script:  Scripts/4. Fulfillment/1. Prepare Purchase Request (PR)/Script1779090479408.groovy
  * Data:    suite "Akta_882/5. Prepare PR" → Data Files/Akta_882_RU/1- Request Note (RN) (1. Request Notes.xlsx, sheet "5-ItemCode - Service")
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-046 1. Prepare Purchase Request (PR)', () => {
   test(
@@ -182,7 +182,7 @@ test.describe('KAT-046 1. Prepare Purchase Request (PR)', () => {
      * 2 = second radio
      * etc.
      */
-    async function clickProcurementType(option: any) {
+    async function clickProcurementType(option: any) { if (option != null) option = Number(option);
     	let xpath: any = `//*[@id='_Catalogue_WAR_NGePportlet_:form:procurementType:${option - 1}']`
 
     	let obj: any = new TestObject("procurementType_" + option)

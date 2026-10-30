@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t, selectDropdownByIndex } from '../../../../
  * Script:  Scripts/4. Fulfillment/4.2 Contract Fulfillment/1. Requisitioner - Prepare Contract Request (CR)/Script1781745946435.groovy
  * Data:    suite "Akta_882_DLOA/4- Prepare CR" → Data Files/Akta_882_RU/2- DLOA (2. DLOA.xlsx, sheet "3- VerifyLOA (2)")
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-057 1. Requisitioner - Prepare Contract Request (CR)', () => {
   test(
@@ -189,7 +189,7 @@ test.describe('KAT-057 1. Requisitioner - Prepare Contract Request (CR)', () => 
      * 2 = second radio
      * etc.
      */
-    async function clickProcurementType(option: any) {
+    async function clickProcurementType(option: any) { if (option != null) option = Number(option);
     	let xpath: any = `//*[@id='_Catalogue_WAR_NGePportlet_:form:procurementType:${option - 1}']`
 
     	let obj: any = new TestObject("procurementType_" + option)
@@ -260,7 +260,7 @@ test.describe('KAT-057 1. Requisitioner - Prepare Contract Request (CR)', () => 
     /* =========================================================
      * Dropdown for Select Supplier Branch Name
      * ========================================================= */
-    async function selectSupplierBranchIfEnabledByIndex(optionIndex: any) {
+    async function selectSupplierBranchIfEnabledByIndex(optionIndex: any) { if (optionIndex != null) optionIndex = Number(optionIndex);
     	
     	// optionIndex is 1-based
     	// 1 = first option

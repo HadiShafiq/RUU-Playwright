@@ -5,13 +5,13 @@ import { WebUI, TestObject, ConditionType, FailureHandling, WebUiCommonHelper, g
 //import java.math.BigDecimal
 
 // Convert excel/csv value safely
-export async function toInt(v: any, defaultVal: any = 0) {
+export async function toInt(v: any, defaultVal: any = 0) { if (defaultVal != null) defaultVal = Number(defaultVal);
 	if (v == null) return defaultVal
 	return Number(v.toString().trim()).intValue()
 }
 
 // PrimeFaces overlay wait
-export async function waitBlockUI(timeout: any = 30) {
+export async function waitBlockUI(timeout: any = 30) { if (timeout != null) timeout = Number(timeout);
 	let blockUI: any = new TestObject('blockUI')
 	blockUI.addProperty("xpath", ConditionType.EQUALS,
 		"//*[contains(@class,'ui-blockui') or contains(@class,'blockUI') or contains(@class,'ui-widget-overlay')]"
@@ -23,19 +23,19 @@ export async function waitBlockUI(timeout: any = 30) {
 }
 
 // wait visible
-export async function wVisible(obj: any, timeout: any = 1) {
+export async function wVisible(obj: any, timeout: any = 1) { if (timeout != null) timeout = Number(timeout);
 	await waitBlockUI(Math.min(timeout, 1))
 	await WebUI.waitForElementVisible(obj, timeout, FailureHandling.STOP_ON_FAILURE)
 }
 
 // wait clickable
-export async function wClickable(obj: any, timeout: any = 1) {
+export async function wClickable(obj: any, timeout: any = 1) { if (timeout != null) timeout = Number(timeout);
 	await wVisible(obj, timeout)
 	await WebUI.waitForElementClickable(obj, timeout, FailureHandling.STOP_ON_FAILURE)
 }
 
 // click
-export async function c(obj: any, timeout: any = 1) {
+export async function c(obj: any, timeout: any = 1) { if (timeout != null) timeout = Number(timeout);
 	for (let i = 0; i < 2; i++) {
 		try {
 			await wClickable(obj, timeout)
@@ -54,7 +54,7 @@ export async function c(obj: any, timeout: any = 1) {
 }
 
 // double click
-export async function dc(obj: any, timeout: any = 1) {
+export async function dc(obj: any, timeout: any = 1) { if (timeout != null) timeout = Number(timeout);
 	try {
 		await wClickable(obj, timeout)
 		await WebUI.scrollToElement(obj, 1, FailureHandling.OPTIONAL)
@@ -67,21 +67,21 @@ export async function dc(obj: any, timeout: any = 1) {
 }
 
 // set text
-export async function t(obj: any, value: any, timeout: any = 1) {
+export async function t(obj: any, value: any, timeout: any = 1) { if (timeout != null) timeout = Number(timeout);
 	await wVisible(obj, timeout)
 	await WebUI.scrollToElement(obj, 1, FailureHandling.OPTIONAL)
 	await WebUI.setText(obj, (value == null ? "" : value.toString()))
 }
 
 // upload
-export async function up(obj: any, filePath: any, timeout: any = 1) {
+export async function up(obj: any, filePath: any, timeout: any = 1) { if (timeout != null) timeout = Number(timeout);
 	await wVisible(obj, timeout)
 	await WebUI.uploadFile(obj, filePath)
 	await waitBlockUI(1)
 }
 
 // set zone qty
-export async function setZoneQtyByRow(rowIndex: any, qtyValue: any) {
+export async function setZoneQtyByRow(rowIndex: any, qtyValue: any) { if (rowIndex != null) rowIndex = Number(rowIndex);
 	let xpath: any =
 		`//div[contains(@class,'ui-dialog')]//input[contains(@id,'specZoneQtyTbl:${rowIndex}:zoneQty')]`
 
@@ -102,7 +102,7 @@ export async function setZoneQtyByRow(rowIndex: any, qtyValue: any) {
 }
 
 // set unit price
-export async function setUnitPriceByRow(rowIndex: any, unitPriceValue: any) {
+export async function setUnitPriceByRow(rowIndex: any, unitPriceValue: any) { if (rowIndex != null) rowIndex = Number(rowIndex);
 	let xpath: any =
 		`//div[contains(@class,'ui-dialog')]//input[contains(@id,'specAnswerTbl:${rowIndex}:ratePerUomAns')]`
 
@@ -140,7 +140,7 @@ export async function openPFDropdown(triggerObj: any) {
 }
 
 // click dropdown option
-export async function clickPFOptionByIndex(index0: any) {
+export async function clickPFOptionByIndex(index0: any) { if (index0 != null) index0 = Number(index0);
 	let opt: any = new TestObject("pfOpt_" + index0)
 	opt.addProperty("xpath", ConditionType.EQUALS,
 		`(//div[contains(@class,'ui-selectonemenu-panel') and contains(@style,'display: block')]//li[contains(@class,'ui-selectonemenu-item')])[${index0 + 1}]`

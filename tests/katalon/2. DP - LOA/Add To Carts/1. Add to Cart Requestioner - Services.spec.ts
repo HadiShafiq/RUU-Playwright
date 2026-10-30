@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t, selectDropdownByIndex } from '../../../../
  * Script:  Scripts/2. DP - LOA/Add To Carts/1. Add to Cart Requestioner - Services/Script1780471317222.groovy
  * Data:    test case defaults (no suite binds a data file)
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-028 1. Add to Cart Requestioner - Services', () => {
   test(
@@ -162,7 +162,7 @@ test.describe('KAT-028 1. Add to Cart Requestioner - Services', () => {
      * 2 = second radio
      * etc.
      */
-    async function clickProcurementType(option: any) {
+    async function clickProcurementType(option: any) { if (option != null) option = Number(option);
 
     	let xpath: any =
     		`//input[@type='radio' and contains(@id,'procType:${option - 1}')]` +
@@ -234,7 +234,7 @@ test.describe('KAT-028 1. Add to Cart Requestioner - Services', () => {
     	/*===================================
     	 function tick ikut index
     	 ===================================*/
-    	async function tickZoneTreeByIndex(index: any) {
+    	async function tickZoneTreeByIndex(index: any) { if (index != null) index = Number(index);
     	  let xpath: any = "(//*[contains(@id,'treeZoneLocationPopup')]/span/div/div)[" + index + "]"
     	  let obj: any = new TestObject("zoneTreeTick_" + index)
     	  obj.addProperty("xpath", ConditionType.EQUALS, xpath)

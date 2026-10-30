@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t, selectDropdownByIndex } from '../../../../
  * Script:  Scripts/3. Submit FD and Agreement/3.1 FD/2. Approve FD/Script1780455759730.groovy
  * Data:    suite "Fulfilment Details - FD/Approval_FD" → Data Files/Fulfillment - FD/Approval_FD (Approve_FD.xlsx, sheet "Sheet1")
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-041 2. Approve FD', () => {
   test(

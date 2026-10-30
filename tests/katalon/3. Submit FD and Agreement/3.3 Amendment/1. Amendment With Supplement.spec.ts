@@ -8,7 +8,7 @@ import { waitBlockUI, wVisible, c, t } from '../../../../support/katalon/helpers
  * Script:  Scripts/3. Submit FD and Agreement/3.3 Amendment/1. Amendment With Supplement/Script1780470549498.groovy
  * Data:    test case defaults (no suite binds a data file)
  *
- * DATA-CHANGING on SIT/UAT unless the script only reads. Not run yet.
+ * DATA-CHANGING on SIT/UAT unless the script only reads.
  */
 test.describe('KAT-045 1. Amendment With Supplement', () => {
   test(

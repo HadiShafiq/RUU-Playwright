@@ -1,0 +1,89 @@
+{
+  "_comment": "Test data corrections on top of the Katalon .tc defaults, per scenario. Applied before data files and KAT_<Variable> env overrides. Say why in _why. {MMddHHmmss} (any Java date pattern) becomes the run's time.",
+  "KAT-001": {
+    "_why": "LOA price 455000 < 2 products x 10 x 30000 = 600000 (ERR-700125); File Reference No. must be unique per LOA (ERR-700027); supplier must be the company of KAT-007's supplier account MOFFLROSNEW3 (default 'BUMI' picks BUMI WARISAN MAJU, whose task KAT-007 can't see)",
+    "LOAOfferedPrice": "600000",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL Organization JPPM - New 3"
+  },
+  "KAT-007": {
+    "_why": "Katalon default P_Item_Code is empty, SIT item search needs an 8-digit UNSPSC code (ERR-716006, ERR-715026); 10101703 from item 101017030000000000 in Desktop/Akta 882 RUU/Excel for Katalon Data Prep/DP PI Add to compare.xlsx",
+    "P_Item_Code": "10101703"
+  },
+  "KAT-002": {
+    "_why": "File Reference No. must be unique per LOA (ERR-700027); supplier must be the company of KAT-008 supplier account MOFFLROS_6",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL LLP (registration with SSM as LLP)6"
+  },
+  "KAT-003": {
+    "_why": "File Reference No. must be unique per LOA (ERR-700027) (supplier BUMI = KAT-009 account bumiwarisanmaju)",
+    "FileReference1": "Test{MMddHHmmss}"
+  },
+  "KAT-004": {
+    "_why": "File Reference No. unique (ERR-700027); LOA price 200000 < 1 product line x 10 x 30000 = 300000 (ERR-700125); supplier = company of KAT-007 account MOFFLROSNEW3",
+    "FileReference1": "Test{MMddHHmmss}",
+    "LOAOfferedPrice": "300000",
+    "SupplierName": "MOF FL Organization JPPM - New 3"
+  },
+  "KAT-005": {
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-008 account MOFFLROS_6; ZoneLocation 2 (No): the suite data is Non-Zonal-Schedule-Service-PK7, and with zone Yes the service quantity/price are per-zone popups the script does not fill; ContractPeriod 24 months: the schedule data ends in year 2 (EndYear2=2) but a 2-month contract only offers the current year; LOA price 300000: with 24 months the service items total 288,000 > 200,000 (ERR-700125)",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL LLP (registration with SSM as LLP)6",
+    "ZoneLocation": "2",
+    "ContractPeriod": "24",
+    "LOAOfferedPrice": "300000"
+  },
+  "KAT-006": {
+    "_why": "File Reference No. unique (ERR-700027) (supplier BUMI = KAT-009 account bumiwarisanmaju)",
+    "FileReference1": "Test{MMddHHmmss}"
+  },
+  "KAT-011": {
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-007 account MOFFLROSNEW3",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL Organization JPPM - New 3"
+  },
+  "KAT-012": {
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-008 account MOFFLROS_6",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL LLP (registration with SSM as LLP)6"
+  },
+  "KAT-013": {
+    "_why": "File Reference No. unique (ERR-700027) (supplier BUMI = KAT-009 account bumiwarisanmaju)",
+    "FileReference1": "Test{MMddHHmmss}"
+  },
+  "KAT-014": {
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-007 account MOFFLROSNEW3",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL Organization JPPM - New 3"
+  },
+  "KAT-015": {
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-008 account MOFFLROS_6",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL LLP (registration with SSM as LLP)6"
+  },
+  "KAT-016": {
+    "_why": "File Reference No. unique (ERR-700027) (supplier BUMI = KAT-009 account bumiwarisanmaju)",
+    "FileReference1": "Test{MMddHHmmss}"
+  },
+  "KAT-017": {
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-007 account MOFFLROSNEW3; ProductUnitPrice \"3000rn\" in the .tc is a line-break typo",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL Organization JPPM - New 3",
+    "ProductUnitPrice": "3000"
+  },
+  "KAT-018": {
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-008 account MOFFLROS_6",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL LLP (registration with SSM as LLP)6"
+  },
+  "KAT-019": {
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-007 account MOFFLROSNEW3",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL Organization JPPM - New 3"
+  },
+  "KAT-020": {
+    "_why": "File Reference No. unique (ERR-700027); supplier = company of KAT-008 account MOFFLROS_6",
+    "FileReference1": "Test{MMddHHmmss}",
+    "SupplierName": "MOF FL LLP (registration with SSM as LLP)6"
+  }
+}

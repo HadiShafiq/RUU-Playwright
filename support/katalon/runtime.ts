@@ -4,6 +4,8 @@ import path from 'node:path';
 import ExcelJS from 'exceljs';
 import type { ElementHandle, Locator, Page, TestInfo } from '@playwright/test';
 import repository from './object-repository.json';
+import overrides from './data-overrides.json';
+import { waitForAjaxIdle } from '../primefaces';
 import './groovy';
 
 /*
@@ -120,7 +122,7 @@ export class WebElement {
     return (await this.locator.elementHandle())!;
   }
   click() {
-    return this.locator.click();
+    return likeSelenium(() => this.locator.click());
   }
   async getText() {
     return (await this.locator.innerText()).trim();
@@ -212,14 +214,52 @@ export const DriverFactory = {
 /** Katalon's default element timeout (seconds) when a keyword is called without one. */
 const DEFAULT_TIMEOUT = 30;
 
+/**
+ * Before acting, let PrimeFaces finish the previous AJAX request (queue empty, no BlockUI). Selenium in Katalon
+ * was slow enough not to need it; Playwright can click a tab while the last postback is still running, and
+ * PrimeFaces then drops the click. A dialog's modal backdrop is not waited for (we may be clicking in it).
+ */
+async function settle() {
+  await waitForAjaxIdle(cur().page, DEFAULT_TIMEOUT * 1000, { dialogOpen: true }).catch(() => {});
+}
+
+/**
+ * Selenium's click/sendKeys block until a page load they trigger has finished (e.g. Login → dashboard);
+ * Playwright returns at once. Katalon scripts rely on the Selenium behaviour (they select the language right
+ * after Login), so: if the action starts a main-frame navigation, wait for the new page's load event.
+ */
+async function likeSelenium(action: () => Promise<unknown>) {
+  const page = cur().page;
+  let navigating = false;
+  let loaded = false;
+  const onRequest = (r: any) => {
+    if (r.isNavigationRequest() && r.frame() === page.mainFrame()) (navigating = true), (loaded = false);
+  };
+  const onLoad = () => (loaded = true);
+  page.on('request', onRequest);
+  page.on('load', onLoad);
+  try {
+    await action();
+    await page.waitForTimeout(300);
+    if (navigating && !loaded) await page.waitForEvent('load', { timeout: 60_000 }).catch(() => {});
+  } finally {
+    page.off('request', onRequest);
+    page.off('load', onLoad);
+  }
+}
+
 async function step<T>(name: string, fh: FH | undefined, onFail: T, body: () => Promise<T>): Promise<T> {
   try {
+    await settle();
     return await body();
   } catch (e: any) {
     const mode = fh ?? FailureHandling.STOP_ON_FAILURE;
     if (mode === FailureHandling.STOP_ON_FAILURE) throw e;
-    cur().log(`${mode === FailureHandling.OPTIONAL ? 'Optional' : 'Continue-on-failure'} step failed: ${name}: ${String(e?.message ?? e).split('\n')[0]}`);
-    if (mode === FailureHandling.CONTINUE_ON_FAILURE) cur().testInfo.annotations.push({ type: 'warning', description: `${name} failed` });
+    // OPTIONAL steps fail all the time by design (e.g. "is the BlockUI overlay there?"), so they stay quiet.
+    if (mode === FailureHandling.CONTINUE_ON_FAILURE) {
+      cur().log(`Continue-on-failure step failed: ${name}: ${String(e?.message ?? e).split('\n')[0]}`);
+      cur().testInfo.annotations.push({ type: 'warning', description: `${name} failed` });
+    }
     return onFail;
   }
 }
@@ -280,20 +320,28 @@ export const WebUI = {
   },
 
   async click(obj: TestObject, fh?: FH) {
-    return step(`click ${name(obj)}`, fh, undefined, () => loc(obj).click({ timeout: DEFAULT_TIMEOUT * 1000 }));
+    return step(`click ${name(obj)}`, fh, undefined, () => likeSelenium(() => loc(obj).click({ timeout: DEFAULT_TIMEOUT * 1000 })));
   },
   async enhancedClick(obj: TestObject, fh?: FH) {
     return step(`enhancedClick ${name(obj)}`, fh, undefined, async () => {
       const l = loc(obj);
       await l.scrollIntoViewIfNeeded({ timeout: DEFAULT_TIMEOUT * 1000 });
-      await l.click({ timeout: DEFAULT_TIMEOUT * 1000 }).catch(() => l.dispatchEvent('click'));
+      await likeSelenium(() => l.click({ timeout: DEFAULT_TIMEOUT * 1000 }).catch(() => l.dispatchEvent('click')));
     });
   },
   async doubleClick(obj: TestObject, fh?: FH) {
-    return step(`doubleClick ${name(obj)}`, fh, undefined, () => loc(obj).dblclick({ timeout: DEFAULT_TIMEOUT * 1000 }));
+    return step(`doubleClick ${name(obj)}`, fh, undefined, () => likeSelenium(() => loc(obj).dblclick({ timeout: DEFAULT_TIMEOUT * 1000 })));
   },
+  /**
+   * Katalon setText = clear, then Selenium sendKeys: real key events, which autocompletes (UOM) and masked
+   * number fields react to. Playwright's fill() sets the value without them, so type instead.
+   */
   async setText(obj: TestObject, text: any, fh?: FH) {
-    return step(`setText ${name(obj)}`, fh, undefined, () => loc(obj).fill(text == null ? '' : String(text), { timeout: DEFAULT_TIMEOUT * 1000 }));
+    return step(`setText ${name(obj)}`, fh, undefined, async () => {
+      const l = loc(obj);
+      await l.fill('', { timeout: DEFAULT_TIMEOUT * 1000 });
+      await l.pressSequentially(text == null ? '' : String(text));
+    });
   },
   async setEncryptedText(obj: TestObject, text: any, fh?: FH) {
     return WebUI.setText(obj, text, fh);
@@ -302,7 +350,7 @@ export const WebUI = {
     return step(`clearText ${name(obj)}`, fh, undefined, () => loc(obj).fill(''));
   },
   async sendKeys(obj: TestObject, keys: any, fh?: FH) {
-    return step(`sendKeys ${name(obj)}`, fh, undefined, () => typeKeys(loc(obj), keys));
+    return step(`sendKeys ${name(obj)}`, fh, undefined, () => likeSelenium(() => typeKeys(loc(obj), keys)));
   },
   async uploadFile(obj: TestObject, file: string, fh?: FH) {
     return step(`uploadFile ${name(obj)}`, fh, undefined, () => loc(obj).setInputFiles(path.resolve(file)));
@@ -314,23 +362,23 @@ export const WebUI = {
   async selectOptionByValue(obj: TestObject, value: any, isRegex = false, fh?: FH) {
     return step(`selectOptionByValue ${name(obj)}`, fh, undefined, async () => {
       const l = loc(obj);
-      if (!isRegex) return void (await l.selectOption({ value: String(value) }));
+      if (!isRegex) return likeSelenium(() => l.selectOption({ value: String(value) }));
       const re = new RegExp(`^${value}$`);
       const values = await l.locator('option').evaluateAll((os) => os.map((o: any) => o.value));
-      await l.selectOption({ value: values.find((v) => re.test(v)) ?? String(value) });
+      await likeSelenium(() => l.selectOption({ value: values.find((v) => re.test(v)) ?? String(value) }));
     });
   },
   async selectOptionByLabel(obj: TestObject, label: any, isRegex = false, fh?: FH) {
     return step(`selectOptionByLabel ${name(obj)}`, fh, undefined, async () => {
       const l = loc(obj);
-      if (!isRegex) return void (await l.selectOption({ label: String(label) }));
+      if (!isRegex) return likeSelenium(() => l.selectOption({ label: String(label) }));
       const re = new RegExp(`^${label}$`);
       const labels = await l.locator('option').evaluateAll((os) => os.map((o: any) => o.textContent.trim()));
-      await l.selectOption({ label: labels.find((v) => re.test(v)) ?? String(label) });
+      await likeSelenium(() => l.selectOption({ label: labels.find((v) => re.test(v)) ?? String(label) }));
     });
   },
   async selectOptionByIndex(obj: TestObject, index: any, fh?: FH) {
-    return step(`selectOptionByIndex ${name(obj)}`, fh, undefined, () => loc(obj).selectOption({ index: Number(index) }).then(() => {}));
+    return step(`selectOptionByIndex ${name(obj)}`, fh, undefined, () => likeSelenium(() => loc(obj).selectOption({ index: Number(index) })));
   },
   async getText(obj: TestObject, fh?: FH) {
     return step(`getText ${name(obj)}`, fh, '', async () => (await loc(obj).innerText({ timeout: DEFAULT_TIMEOUT * 1000 })).trim());
@@ -681,13 +729,18 @@ const cellText = (c: ExcelJS.CellValue): string =>
 
 /**
  * Values for the test case's variables, in Katalon's order of precedence (lowest first):
- *   1. defaults from the .tc file (passed in by the spec)
+ *   1. defaults from the .tc file (passed in by the spec), corrected by support/katalon/data-overrides.json
  *   2. login defaults kept out of git in .auth/katalon-variables.json (scripts/katalon/convert.mjs writes it)
  *   3. the suite's data file row DATA_ROW (default 1), when the Excel file is found under KATALON_DATA_DIR
  *   4. environment variables KAT_<Variable>
  */
 export async function katalonVariables(caseId: string, defaults: Record<string, any>, binding?: DataBinding): Promise<Record<string, any>> {
   const vars: Record<string, any> = { ...defaults };
+  const { _why, ...corrections } = (overrides as unknown as Record<string, Record<string, any>>)[caseId] ?? {};
+  if (_why) cur().log(`Test data corrected (support/katalon/data-overrides.json): ${Object.keys(corrections).join(', ')}: ${_why}`);
+  // "{MMddHHmmss}" etc. in a correction: the run's time in that Java date pattern (for values SIT wants unique).
+  const now = new Date();
+  for (const [k, v] of Object.entries(corrections)) vars[k] = typeof v === 'string' ? v.replace(/\{([yMdHms]+)\}/g, (_, p) => formatJavaDate(p, now)) : v;
   const secretFile = path.join(ROOT, '.auth', 'katalon-variables.json');
   if (fs.existsSync(secretFile)) Object.assign(vars, JSON.parse(fs.readFileSync(secretFile, 'utf8'))[caseId] ?? {});
 
