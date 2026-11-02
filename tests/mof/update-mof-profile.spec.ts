@@ -106,8 +106,19 @@ for (const [id, name] of [
 ] as const) {
   test(`Left menu section opens: ${name}`, meta(id, `Clicking "${name}" in the left menu opens that section.`), async ({ page, env, evidence }) => {
     const mof = await onApplication(page, env, evidence);
-    const notice = await openSection(mof, name, evidence);
-    await evidence.capture(`section_${name}`, { step: `Open "${name}"`, expected: 'Section opens', actual: notice || 'Opened' });
+    // SIT data: when the company's Capital / Equity Status total has no matching Individual shareholders,
+    // leaving Capital is refused (ERR-722554) and the shareholders cannot be added within 6 months of a New
+    // Application (ERR-722683). That is the account's data, not this flow: record it and let the later sections run.
+    evidence.log(`Left menu → "${name}"`);
+    const { opened, message } = await mof.goToSection(name);
+    if (!opened && /ERR-722554/.test(message)) {
+      await evidence.capture(`section_${name}_blocked`, { step: `Open "${name}"`, expected: 'Section opens', actual: message });
+      evidence.actual(`Blocked by SIT data: ${message}`);
+      test.skip(true, `SIT data (DEF-3): ${message}`);
+    }
+    expect(opened, `"${name}" did not open. Application message: ${message || '(none)'}`).toBe(true);
+    if (message) evidence.log(`Notice on "${name}": ${message}`);
+    await evidence.capture(`section_${name}`, { step: `Open "${name}"`, expected: 'Section opens', actual: message || 'Opened' });
     evidence.actual('Section opened');
   });
 }

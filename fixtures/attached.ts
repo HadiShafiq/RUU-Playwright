@@ -1,4 +1,5 @@
 import { test as base } from './test';
+import { LoginPage } from '../pages/LoginPage';
 
 export { expect, scenario } from './test';
 
@@ -13,7 +14,7 @@ export { expect, scenario } from './test';
  * SLOWMO (ms, default 100) slows every action so it can be followed on screen.
  */
 export const test = base.extend({
-  page: async ({ playwright, baseURL, headless }, use) => {
+  page: async ({ playwright, baseURL, headless, env }, use) => {
     const slowMo = Number(process.env.SLOWMO ?? 100);
     const cdp = process.env.CDP_URL;
     const browser = cdp
@@ -32,7 +33,12 @@ export const test = base.extend({
     // which Playwright applies to attached contexts too.
     await use(page);
 
-    if (!cdp) await browser.close();
+    if (!cdp) {
+      // Sign out before closing: SIT keeps a closed browser's session alive, and after a few of them
+      // it ends every new login of the same account straight away.
+      await new LoginPage(page, env).signOut();
+      await browser.close();
+    }
     // Attached mode: leave the browser and the page exactly where the test finished.
   },
 });
