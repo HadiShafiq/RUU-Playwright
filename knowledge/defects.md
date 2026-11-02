@@ -33,4 +33,5 @@ Mark each defect **Confirmed** (reproduced, evidence attached) or **Suspected** 
 - Steps to reproduce: approve a Contract Request or Purchase Request (KAT-058 / KAT-047), then check Task Status Search for the document after some time
 - Expected result: iGFMAS verifies; a Contract Order (CO…) / Purchase Order (PO…) is created and the supplier gets an acknowledgement task
 - Actual result: on 2026-11-02 ~11:20, Task Status Search still shows only "Initiate CR / Review CR — COMPLETED" (CR, 3 days later) and "Review PR — COMPLETED" (PR); no CO/PO, nothing in the supplier's My Task
+- Rechecked 2026-11-02 13:35: PR260000000004657, PR260000000004659 and CR260000000005449 unchanged (only the completed Review/Initiate tasks; no CO/PO)
 - Needs: SIT team to confirm iGFMAS verification is running in SIT (or process these two documents)

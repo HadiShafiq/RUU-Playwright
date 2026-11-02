@@ -472,7 +472,9 @@ export async function claimGroupTaskIfAny(docNo: any) {
   if (!doc) return false;
   await settle();
   // Already assigned to this user (in My Task)? Then leave Group Task alone: paging it disturbs the My Task search.
-  const myTask = page.locator('tbody[id*="taskListMyTaskId_data"] tr td', { hasText: new RegExp(`^\\s*${doc}\\s*$`) });
+  // A Delivery Order cell lists two numbers (PO and DO, one per line), so match the number as a whole word.
+  const docInCell = new RegExp(`(^|\\s)${doc}(\\s|$)`);
+  const myTask = page.locator('tbody[id*="taskListMyTaskId_data"] tr td', { hasText: docInCell });
   if (await myTask.count()) {
     cur().log(`${doc} is already in My Task (no claim needed)`);
     return false;
@@ -485,7 +487,7 @@ export async function claimGroupTaskIfAny(docNo: any) {
   let claimed = false;
   let pageNo = 1;
   for (; pageNo <= 1; pageNo++) {
-    const row = groupBody.locator('tr').filter({ has: page.locator(`td`, { hasText: new RegExp(`^\\s*${doc}\\s*$`) }) });
+    const row = groupBody.locator('tr').filter({ has: page.locator(`td`, { hasText: docInCell }) });
     if (await row.count()) {
       await row.first().locator('button', { hasText: 'Claim' }).first().click();
       await settle();

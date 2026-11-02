@@ -211,6 +211,13 @@ $1}`,
     replace: 'ZoneCoverage',
     note: 'Script reads variable "ZonalCoverage" but the test case defines "ZoneCoverage" (typo); reads ZoneCoverage',
   },
+  {
+    // The quantity's change event fires on blur, i.e. when the script clicks into Delivery Amount; the AJAX then re-renders the row and wipes the amount.
+    when: (tc) => tc.rel.includes('Pending Delivery List'),
+    find: "t(findTestObject('Object Repository/DP - Add To Cart/Pending Delivery List/Input Delivery Quantity'), DeliveryQuantity)\n",
+    replace: "t(findTestObject('Object Repository/DP - Add To Cart/Pending Delivery List/Input Delivery Quantity'), DeliveryQuantity)\nWebUI.sendKeys(findTestObject('Object Repository/DP - Add To Cart/Pending Delivery List/Input Delivery Quantity'), Keys.chord(Keys.TAB))\n",
+    note: 'Pending Delivery: the Delivery Quantity change is sent when the box loses focus, which was the click into Delivery Amount; the row then re-rendered and reset the typed amount to 0 ("Delivery Amount (RM) must be greater than 0"); Tab out of the quantity first so the re-render finishes before the amount is typed',
+  },
 ];
 
 /** Found by typechecking the converted specs: the Katalon scripts use these where they are not defined. */

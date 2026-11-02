@@ -140,5 +140,36 @@
     "dateValue": "{yyyy-MM-dd+30d}",
     "_accountOf": "KAT-040",
     "tickAmendmentnAuthority": "1,2,3,5,6,7,8"
+  },
+  "KAT-035": {
+    "_why": "PO260000000006602 was created from our Compare PR260000000004659 (same process instance 16003097); its Acknowledge PO task is assigned to basicflros3, the KAT-022 supplier account",
+    "Document_Number": "PO260000000006602",
+    "_accountOf": "KAT-022"
+  },
+  "KAT-048": {
+    "_why": "PO260000000006601 was created from our PR260000000004657 (KAT-046/047, process instance 15973541); its Acknowledge PO task is assigned to this test's account",
+    "Document_Number": "PO260000000006601"
+  },
+  "KAT-049": {
+    "_why": "Deliver against our PO260000000006601 (acknowledged by KAT-048, same supplier account); default date 2026-10-09 is in the past, use today; quantity 10 = Ordered_Quantity of KAT-046; amount = full ordered amount RM1,000 (10 x RM100) so the invoice/payment steps match",
+    "Purchase_Number": "PO260000000006601",
+    "dateValue": "{yyyy-MM-dd}",
+    "DeliveryAmount": 1000
+  },
+  "KAT-050": {
+    "_why": "Acknowledge our delivery: KAT-049 submitted DO-PO260000000006601, which is Delivery Order 01309H005M2600500 in this receiving officer's Group Task (seen 2026-11-02 15:58)",
+    "Document_Number": "01309H005M2600500"
+  },
+  "KAT-059": {
+    "_why": "CO260000000005848 was created from our CR260000000005449 (KAT-057/058, process instance 15973526); its Acknowledge CO task is assigned to mofflros_6, the KAT-008 supplier account",
+    "Document_Number": "CO260000000005848",
+    "_accountOf": "KAT-008"
+  },
+  "KAT-060": {
+    "_why": "Deliver against our CO260000000005848 (acknowledged by KAT-059 as the KAT-008 supplier account, which owns the CO); default date 2026-06-23 is in the past, use today (delivery window 30/10/2026-29/12/2026); full order 10 x RM30,000 = RM300,000",
+    "Purchase_Number": "CO260000000005848",
+    "dateValue": "{yyyy-MM-dd}",
+    "DeliveryAmount": 300000,
+    "_accountOf": "KAT-008"
   }
 }
