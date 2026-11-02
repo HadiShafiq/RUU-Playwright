@@ -160,6 +160,11 @@
     "_why": "Acknowledge our delivery: KAT-049 submitted DO-PO260000000006601, which is Delivery Order 01309H005M2600500 in this receiving officer's Group Task (seen 2026-11-02 15:58)",
     "Document_Number": "01309H005M2600500"
   },
+  "KAT-052": {
+    "_why": "Stop delivery on our own PO260000000006602 (Compare chain, acknowledged by KAT-035, not used by any later step); PO260000000006601 is kept for the delivery/invoice/payment chain; the stop is raised by the PO's supplier, basicflros3 (KAT-022 account), the default supplier cannot see this PO",
+    "PO_Number": "PO260000000006602",
+    "_accountOf": "KAT-022"
+  },
   "KAT-059": {
     "_why": "CO260000000005848 was created from our CR260000000005449 (KAT-057/058, process instance 15973526); its Acknowledge CO task is assigned to mofflros_6, the KAT-008 supplier account",
     "Document_Number": "CO260000000005848",
