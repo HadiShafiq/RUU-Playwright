@@ -18,6 +18,27 @@ const text = (v: ExcelJS.CellValue) => (v == null ? '' : String(typeof v === 'ob
  * Login for `env`. E2E_USERNAME / E2E_PASSWORD from the shell or .env win; otherwise the row of
  * .auth/credentials.xlsx whose Environment matches. Returns undefined when neither has one.
  */
+/**
+ * The password shared by all officer accounts of `env`: the .auth/credentials.xlsx row whose Username is "*"
+ * (Role "Officer (any)"). Lets a test log in as whichever officer SIT assigned a task to.
+ */
+export async function loadSharedOfficerPassword(env: EnvName): Promise<string | undefined> {
+  if (!fs.existsSync(CREDENTIALS_XLSX)) return undefined;
+  const wb = new ExcelJS.Workbook();
+  await wb.xlsx.readFile(CREDENTIALS_XLSX);
+  const ws = wb.getWorksheet('Credentials');
+  if (!ws) return undefined;
+  const header = (ws.getRow(1).values as ExcelJS.CellValue[]).map(text);
+  const [envCol, userCol, passCol] = ['Environment', 'Username', 'Password'].map((n) => header.indexOf(n));
+  if (envCol < 1 || userCol < 1 || passCol < 1) return undefined;
+  for (let r = 2; r <= ws.rowCount; r++) {
+    const row = ws.getRow(r);
+    if (text(row.getCell(envCol).value).toUpperCase() === env && text(row.getCell(userCol).value) === '*')
+      return text(row.getCell(passCol).value) || undefined;
+  }
+  return undefined;
+}
+
 export async function loadCredentials(env: EnvName): Promise<Credentials | undefined> {
   const { E2E_USERNAME, E2E_PASSWORD } = process.env;
   if (E2E_USERNAME && E2E_PASSWORD) return { username: E2E_USERNAME, password: E2E_PASSWORD, source: 'environment' };

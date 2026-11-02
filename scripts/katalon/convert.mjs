@@ -218,6 +218,13 @@ $1}`,
     replace: "t(findTestObject('Object Repository/DP - Add To Cart/Pending Delivery List/Input Delivery Quantity'), DeliveryQuantity)\nWebUI.sendKeys(findTestObject('Object Repository/DP - Add To Cart/Pending Delivery List/Input Delivery Quantity'), Keys.chord(Keys.TAB))\n",
     note: 'Pending Delivery: the Delivery Quantity change is sent when the box loses focus, which was the click into Delivery Amount; the row then re-rendered and reset the typed amount to 0 ("Delivery Amount (RM) must be greater than 0"); Tab out of the quantity first so the re-render finishes before the amount is typed',
   },
+  {
+    // The supplier evaluation has 4 criteria for a contract delivery, the loop always scored 5.
+    when: (tc) => /Receiving Officer/.test(tc.rel),
+    find: '\tWebUI.waitForElementVisible(dropdown, 10)\n',
+    replace: '\tif (!WebUI.waitForElementPresent(dropdown, 3, FailureHandling.OPTIONAL)) break\n\tWebUI.waitForElementVisible(dropdown, 10)\n',
+    note: 'Fulfilment Received Note: the Supplier Evaluation loop scored 5 criteria, but a contract delivery has 4 (Delivery/Service Period, Quality, Supplier Performance, Support Service); stop at the last criterion on the page',
+  },
 ];
 
 /** Found by typechecking the converted specs: the Katalon scripts use these where they are not defined. */

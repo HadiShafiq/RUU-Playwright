@@ -6,6 +6,8 @@ import type { ElementHandle, Locator, Page, TestInfo } from '@playwright/test';
 import repository from './object-repository.json';
 import overrides from './data-overrides.json';
 import { waitForAjaxIdle } from '../primefaces';
+import { loadSharedOfficerPassword } from '../credentials';
+import { getEnv } from '../../config/environments';
 import './groovy';
 
 /*
@@ -783,7 +785,7 @@ const cellText = (c: ExcelJS.CellValue): string =>
  */
 export async function katalonVariables(caseId: string, defaults: Record<string, any>, binding?: DataBinding): Promise<Record<string, any>> {
   const vars: Record<string, any> = { ...defaults };
-  const { _why, _accountOf, ...corrections } = (overrides as unknown as Record<string, Record<string, any>>)[caseId] ?? {};
+  const { _why, _accountOf, _officer, ...corrections } = (overrides as unknown as Record<string, Record<string, any>>)[caseId] ?? {};
   if (_why) cur().log(`Test data corrected (support/katalon/data-overrides.json): ${Object.keys(corrections).join(', ')}: ${_why}`);
   // "{MMddHHmmss}" etc. in a correction: the run's time in that Java date pattern (for values SIT wants unique);
   // "{yyyy-MM-dd+180d}": that many days from today (for dates SIT wants in the future).
@@ -803,6 +805,15 @@ export async function katalonVariables(caseId: string, defaults: Record<string, 
       vars.Password = secrets[other].Password;
       cur().log(`Using the login of ${other} (support/katalon/data-overrides.json)`);
     }
+  }
+  // "_officer": "831221115096": SIT assigned the task to an officer none of the test cases log in as;
+  // log in as that ID with the shared officer password (credentials.xlsx row Username "*").
+  if (_officer) {
+    const password = await loadSharedOfficerPassword(getEnv().name);
+    if (!password) throw new Error(`"_officer" for ${caseId} needs the shared officer password: a row with Username "*" in .auth/credentials.xlsx`);
+    vars.Username = String(_officer);
+    vars.Password = password;
+    cur().log(`Using officer ${_officer} with the shared officer password (support/katalon/data-overrides.json)`);
   }
 
   if (binding && !process.env.KATALON_NO_DATA) {

@@ -11,6 +11,7 @@ import { waitBlockUI, wVisible, c, t, selectDropdownByIndex } from '../../../../
  * DATA-CHANGING on SIT/UAT unless the script only reads.
  * Katalon step repaired: ENHANCEMENT: before searching My Task, claim the document from Group Task if it is a group task (e.g. Submit FD is assigned to 7 officers); same steps as WebHelper.claimDocument.
  * Katalon step repaired: ENHANCEMENT: Task List search is clicked again when no result appears within 10 s (the first click sometimes renders no My Task table).
+ * Katalon step repaired: Fulfilment Received Note: the Supplier Evaluation loop scored 5 criteria, but a contract delivery has 4 (Delivery/Service Period, Quality, Supplier Performance, Support Service); stop at the last criterion on the page.
  */
 test.describe('KAT-061 5. Receiving Officer - Acknowledge Delivery Order - (Fulfilment Received Note)', () => {
   test(
@@ -342,6 +343,7 @@ test.describe('KAT-061 5. Receiving Officer - Acknowledge Delivery Order - (Fulf
     		"//select[contains(@name,'suppEvalutionDt:" + i + ":score')]"
     	)
 
+    	if (!await WebUI.waitForElementPresent(dropdown, 3, FailureHandling.OPTIONAL)) break
     	await WebUI.waitForElementVisible(dropdown, 10)
     	await WebUI.waitForElementClickable(dropdown, 10)
 

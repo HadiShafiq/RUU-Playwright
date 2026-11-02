@@ -165,6 +165,39 @@
     "PO_Number": "PO260000000006602",
     "_accountOf": "KAT-022"
   },
+  "KAT-051": {
+    "_why": "Approve our FRN FN260000000005202 (from KAT-050, DO 01309H005M2600500); its Approve FRN task is assigned to officer 180220145443, which none of the test cases log in as",
+    "Document_Number": "FN260000000005202",
+    "_officer": "180220145443"
+  },
+  "KAT-061": {
+    "_why": "Receive our contract delivery DO-CO260000000005848 = DO 01400K003S2600002 (found by the user in SIT DB); its Create FRN task is assigned to officer 831221115096, which none of the test cases log in as",
+    "Document_Number": "01400K003S2600002",
+    "_officer": "831221115096"
+  },
+  "KAT-062": {
+    "_why": "Approve our contract FRN FN260000000005203 (from KAT-061); its Approve FRN task is assigned to officer 180220145443, which none of the test cases log in as",
+    "Document_Number": "FN260000000005203",
+    "_officer": "180220145443"
+  },
+  "KAT-054": {
+    "_why": "Invoice our PO260000000006601 (delivered by KAT-049, FRN FN260000000005202 approved by KAT-051); the invoice is raised by the PO's supplier, the KAT-048 account",
+    "Document_Number": "PO260000000006601",
+    "_accountOf": "KAT-048"
+  },
+  "KAT-063": {
+    "_why": "Invoice our CO260000000005848 (delivered by KAT-060, FRN FN260000000005203); the invoice is raised by the CO's supplier mofflros_6, the KAT-008 account",
+    "Document_Number": "CO260000000005848",
+    "_accountOf": "KAT-008"
+  },
+  "KAT-055": {
+    "_why": "Match payment for our PO260000000006601 (invoice IN-PO260000000006601 from KAT-054); Match Payment is a group task for this account's group",
+    "Document_Number": "PO260000000006601"
+  },
+  "KAT-064": {
+    "_why": "Match payment for our CO260000000005848 (invoice IN-CO260000000005848 from KAT-063); Match Payment is a group task for this account's group",
+    "Document_Number": "CO260000000005848"
+  },
   "KAT-059": {
     "_why": "CO260000000005848 was created from our CR260000000005449 (KAT-057/058, process instance 15973526); its Acknowledge CO task is assigned to mofflros_6, the KAT-008 supplier account",
     "Document_Number": "CO260000000005848",
