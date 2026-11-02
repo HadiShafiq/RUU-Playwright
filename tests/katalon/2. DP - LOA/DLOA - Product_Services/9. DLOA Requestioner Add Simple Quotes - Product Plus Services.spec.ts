@@ -10,6 +10,7 @@ import { waitBlockUI, wVisible, c, t, up, selectDropdownByIndex } from '../../..
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
  * Katalon step repaired: ENHANCEMENT: before Submit, open Verification And Approval and pick the first approver when the LOA asks for one ("Approver is required", ERR-760315); the Katalon script never fills it.
+ * Katalon step repaired: Service specification used a Direct LOA object (section "Product", not on this page); now the DP-LOA "Service List" specification object (new lines are added at the top, so its first box is the newest line).
  */
 test.describe('KAT-037 9. DLOA Requestioner Add Simple Quotes - Product Plus Services', () => {
   test(
@@ -782,7 +783,7 @@ test.describe('KAT-037 9. DLOA Requestioner Add Simple Quotes - Product Plus Ser
     	await WebUI.delay(1)
 
         // Input Specification 2 TextBox for Service
-        let spec2Service: any = findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Input Specification 2 TextBox')
+        let spec2Service: any = findTestObject('Object Repository/DLOA/4. DLOA - Requestioner/2. Item List/Input Specification 2 TextBox')
         let serviceSpec2WithLoopIndex: any = ServiceSpecification2 + s  // Add loop index to Specification Text
         await WebUI.setText(spec2Service, serviceSpec2WithLoopIndex) // type new value
         await waitBlockUI(30)

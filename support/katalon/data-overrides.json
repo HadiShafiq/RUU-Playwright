@@ -117,10 +117,10 @@
     "dateValue": "{yyyy-MM-dd}"
   },
   "KAT-037": {
-    "_why": "Simple Quote start date 2026-10-12 is in the past; use the run date; default supplier Basic FL ROS - Organization (Registered with JPPM) 1 + item 911015030000000000 give 0 catalogue results; AINHALIM ENTERPRISE sells service 911017010000000000 (Catalogue Search 2026-10-30)",
+    "_why": "Simple Quote start date 2026-10-12 is in the past; use the run date; default supplier Basic FL ROS - Organization (Registered with JPPM) 1 + item 911015030000000000 give 0 catalogue results; AINHALIM ENTERPRISE product 14111503005010013D (as in KAT-036, which passed; generic 18-digit codes have no product specification box) (the script takes the product line from the catalogue and adds 2 service lines by hand) (Catalogue Search 2026-10-30)",
     "dateValue": "{yyyy-MM-dd}",
     "SupplierName": "AINHALIM ENTERPRISE",
-    "ItemCode": "911017010000000000"
+    "ItemCode": "14111503005010013D"
   },
   "KAT-029": {
     "_why": "The script reads SupplierName1-3 and DaytoResponse, which the test case never defines (Katalon defect); ItemCode1 441217070000300057rn has no catalogue offer. Supplier/item pairs found by Catalogue Search 2026-11-02",
@@ -133,5 +133,12 @@
   "KAT-030": {
     "_why": "\"Response To Inquiry\" for the KAT-029 inquiry is assigned to the first supplier, basicflros3 (KAT-022 account), not the Katalon default AINHALIM account",
     "_accountOf": "KAT-022"
+  },
+  "KAT-045": {
+    "_why": "Amend our contract CT260000000002209 (FD and agreement approved by KAT-040..043); date 2026-06-20 is in the past, use +30 days; the default account is a Kementerian Kesihatan contract admin and cannot see a Kementerian Kewangan contract, so use the contract officer of KAT-040/042; authority 9 (Desk Officer Committee) left out: the desk officer list is empty for this PTJ in SIT",
+    "ContractNo": "CT260000000002209",
+    "dateValue": "{yyyy-MM-dd+30d}",
+    "_accountOf": "KAT-040",
+    "tickAmendmentnAuthority": "1,2,3,5,6,7,8"
   }
 }

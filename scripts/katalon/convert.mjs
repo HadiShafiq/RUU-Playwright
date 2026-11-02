@@ -185,6 +185,12 @@ $1$2`,
     note: 'Contract Request: the add-item steps run only when an "Add" button is visible; contracts that copy their items in automatically have none (the first "Add" in the page is the closed popup\'s button)',
   },
   {
+    when: (tc) => tc.rel.includes('DLOA - Product_Services/9.'),
+    find: "TestObject spec2Service = findTestObject('Object Repository/Direct LOA/1. Direct LOA Requistioner/Zone Item Tab/Add Product/Input Specification 2 TextBox')",
+    replace: "TestObject spec2Service = findTestObject('Object Repository/DLOA/4. DLOA - Requestioner/2. Item List/Input Specification 2 TextBox')",
+    note: 'Service specification used a Direct LOA object (section "Product", not on this page); now the DP-LOA "Service List" specification object (new lines are added at the top, so its first box is the newest line)',
+  },
+  {
     find: 'checkDocumentStillAvailableToClaim(docNo)',
     replace: 'claimDocument(docNo)',
     note: '"checkDocumentStillAvailableToClaim" is called but never defined; the second check now looks for the document again with the script\'s own claimDocument (still there = failed claim, gone = skipped)',
