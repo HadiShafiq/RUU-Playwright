@@ -134,3 +134,4 @@
 | 2026-11-02 11:11 | SIT | User ("continue") | KAT-031 Prepare Request Note - Compare, PASS | **Request Note RN260000000004513 submitted** (from PI260000000000744) | Submit RN | Next: KAT-032 | n/a |
 | 2026-11-02 11:12 | SIT | User ("continue") | KAT-032 Approve Request Notes - Compare, PASS | **RN260000000004513 approved** | Approve | Next: KAT-033 Submit PR | n/a |
 | 2026-11-02 11:15 | SIT | User ("continue") | KAT-033 Submit Purchase Request on RN260000000004513 | No Submit PR task yet (Task Status shows only Review Direct Purchase completed). **No data touched** | read only | Retry later | n/a |
+| 2026-11-02 11:20 | SIT | (diagnostic, read-only) | Task Status for PR260000000004657, CR260000000005449; supplier My Task | No PO/CO after iGFMAS verification (CR waiting 3 days). Recorded as DEF-2 (suspected) | read only | n/a | n/a |
