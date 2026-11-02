@@ -10,6 +10,7 @@ import { waitBlockUI, wVisible, c, t, up, selectDropdownByIndex } from '../../..
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
  * Katalon step repaired: Zone / Item: an LOA over RM500,000 a year shows a GST registration notice (OK) that blocks the Assign buttons; click OK if it appears.
+ * Katalon step repaired: ENHANCEMENT: Task List search is clicked again when no result appears within 10 s (the first click sometimes renders no My Task table).
  */
 test.describe('KAT-008 Supplier Direct LOA - Services', () => {
   test(
@@ -170,6 +171,9 @@ test.describe('KAT-008 Supplier Direct LOA - Services', () => {
         Document_Number)
 
     await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    if (!await WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'), 10, FailureHandling.OPTIONAL)) {
+    	await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    }
 
     //Click TaskList Description
     await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'))

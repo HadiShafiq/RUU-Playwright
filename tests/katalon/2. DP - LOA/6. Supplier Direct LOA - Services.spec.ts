@@ -9,6 +9,7 @@ import { waitBlockUI, wVisible, c, t, up, selectDropdownByIndex } from '../../..
  * Data:    suite "Direct_Purchased (Services)/6. Supplier Direct LOA - Services" → Data Files/Direct_Purchased/DP_Izzah (Data_Izzah_DP.xlsx, sheet "Do_Verify_LOA")
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
+ * Katalon step repaired: ENHANCEMENT: Task List search is clicked again when no result appears within 10 s (the first click sometimes renders no My Task table).
  */
 test.describe('KAT-026 6. Supplier Direct LOA - Services', () => {
   test(
@@ -299,6 +300,9 @@ test.describe('KAT-026 6. Supplier Direct LOA - Services', () => {
         Document_Number)
 
     await WebUI.click(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    if (!await WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'), 10, FailureHandling.OPTIONAL)) {
+    	await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    }
 
     //Click TaskList Description
     await WebUI.click(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'))

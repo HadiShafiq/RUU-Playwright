@@ -191,6 +191,15 @@ $1$2`,
     note: 'Service specification used a Direct LOA object (section "Product", not on this page); now the DP-LOA "Service List" specification object (new lines are added at the top, so its first box is the newest line)',
   },
   {
+    // My Task search sometimes renders no result table on the first click (seen for the approver account); click again.
+    find: /^([ \t]*)((?:c|WebUI\.click)\(findTestObject\('Object Repository\/Direct LOA\/2\. Direct LOA Supplier\/TaskList Supplier\/Search TaskList'\)\)[^\n]*)$/gm,
+    replace: `$1$2
+$1if (!WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'), 10, FailureHandling.OPTIONAL)) {
+$1\tc(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+$1}`,
+    note: 'ENHANCEMENT: Task List search is clicked again when no result appears within 10 s (the first click sometimes renders no My Task table)',
+  },
+  {
     find: 'checkDocumentStillAvailableToClaim(docNo)',
     replace: 'claimDocument(docNo)',
     note: '"checkDocumentStillAvailableToClaim" is called but never defined; the second check now looks for the document again with the script\'s own claimDocument (still there = failed claim, gone = skipped)',

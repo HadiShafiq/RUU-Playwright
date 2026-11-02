@@ -10,6 +10,7 @@ import { waitBlockUI, wVisible, c, t } from '../../../../support/katalon/helpers
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
  * Katalon step repaired: ENHANCEMENT: before searching My Task, claim the document from Group Task if it is a group task (e.g. Submit FD is assigned to 7 officers); same steps as WebHelper.claimDocument.
+ * Katalon step repaired: ENHANCEMENT: Task List search is clicked again when no result appears within 10 s (the first click sometimes renders no My Task table).
  */
 test.describe('KAT-058 2. Approval - Approve Contract Request', () => {
   test(
@@ -309,6 +310,9 @@ test.describe('KAT-058 2. Approval - Approve Contract Request', () => {
         Document_Number)
 
     await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    if (!await WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'), 10, FailureHandling.OPTIONAL)) {
+    	await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    }
 
     //Click TaskList Description
     await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'))

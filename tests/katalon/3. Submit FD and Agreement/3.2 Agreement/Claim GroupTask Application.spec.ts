@@ -9,6 +9,7 @@ import { waitBlockUI, wVisible, c, t, selectDropdownByIndex } from '../../../../
  * Data:    test case defaults (no suite binds a data file)
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
+ * Katalon step repaired: ENHANCEMENT: Task List search is clicked again when no result appears within 10 s (the first click sometimes renders no My Task table).
  * Katalon step repaired: "checkDocumentStillAvailableToClaim" is called but never defined; the second check now looks for the document again with the script's own claimDocument (still there = failed claim, gone = skipped).
  */
 test.describe('KAT-044 Claim GroupTask Application', () => {
@@ -306,6 +307,9 @@ test.describe('KAT-044 Claim GroupTask Application', () => {
     	Document_Number)
 
     c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    if (!WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'), 10, FailureHandling.OPTIONAL)) {
+    	c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    }
 
     //Click TaskList Description
     c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'))

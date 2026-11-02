@@ -9,6 +9,7 @@ import { waitBlockUI, wVisible, c, t } from '../../../../support/katalon/helpers
  * Data:    suite "Akta_882/4b. Assign Code Service" → Data Files/Akta_882_RU/1- Request Note (RN) (1. Request Notes.xlsx, sheet "5-ItemCode - Service")
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
+ * Katalon step repaired: ENHANCEMENT: Task List search is clicked again when no result appears within 10 s (the first click sometimes renders no My Task table).
  */
 test.describe('KAT-039 4b. Assign Code Service', () => {
   test(
@@ -287,6 +288,9 @@ test.describe('KAT-039 4b. Assign Code Service', () => {
         Document_Number)
 
     await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    if (!await WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'), 10, FailureHandling.OPTIONAL)) {
+    	await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    }
 
     //Click TaskList Description
     await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'))

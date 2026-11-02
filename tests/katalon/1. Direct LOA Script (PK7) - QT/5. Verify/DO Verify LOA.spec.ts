@@ -9,6 +9,7 @@ import { waitBlockUI, wVisible, c, t } from '../../../../support/katalon/helpers
  * Data:    suite "Akta_882_DLOA/3-Verify LOA" → Data Files/Akta_882_RU/2- DLOA (2. DLOA.xlsx, sheet "3- VerifyLOA (2)")
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
+ * Katalon step repaired: ENHANCEMENT: Task List search is clicked again when no result appears within 10 s (the first click sometimes renders no My Task table).
  */
 test.describe('KAT-010 DO Verify LOA', () => {
   test(
@@ -156,6 +157,9 @@ test.describe('KAT-010 DO Verify LOA', () => {
         Document_Number)
 
     await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    if (!await WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'), 10, FailureHandling.OPTIONAL)) {
+    	await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    }
 
     //Click TaskList Description
     await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'))

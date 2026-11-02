@@ -142,3 +142,6 @@
 | 2026-11-02 11:55 | SIT | User ("continue") | KAT-037 (3 runs) | Catalogue product added; stopped at product specification (script used a Direct LOA object). Not submitted | unsaved | n/a | n/a |
 | 2026-11-02 11:58 | SIT | User ("continue") | KAT-037 | Reached Criteria and Supplier List; SIT "Specification is mandatory" (service spec typed into product table by my wrong repair). Not submitted | unsaved | n/a | n/a |
 | 2026-11-02 12:08 | SIT | User ("continue") | KAT-037 DLOA Add Simple Quotes - Product Plus Services, PASS | **Simple Quote SQ260000000002274 submitted** (AINHALIM 14111503005010013D + 2 service lines) | Submit SQ | Supplier response when the SQ opens | n/a |
+| 2026-11-02 12:11 | SIT | User ("continue") | KAT-033 Submit Purchase Request, PASS | **Purchase Request PR260000000004659 submitted** (from RN260000000004513) | Submit PR | Next: KAT-034 | n/a |
+| 2026-11-02 12:14 | SIT | User ("continue") | KAT-034 Approve PR on PR260000000004659; read-only search reproduction | My Task search rendered no table in the test; read-only reproduction found it (1 row). **No data touched** | read only | n/a | n/a |
+| 2026-11-02 12:17 | SIT | User ("continue") | KAT-034 Approve Purchase Request, PASS | **PR260000000004659 approved, sent to iGFMAS** | Approve | KAT-035 waits for the PO (DEF-2) | n/a |

@@ -10,6 +10,7 @@ import { waitBlockUI, wVisible, c, t } from '../../../support/katalon/helpers';
  *          also suite "Direct_Purchased (Services)/4. Approve Request Notes" → Data Files/Direct_Purchased/DP_Izzah
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
+ * Katalon step repaired: ENHANCEMENT: Task List search is clicked again when no result appears within 10 s (the first click sometimes renders no My Task table).
  */
 test.describe('KAT-024 4. Approve Request Notes', () => {
   test(
@@ -301,6 +302,9 @@ test.describe('KAT-024 4. Approve Request Notes', () => {
     	Document_Number)
 
     await WebUI.click(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    if (!await WebUI.waitForElementVisible(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'), 10, FailureHandling.OPTIONAL)) {
+    	await c(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList'))
+    }
 
     //Click TaskList Description
     await WebUI.click(findTestObject('Object Repository/Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description'))
