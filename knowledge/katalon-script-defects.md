@@ -94,3 +94,4 @@ scripts/katalon/convert.mjs) so the Playwright run is reliable.
 | Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Input Document Number | Task List "Document No" was "the 6th j_idt text box", which can be a Group Task field; now the box after the last "Document No :" label (the My Task one) |
 | Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Search TaskList | Task List "Search" was "the 3rd Search button on the page", which changes with the Group Task panel; now the first Search button after the MY TASK heading |
 | Direct LOA/2. Direct LOA Supplier/Zone Item/Zone Item Supplier Product/Item Details Pop Up Item Details - OK | Item Details confirmation now has Yes/No instead of OK ("Are you sure with this code assignment?"); accept either |
+| DP - Add To Cart/Add to Compare/Day to Response | Missing from the Object Repository; the "Day to Respond" field on Add to Compare (input id …:form:dayToResponse) |

@@ -121,5 +121,17 @@
     "dateValue": "{yyyy-MM-dd}",
     "SupplierName": "AINHALIM ENTERPRISE",
     "ItemCode": "911017010000000000"
+  },
+  "KAT-029": {
+    "_why": "The script reads SupplierName1-3 and DaytoResponse, which the test case never defines (Katalon defect); ItemCode1 441217070000300057rn has no catalogue offer. Supplier/item pairs found by Catalogue Search 2026-11-02",
+    "SupplierName1": "Basic FL ROC (registration with SSM as ROC) 3",
+    "ItemCode1": "101017030000000000",
+    "SupplierName2": "TYESO",
+    "SupplierName3": "AINHALIM ENTERPRISE",
+    "DaytoResponse": "3"
+  },
+  "KAT-030": {
+    "_why": "\"Response To Inquiry\" for the KAT-029 inquiry is assigned to the first supplier, basicflros3 (KAT-022 account), not the Katalon default AINHALIM account",
+    "_accountOf": "KAT-022"
   }
 }

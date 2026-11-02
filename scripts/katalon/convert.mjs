@@ -63,6 +63,19 @@ for (const r of OBJECT_REPAIRS) {
   repository[r.key].selector = repository[r.key].selector.split(r.find).join(r.replace);
   objectRepairs.push(r);
 }
+/** Objects a script uses that the Object Repository does not have (Katalon fails with "test object not found"). */
+const OBJECT_ADDITIONS = [
+  {
+    key: 'DP - Add To Cart/Add to Compare/Day to Response',
+    selector: "//input[contains(@id,':form:dayToResponse')]",
+    note: 'Missing from the Object Repository; the "Day to Respond" field on Add to Compare (input id …:form:dayToResponse)',
+  },
+];
+for (const a of OBJECT_ADDITIONS) {
+  if (repository[a.key]) throw new Error(`Object addition no longer needed: ${a.key}`);
+  repository[a.key] = { method: 'XPATH', selector: a.selector };
+  objectRepairs.push(a);
+}
 fs.writeFileSync(path.join(root, 'support', 'katalon', 'object-repository.json'), JSON.stringify(repository, null, 1) + '\n');
 
 /* ---------- Test cases, variables, suite data bindings ---------- */

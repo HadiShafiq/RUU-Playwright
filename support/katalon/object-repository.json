@@ -1994,5 +1994,9 @@
  "Zone item_Zonal/Zonal/span_Offered Total Amount(RM)_ui-button-ico_f4f065": {
   "method": "XPATH",
   "selector": "10"
+ },
+ "DP - Add To Cart/Add to Compare/Day to Response": {
+  "method": "XPATH",
+  "selector": "//input[contains(@id,':form:dayToResponse')]"
  }
 }

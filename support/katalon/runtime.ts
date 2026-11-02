@@ -471,6 +471,12 @@ export async function claimGroupTaskIfAny(docNo: any) {
   const doc = String(docNo ?? '').trim();
   if (!doc) return false;
   await settle();
+  // Already assigned to this user (in My Task)? Then leave Group Task alone: paging it disturbs the My Task search.
+  const myTask = page.locator('tbody[id*="taskListMyTaskId_data"] tr td', { hasText: new RegExp(`^\\s*${doc}\\s*$`) });
+  if (await myTask.count()) {
+    cur().log(`${doc} is already in My Task (no claim needed)`);
+    return false;
+  }
   const groupBody = page.locator('tbody[id*="taskListGroupId_data"]').first();
   if (!(await groupBody.count())) return false;
   // Newest tasks are listed first, so a few pages are enough. Paging the Group Task table and leaving it on a
@@ -478,7 +484,7 @@ export async function claimGroupTaskIfAny(docNo: any) {
   const pageLink = (n: number) => page.locator(`xpath=(//span[contains(@class,'ui-paginator-pages')])[1]/span[normalize-space()='${n}']`);
   let claimed = false;
   let pageNo = 1;
-  for (; pageNo <= 3; pageNo++) {
+  for (; pageNo <= 1; pageNo++) {
     const row = groupBody.locator('tr').filter({ has: page.locator(`td`, { hasText: new RegExp(`^\\s*${doc}\\s*$`) }) });
     if (await row.count()) {
       await row.first().locator('button', { hasText: 'Claim' }).first().click();
@@ -487,7 +493,7 @@ export async function claimGroupTaskIfAny(docNo: any) {
       claimed = true;
       break;
     }
-    if (pageNo === 3 || !(await pageLink(pageNo + 1).count())) break;
+    if (pageNo === 1 || !(await pageLink(pageNo + 1).count())) break;
     await pageLink(pageNo + 1).click();
     await settle();
   }
@@ -739,10 +745,11 @@ export const binding = {
 
 /**
  * A name the Katalon script uses without defining it where it is used (see knowledge/katalon-script-defects.md).
- * Katalon stops there; so does this, unless the value is given as KAT_<name>.
+ * Katalon stops there; so does this, unless the value is given as KAT_<name> or in data-overrides.json.
  */
 export function katalonMissing(n: string): any {
   if (process.env[`KAT_${n}`] !== undefined) return process.env[`KAT_${n}`];
+  if (currentVars[n] !== undefined) return currentVars[n]; // supplied in support/katalon/data-overrides.json
   throw new Error(`Katalon script defect: "${n}" is not defined where the Katalon script uses it (Katalon stops here too). Set KAT_${n} to supply a value.`);
 }
 
@@ -774,7 +781,7 @@ const cellText = (c: ExcelJS.CellValue): string =>
  */
 export async function katalonVariables(caseId: string, defaults: Record<string, any>, binding?: DataBinding): Promise<Record<string, any>> {
   const vars: Record<string, any> = { ...defaults };
-  const { _why, ...corrections } = (overrides as unknown as Record<string, Record<string, any>>)[caseId] ?? {};
+  const { _why, _accountOf, ...corrections } = (overrides as unknown as Record<string, Record<string, any>>)[caseId] ?? {};
   if (_why) cur().log(`Test data corrected (support/katalon/data-overrides.json): ${Object.keys(corrections).join(', ')}: ${_why}`);
   // "{MMddHHmmss}" etc. in a correction: the run's time in that Java date pattern (for values SIT wants unique);
   // "{yyyy-MM-dd+180d}": that many days from today (for dates SIT wants in the future).
@@ -783,7 +790,18 @@ export async function katalonVariables(caseId: string, defaults: Record<string, 
   for (const [k, v] of Object.entries(corrections))
     vars[k] = typeof v === 'string' ? v.replace(/\{([yMdHms][yMdHms\-/.: ]*?)(?:\+(\d+)d)?\}/g, expand) : v;
   const secretFile = path.join(ROOT, '.auth', 'katalon-variables.json');
-  if (fs.existsSync(secretFile)) Object.assign(vars, JSON.parse(fs.readFileSync(secretFile, 'utf8'))[caseId] ?? {});
+  if (fs.existsSync(secretFile)) {
+    const secrets = JSON.parse(fs.readFileSync(secretFile, 'utf8'));
+    Object.assign(vars, secrets[caseId] ?? {});
+    // "_accountOf": "KAT-022" in data-overrides.json: log in with that test case's account instead
+    // (the task went to a different supplier/officer than the Katalon default; no password in git).
+    const other = (overrides as unknown as Record<string, Record<string, any>>)[caseId]?._accountOf;
+    if (other && secrets[other]) {
+      vars.Username = secrets[other].Username;
+      vars.Password = secrets[other].Password;
+      cur().log(`Using the login of ${other} (support/katalon/data-overrides.json)`);
+    }
+  }
 
   if (binding && !process.env.KATALON_NO_DATA) {
     const file = findFile(KATALON_DATA_DIR, path.win32.basename(binding.source));
