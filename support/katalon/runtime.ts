@@ -266,6 +266,24 @@ async function step<T>(name: string, fh: FH | undefined, onFail: T, body: () => 
   }
 }
 
+/**
+ * My Task: the scripts type a document number, search, then click the first row. When the document is not in
+ * this account's My Task, the unfiltered list stays and the first row is someone else's task. Remember the number
+ * and refuse to open a row that does not show it.
+ */
+const TASK_DOC_INPUT = 'Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Input Document Number';
+const TASK_FIRST_ROW = 'Direct LOA/2. Direct LOA Supplier/TaskList Supplier/Click TaskList Description';
+const taskSearchDoc = new WeakMap<Page, string>();
+async function guardTaskRow(obj: TestObject | WebElement) {
+  if (!(obj instanceof TestObject) || obj.getObjectId() !== TASK_FIRST_ROW) return;
+  const doc = taskSearchDoc.get(cur().page);
+  if (!doc) return;
+  if (!(await waitState(obj, 'attached', 10))) throw new Error(`${doc} is not in this account's My Task (no result)`);
+  const row = await loc(obj).locator('xpath=ancestor::tr[1]').innerText({ timeout: DEFAULT_TIMEOUT * 1000 });
+  if (!row.includes(doc))
+    throw new Error(`${doc} is not in this account's My Task (the first row is "${row.replace(/\s+/g, ' ').trim()}"); stopped instead of opening another task`);
+}
+
 const isFH = (v: any): v is FH => typeof v === 'string' && v in FailureHandling;
 /** Katalon overloads: (obj, timeout?, fh?) or (obj, fh?). */
 const tf = (a?: any, b?: any): [number, FH | undefined] => (isFH(a) ? [DEFAULT_TIMEOUT, a] : [a ?? DEFAULT_TIMEOUT, b]);
@@ -322,10 +340,14 @@ export const WebUI = {
   },
 
   async click(obj: TestObject, fh?: FH) {
-    return step(`click ${name(obj)}`, fh, undefined, () => likeSelenium(() => loc(obj).click({ timeout: DEFAULT_TIMEOUT * 1000 })));
+    return step(`click ${name(obj)}`, fh, undefined, async () => {
+      await guardTaskRow(obj);
+      await likeSelenium(() => loc(obj).click({ timeout: DEFAULT_TIMEOUT * 1000 }));
+    });
   },
   async enhancedClick(obj: TestObject, fh?: FH) {
     return step(`enhancedClick ${name(obj)}`, fh, undefined, async () => {
+      await guardTaskRow(obj);
       const l = loc(obj);
       await l.scrollIntoViewIfNeeded({ timeout: DEFAULT_TIMEOUT * 1000 });
       await likeSelenium(() => l.click({ timeout: DEFAULT_TIMEOUT * 1000 }).catch(() => l.dispatchEvent('click')));
@@ -340,6 +362,7 @@ export const WebUI = {
    */
   async setText(obj: TestObject, text: any, fh?: FH) {
     return step(`setText ${name(obj)}`, fh, undefined, async () => {
+      if (obj instanceof TestObject && obj.getObjectId() === TASK_DOC_INPUT) taskSearchDoc.set(cur().page, String(text ?? '').trim());
       const l = loc(obj);
       await l.fill('', { timeout: DEFAULT_TIMEOUT * 1000 });
       await l.pressSequentially(text == null ? '' : String(text));

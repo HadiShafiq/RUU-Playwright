@@ -225,6 +225,13 @@ $1}`,
     replace: '\tif (!WebUI.waitForElementPresent(dropdown, 3, FailureHandling.OPTIONAL)) break\n\tWebUI.waitForElementVisible(dropdown, 10)\n',
     note: 'Fulfilment Received Note: the Supplier Evaluation loop scored 5 criteria, but a contract delivery has 4 (Delivery/Service Period, Quality, Supplier Performance, Support Service); stop at the last criterion on the page',
   },
+  {
+    // Procurement type 2 (Direct LOA, the test case default) also has the Criteria and Supplier List section; the script only fills it for type 1.
+    when: (tc) => tc.rel.includes('Add Simple Quotes'),
+    find: /if \(rbType == 1\) \{/,
+    replace: 'if (rbType == 1 || rbType == 2) {',
+    note: 'Simple Quote: Criteria and Supplier List was filled only for procurement type 1, so with type 2 (Direct LOA, the test case default) SIT rejected the submit (ERR-760109: at least one supplier); fill it for type 2 too',
+  },
 ];
 
 /** Found by typechecking the converted specs: the Katalon scripts use these where they are not defined. */

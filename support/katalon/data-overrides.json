@@ -89,11 +89,34 @@
     "PerformanceBond": "2"
   },
   "KAT-021": {
-    "_why": "Start date 2026-10-19 is in the past (run date instead); default supplier Basic FL Organization (Others) 1 + item 851220040000000000 give 0 catalogue results. Use the company of KAT-022 supplier account BASICFLROS3 and its service item (Catalogue Search, 2026-10-30); RBProcurementType 1 like the sibling Product tests KAT-036/037: with 2 the script skips Criteria and Supplier List and SIT rejects (ERR-760109)",
+    "_why": "Start date 2026-10-19 is in the past (run date instead); default supplier Basic FL Organization (Others) 1 + item 851220040000000000 give 0 catalogue results. Use the company of KAT-022 supplier account BASICFLROS3 and its service item (Catalogue Search, 2026-10-30). Procurement type stays the test case's 2 (Direct LOA, needed for Prepare LOA KAT-025); with type 1 (used 2026-10-30 for SQ260000000002272) the RN goes to Submit PR instead",
     "dateValue": "{yyyy-MM-dd}",
     "SupplierName": "Basic FL ROC (registration with SSM as ROC) 3",
-    "ItemCode": "801218020000000000",
-    "RBProcurementType": "1"
+    "ItemCode": "801218020000000000"
+  },
+  "KAT-022": {
+    "_why": "Respond to our Direct LOA Simple Quote SQ260000000002276 (KAT-021, 2026-11-04) as the default BASICFLROS3 account (its supplier); answered before: SQ260000000002272 (default account), SQ260000000002273 and SQ260000000002274 (AINHALIM, the KAT-030 login, on 2026-11-02 and 2026-11-04)",
+    "sqNo": "SQ260000000002276"
+  },
+  "KAT-023": {
+    "_why": "Prepare RN from our Simple Quote SQ260000000002273 (KAT-036 product SQ, answered by AINHALIM, closed 2026-11-02 20:15) instead of the Katalon SQ260000000002149, for Assign Code KAT-038; prepared by the requisitioner who created the SQ. SQ260000000002272 (KAT-021) gave RN260000000004509 on 2026-11-04",
+    "Document_Number": "SQ260000000002273",
+    "_accountOf": "KAT-036"
+  },
+  "KAT-024": {
+    "_why": "Approve our product RN260000000004511 (KAT-023 from SQ260000000002273) instead of the Katalon RN260000000004206; its Review Direct Purchase task is assigned to officer 690127065209 (Task Status Search 2026-11-04). RN260000000004509 was approved with the default account on 2026-11-04",
+    "Document_Number": "RN260000000004511",
+    "_officer": "690127065209"
+  },
+  "KAT-025": {
+    "_why": "Prepare the LOA from our approved RN260000000004509 (KAT-024) instead of the Katalon RN260000000004244; file reference from the RN number like the Katalon data",
+    "Document_Number": "RN260000000004509",
+    "FileReference1": "260000000004509"
+  },
+  "KAT-038": {
+    "_why": "Assign Code on our product RN260000000004511 (KAT-023 from SQ260000000002273) instead of the Katalon RN260000000004210; its Review Direct Purchase task is assigned to officer 690127065209 (Task Status Search 2026-11-04), not a Katalon account",
+    "Document_Number": "RN260000000004511",
+    "_officer": "690127065209"
   },
   "KAT-040": {
     "_why": "Performance Bond dates 2026-06-15 are in the past (datepicker does not offer them); use 180 days from the run date; tickPerformanceBond 2: with 1 the script ticks Performance Bond Deferment but adds no deferment history, so Approve FD fails (ERR-750071)",

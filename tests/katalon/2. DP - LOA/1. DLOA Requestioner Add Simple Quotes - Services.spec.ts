@@ -10,6 +10,7 @@ import { waitBlockUI, wVisible, c, t, up, selectDropdownByIndex } from '../../..
  *
  * DATA-CHANGING on SIT/UAT unless the script only reads.
  * Katalon step repaired: ENHANCEMENT: before Submit, open Verification And Approval and pick the first approver when the LOA asks for one ("Approver is required", ERR-760315); the Katalon script never fills it.
+ * Katalon step repaired: Simple Quote: Criteria and Supplier List was filled only for procurement type 1, so with type 2 (Direct LOA, the test case default) SIT rejected the submit (ERR-760109: at least one supplier); fill it for type 2 too.
  */
 test.describe('KAT-021 1. DLOA Requestioner Add Simple Quotes - Services', () => {
   test(
@@ -560,7 +561,7 @@ test.describe('KAT-021 1. DLOA Requestioner Add Simple Quotes - Services', () =>
     let locationVal: any = parseInt(LocalityCoverage.toString())
 
     // Click Side Menu
-    if (rbType == 1) {
+    if (rbType == 1 || rbType == 2) {
 
         let sideMenu: any = findTestObject('Object Repository/DLOA/4. DLOA - Requestioner/3. Criteria and Supplier List/Side Menu Criteria and Supplier List')
         await WebUI.waitForElementClickable(sideMenu, 30)
