@@ -232,6 +232,21 @@ $1}`,
     replace: 'if (rbType == 1 || rbType == 2) {',
     note: 'Simple Quote: Criteria and Supplier List was filled only for procurement type 1, so with type 2 (Direct LOA, the test case default) SIT rejected the submit (ERR-760109: at least one supplier); fill it for type 2 too',
   },
+  {
+    // The loop adds the first search result twice; a supplier already in the list drops out of the search, so an exact name finds nothing the second time.
+    when: (tc) => tc.rel.includes('Add Simple Quotes'),
+    find: /^([ \t]*)WebUI\.waitForElementVisible\(supplierRow, 20\)\n/m,
+    replace: `$1if (i > 1 && !WebUI.waitForElementVisible(supplierRow, 20, FailureHandling.OPTIONAL)) {
+$1\tTestObject cancelSupplierSearch = new TestObject('cancelSupplierSearch')
+$1\tcancelSupplierSearch.addProperty('xpath', ConditionType.EQUALS, "//div[contains(@class,'ui-dialog') and @aria-hidden='false']//button[.//span[normalize-space(.)='Cancel']]")
+$1\tWebUI.click(cancelSupplierSearch)
+$1\twaitBlockUI(10)
+$1\tbreak
+$1}
+$1WebUI.waitForElementVisible(supplierRow, 20)
+`,
+    note: 'Simple Quote Supplier List: the loop adds the first search result twice; a supplier already added no longer appears in the search, so with one exact company name the second round found "No records found" and failed; the second round now closes the search and stops when nobody else is found',
+  },
 ];
 
 /** Found by typechecking the converted specs: the Katalon scripts use these where they are not defined. */
